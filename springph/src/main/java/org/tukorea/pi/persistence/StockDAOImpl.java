@@ -18,6 +18,8 @@ public class StockDAOImpl implements StockDAO{
 	public StockVO selectNowStock(String symbol) throws Exception{
 		return sqlSession.selectOne(namespace+".selectNowStock", symbol);
 	}
-	
+	public StockVO selectLastStock(String symbol) throws Exception{
+		return sqlSession.selectOne(namespace+".selectLastStock", symbol);
+	}
 
 }

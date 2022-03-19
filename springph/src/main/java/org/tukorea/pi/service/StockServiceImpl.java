@@ -1,6 +1,8 @@
 package org.tukorea.pi.service;
 
 
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,17 @@ public class StockServiceImpl implements StockService {
 	private StockDAO stockDAO;
 
 	public StockVO readNowStock(String symbol) throws Exception{
-		return stockDAO.selectNowStock(symbol);
+		LocalTime now = LocalTime.now();
+		int hour = now.getHour();
+		
+		// 장 개장시간은 13시부터 21시까지
+		if(hour>=13 && hour<21) {
+			return stockDAO.selectNowStock(symbol);
+		}
+	
+		return stockDAO.selectLastStock(symbol);
+
+		
 	}
 	
 }

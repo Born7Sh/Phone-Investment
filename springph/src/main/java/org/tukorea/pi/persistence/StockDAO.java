@@ -4,4 +4,5 @@ import org.tukorea.pi.domain.StockVO;
 
 public interface StockDAO {
 	public StockVO selectNowStock(String symbol) throws Exception;
+	public StockVO selectLastStock(String symbol) throws Exception;
 }
