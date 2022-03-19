@@ -24,10 +24,10 @@ public class StockServiceImpl implements StockService {
 		if(hour>=13 && hour<21) {
 			return stockDAO.selectNowStock(symbol);
 		}
-	
-		return stockDAO.selectLastStock(symbol);
+		else {
+			return stockDAO.selectLastStock(symbol);
+		}
 
-		
 	}
 	
 }
