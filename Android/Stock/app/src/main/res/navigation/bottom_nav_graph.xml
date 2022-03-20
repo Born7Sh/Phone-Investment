@@ -2,25 +2,26 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/HomeFragment"
     android:id="@+id/bottom_nav_graph">
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.stock.fragment.HomeFragment"
+        android:name="com.example.stock.views.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/FavoriteFragment"
-        android:name="com.example.stock.fragment.FavoriteFragment"
+        android:name="com.example.stock.views.FavoriteFragment"
         android:label="FavoriteFragment"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/AnalFragment"
-        android:name="com.example.stock.fragment.AnalFragment"
+        android:name="com.example.stock.views.AnalFragment"
         android:label="AnalFragment"
         tools:layout="@layout/fragment_anal" />
     <fragment
         android:id="@+id/SettingFragment"
-        android:name="com.example.stock.fragment.AnalFragment"
+        android:name="com.example.stock.views.AnalFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting" />
 </navigation>

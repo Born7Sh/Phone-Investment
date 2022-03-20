@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/HomeFragment"
+        android:icon="@drawable/home10"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/FavoriteFragment"
+        android:icon="@drawable/heart10"
+        android:title="즐겨찾기" />
+
+    <item
+        android:id="@+id/AnalFragment"
+        android:icon="@drawable/anal10"
+        android:title="그래프" />
+
+    <item
+        android:id="@+id/SettingFragment"
+        android:icon="@drawable/setting10"
+        android:title="설정" />
+</menu>
