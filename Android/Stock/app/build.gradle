@@ -59,6 +59,7 @@ dependencies {
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 
     // recyclerview, cardview
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -66,6 +67,7 @@ dependencies {
 
     implementation"androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation"androidx.navigation:navigation-ui-ktx:2.3.0"
+
 
 
 }
