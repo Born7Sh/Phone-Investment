@@ -1,20 +1,12 @@
 package com.example.stock
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.RelativeLayout
-import com.example.stock.adapter.MainFragmentAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.stock.databinding.ActivityMainBinding
-import com.example.stock.R
 
 
 class MainActivity : AppCompatActivity() {
