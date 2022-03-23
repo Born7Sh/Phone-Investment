@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 
 data class Stock (
-    @PrimaryKey @ColumnInfo(name = "id")
     val stockId: String,
     val name: String,
+    val price: String,
     val description: String)

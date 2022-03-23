@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -34,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
                 android:textSize="20dp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -41,9 +41,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="회사 이름" />
 
+            <TextView
+                android:id="@+id/stock_item_own"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="10주"
+                app:layout_constraintLeft_toLeftOf="@+id/stock_item_title"
+                app:layout_constraintRight_toRightOf="@id/stock_item_title"
+                app:layout_constraintTop_toBottomOf="@+id/stock_item_title"></TextView>
 
             <TextView
-                android:id="@+id/stock_item_price"
+                android:id="@+id/stock_item_own_price"
                 android:text="@{stock.name}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,9 +69,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="투자금액"
-                app:layout_constraintLeft_toLeftOf="@+id/stock_item_price"
-                app:layout_constraintRight_toRightOf="@id/stock_item_price"
-                app:layout_constraintTop_toBottomOf="@+id/stock_item_price"></TextView>
+                app:layout_constraintLeft_toLeftOf="@+id/stock_item_own_price"
+                app:layout_constraintRight_toRightOf="@id/stock_item_own_price"
+                app:layout_constraintTop_toBottomOf="@+id/stock_item_own_price"></TextView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
