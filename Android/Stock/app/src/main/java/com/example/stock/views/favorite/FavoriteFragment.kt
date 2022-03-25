@@ -1,47 +1,60 @@
 package com.example.stock.views.favorite
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.stock.MainActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
-import com.example.stock.adapter.StockAdapter
-import com.example.stock.data.Stock
+import com.example.stock.adapter.StockAdatper
 import com.example.stock.databinding.FragmentFavoriteBinding
 import com.example.stock.model.StockViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class FavoriteFragment : Fragment() {
-    var data = MutableLiveData<ArrayList<Stock>>()
     private lateinit var binding: FragmentFavoriteBinding
-    private var viewModel: StockViewModel by StockViewModel()
-    lateinit var adapter: StockAdapter
+    private lateinit var stockViewModel: StockViewModel
+    private lateinit var stockAdatper: StockAdatper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite, container, false)
+        stockAdatper = StockAdatper()
+        binding.recycler.adapter = stockAdatper
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        stockViewModel = ViewModelProvider(this).get(StockViewModel::class.java)
+        binding.viewModel = stockViewModel
 
+        stockViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            stockAdatper.setData(it)
+        })
+        // 뷰모델을 LifeCycle 에 종속시킴, LifeCycle 동안 옵저버 역할을 함
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        dataAdd()
+    }
 
+
+    fun dataAdd() {
+        GlobalScope.launch {
+            delay(15000L)
+            stockViewModel.buttonClick()}
+        println ("Hello,")
+        Thread.sleep (2000L)
+    }
 }

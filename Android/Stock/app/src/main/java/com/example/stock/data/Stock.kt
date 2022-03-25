@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+//@Entity
 data class Stock(
     @PrimaryKey(autoGenerate = true) val stockId: String,
     val name: String,
