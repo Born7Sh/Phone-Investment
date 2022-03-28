@@ -5,17 +5,56 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
+import com.example.stock.adapter.NewsAdapter
+import com.example.stock.adapter.StockAdapter
+import com.example.stock.data.News
+import com.example.stock.databinding.FragmentFavoriteBinding
+
+import com.example.stock.databinding.FragmentHomeBinding
+import com.example.stock.model.NewsViewModel
+import com.example.stock.model.StockViewModel
 
 class HomeFragment : Fragment() {
+
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var stockViewModel: StockViewModel
+    private lateinit var stockAdapter: StockAdapter
+
+    private lateinit var newsViewModel: NewsViewModel
+    private lateinit var newsAdapter: NewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        stockAdapter = StockAdapter()
+        newsAdapter = NewsAdapter()
+
+        binding.recyclerStock.adapter = stockAdapter
+        binding.recyclerNews.adapter = newsAdapter
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        stockViewModel = ViewModelProvider(this).get(StockViewModel::class.java)
+        newsViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
 
+        binding.stockViewModel = stockViewModel
+        binding.newsViewModel = newsViewModel
+
+        stockViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            stockAdapter.setData(it)
+        })
+
+        newsViewModel.newsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            newsAdapter.setData(it)
+        })
+
+
+    }
 }

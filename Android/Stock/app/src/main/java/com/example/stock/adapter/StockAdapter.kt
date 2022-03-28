@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stock.data.Stock
-import com.example.stock.databinding.FragmentFavoriteBinding
 import com.example.stock.databinding.ListStockBinding
 
-class StockAdatper :RecyclerView.Adapter<StockAdatper.MyViewHolder>(){
+class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>(){
     var stockList = mutableListOf<Stock>()
 
     // 생성된 뷰 홀더에 값 지정
