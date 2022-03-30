@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="stockViewModel"
             type="com.example.stock.model.StockViewModel" />
 
@@ -13,34 +17,124 @@
             name="newsViewModel"
             type="com.example.stock.model.NewsViewModel" />
 
+        <variable
+            name="homeFragment"
+            type="com.example.stock.views.home.HomeFragment" />
+
     </data>
 
     <FrameLayout
+        android:id="@+id/HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.home.HomeFragment">
+        tools:context=".views.home.HomeFragment"
+        >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/recycler_stock"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                app:layout_goneMarginTop="40dp"
-                android:id="@+id/recycler_news"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_stock"></androidx.recyclerview.widget.RecyclerView>
+                <include
+                    layout="@layout/toolbar_search"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <Button
+                    android:text="내 정보"
+                    android:id="@+id/button_1"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/button_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Button>
+
+                <Button
+                    android:onClick="@{homeFragment::btnClick}"
+                    android:text="실시간 뉴스"
+                    android:id="@+id/button_2"
+                    app:layout_constraintTop_toTopOf="@id/button_1"
+                    app:layout_constraintLeft_toRightOf="@id/button_1"
+                    app:layout_constraintRight_toLeftOf="@id/button_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Button>
+
+                <Button
+                    android:text="실시간 랭킹"
+                    app:layout_constraintLeft_toRightOf="@id/button_2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/button_3"
+                    app:layout_constraintTop_toTopOf="@id/button_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Button>
+
+                <TextView
+                    android:id="@+id/home_ownStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="20dp"
+                    android:text="내 정보"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    app:layout_constraintTop_toBottomOf="@+id/button_1"></TextView>
+
+                <TextView
+                    android:onClick="@{homeFragment::textClick}"
+                    android:text="내 정보"
+                    android:id="@+id/button_stock"
+                    app:layout_constraintTop_toTopOf="@id/home_ownStock"
+                    app:layout_constraintLeft_toRightOf="@id/home_ownStock"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/home_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="실시간 뉴스"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_stock"></TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="30dp"
+                    android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/home_news"
+                    app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/home_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="실시간 랭킹"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_news"></TextView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </FrameLayout>
 </layout>

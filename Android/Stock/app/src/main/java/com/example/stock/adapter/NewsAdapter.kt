@@ -11,8 +11,8 @@ class NewsAdapter :RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
 
     // 생성된 뷰 홀더에 값 지정
     class MyViewHolder(val binding :ListNewsBinding) :RecyclerView.ViewHolder(binding.root){
-        fun bind(currentStock:News){
-            binding.news=currentStock
+        fun bind(currentNews:News){
+            binding.news=currentNews
         }
     }
 

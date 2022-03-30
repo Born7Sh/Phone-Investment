@@ -1,6 +1,8 @@
 package com.example.stock.model
 
 import android.util.Log
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.*
 import com.example.stock.data.Stock
 
@@ -15,7 +17,12 @@ class StockViewModel() : ViewModel() {
 
     init{
         items = arrayListOf(
-            Stock("1","homin","100000",""),
+            Stock("1","homin1","100,000",""),
+            Stock("2","homin2","200,000",""),
+            Stock("3","homin3","300,000",""),
+            Stock("4","homin4","400,000",""),
+            Stock("5","homin5","500,000",""),
+            Stock("6","homin6","600,000","")
         )
         _stockList.value = items
     }
@@ -36,5 +43,6 @@ class StockViewModel() : ViewModel() {
         }
 
     }
+
 }
 
