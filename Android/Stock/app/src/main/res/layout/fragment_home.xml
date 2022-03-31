@@ -64,6 +64,7 @@
                     android:layout_height="wrap_content"></Button>
 
                 <Button
+                    android:onClick="@{homeFragment::btnClick2}"
                     android:text="실시간 랭킹"
                     app:layout_constraintLeft_toRightOf="@id/button_2"
                     app:layout_constraintRight_toRightOf="parent"
@@ -85,10 +86,10 @@
 
                 <TextView
                     android:onClick="@{homeFragment::textClick}"
+                    android:layout_margin="12dp"
                     android:text="내 정보"
                     android:id="@+id/button_stock"
                     app:layout_constraintTop_toTopOf="@id/home_ownStock"
-                    app:layout_constraintLeft_toRightOf="@id/home_ownStock"
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></TextView>

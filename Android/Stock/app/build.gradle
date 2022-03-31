@@ -65,8 +65,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    implementation"androidx.navigation:navigation-fragment-ktx:2.3.0"
-    implementation"androidx.navigation:navigation-ui-ktx:2.3.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
 
     // Room
     implementation 'androidx.room:room-runtime:2.2.6'
@@ -78,5 +78,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
+
+    // 캔들차트용
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
 }

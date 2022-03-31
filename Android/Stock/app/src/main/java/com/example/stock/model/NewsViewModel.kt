@@ -26,20 +26,4 @@ class NewsViewModel() : ViewModel() {
         _newsList.value = items
     }
 
-    fun buttonClick() {
-        val range = (1000..10000)
-        val user = News("1", "homin", range.random().toString(), "", "")
-        items.add(user)
-
-        Log.v("변하는 List", "크기는 몇이여? " + items.size)
-        for (i in items) {
-            Log.v("tag1", i.title + " " + i.date)
-        }
-        _newsList.postValue(items)
-
-        for (i in newsList.value!!) {
-            Log.v("안변하는 List", i.title + " " + i.date)
-        }
-
-    }
 }

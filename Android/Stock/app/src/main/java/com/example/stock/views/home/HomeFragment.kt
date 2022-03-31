@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
     private lateinit var newsAdapter: NewsAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,9 +76,14 @@ class HomeFragment : Fragment() {
         Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
     }
 
-    fun textClick(view: View){
+    fun textClick(view: View) {
 
         view.findNavController().navigate(R.id.action_HomeFragment_to_homeStockFragment)
+    }
+
+    fun btnClick2(view: View) {
+
+        view.findNavController().navigate(R.id.action_HomeFragment_to_stockDetailFragment)
     }
 
 }

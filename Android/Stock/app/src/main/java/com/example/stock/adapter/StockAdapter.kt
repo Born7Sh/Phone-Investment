@@ -1,8 +1,11 @@
 package com.example.stock.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stock.R
 import com.example.stock.data.Stock
 import com.example.stock.databinding.ListStockBinding
 
@@ -11,9 +14,30 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>(){
 
     // 생성된 뷰 홀더에 값 지정
     class MyViewHolder(val binding : ListStockBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.setClickListener {
+                binding.stock?.let { stock ->
+                    navigateToDetailStock(stock, it)
+                }
+            }
+        }
+
+        private fun navigateToDetailStock(
+            stock: Stock,
+            view: View
+        ) {
+//            val direction =
+//                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
+//                    stock.stockId
+//                )
+            view.findNavController().navigate(R.id.action_HomeFragment_to_stockDetailFragment)
+        }
+
         fun bind(currentStock : Stock) {
             binding.stock = currentStock
         }
+
     }
 
     // 어떤 xml 으로 뷰 홀더를 생성할지 지정

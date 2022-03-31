@@ -1,60 +1,96 @@
 package com.example.stock.views
 
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
+import com.example.stock.databinding.FragmentStockDetailBinding
+import com.example.stock.model.StockDetailViewModel
+import com.example.stock.model.StockViewModel
+import com.github.mikephil.charting.data.CandleData
+import com.github.mikephil.charting.data.CandleDataSet
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StockDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StockDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding: FragmentStockDetailBinding
+    lateinit var stockDetailViewModel: StockDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stock_detail, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_stock_detail, container, false)
+
+        stockDetailViewModel = ViewModelProvider(this).get(StockDetailViewModel::class.java)
+        binding.viewModel = stockDetailViewModel
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StockDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StockDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        stockDetailViewModel.stockList.observe(viewLifecycleOwner, {
+
+            val dataSet = CandleDataSet(it, "").apply {
+                // 심지 부분
+                shadowColor = Color.LTGRAY
+                shadowWidth = 1F
+
+                // 음봄
+                decreasingColor = Color.BLUE
+                decreasingPaintStyle = Paint.Style.FILL
+                // 양봉
+                increasingColor = Color.RED
+                increasingPaintStyle = Paint.Style.FILL
+
+                neutralColor = Color.DKGRAY
+                setDrawValues(false)
+                // 터치시 노란 선 제거
+                highLightColor = Color.TRANSPARENT
             }
+
+            binding.cdChart.axisLeft.run {
+                setDrawAxisLine(false)
+                setDrawGridLines(false)
+                textColor = Color.TRANSPARENT
+            }
+
+            binding.cdChart.axisRight.run {
+                isEnabled = false
+            }
+
+            // X 축
+            binding.cdChart.xAxis.run {
+                textColor = Color.TRANSPARENT
+                setDrawAxisLine(false)
+                setDrawGridLines(false)
+                setAvoidFirstLastClipping(true)
+            }
+
+            // 범례
+            binding.cdChart.legend.run {
+                isEnabled = false
+            }
+
+            binding.cdChart.apply {
+                this.data = CandleData(dataSet)
+                description.isEnabled = false
+                isHighlightPerDragEnabled = true
+                requestDisallowInterceptTouchEvent(true)
+                invalidate()
+            }
+        })
     }
+
+
 }
