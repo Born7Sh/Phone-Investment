@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.StockDetailViewModel
@@ -22,6 +23,7 @@ class StockDetailFragment : Fragment() {
 
     lateinit var binding: FragmentStockDetailBinding
     lateinit var stockDetailViewModel: StockDetailViewModel
+    private val arg: StockDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +35,7 @@ class StockDetailFragment : Fragment() {
 
         stockDetailViewModel = ViewModelProvider(this).get(StockDetailViewModel::class.java)
         binding.viewModel = stockDetailViewModel
+        binding.stockName.text = arg.stockId
 
         return binding.root
     }

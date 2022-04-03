@@ -11,3 +11,4 @@ data class Stock(
     val price: String,
     val description: String
 )
+
