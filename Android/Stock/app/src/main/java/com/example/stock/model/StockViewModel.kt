@@ -17,19 +17,14 @@ class StockViewModel() : ViewModel() {
 
     init{
         items = arrayListOf(
-            Stock("1","homin1","100,000",""),
-            Stock("2","homin2","200,000",""),
-            Stock("3","homin3","300,000",""),
-            Stock("4","homin4","400,000",""),
-            Stock("5","homin5","500,000",""),
-            Stock("6","homin6","600,000","")
+
         )
         _stockList.value = items
     }
 
     fun buttonClick(){
         val range = (1000..10000)
-        val user = Stock("1","homin",range.random().toString(),"")
+        val user = Stock("1","homin",range.random().toString(),"","",1)
         items.add(user)
 
         Log.v("변하는 List", "크기는 몇이여? " + items.size)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
@@ -21,6 +22,7 @@ import com.example.stock.data.News
 import com.example.stock.databinding.FragmentFavoriteBinding
 
 import com.example.stock.databinding.FragmentHomeBinding
+import com.example.stock.model.MainViewModel
 import com.example.stock.model.NewsViewModel
 import com.example.stock.model.StockViewModel
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -28,6 +30,9 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val mainViewModel by activityViewModels<MainViewModel>()
+
     private lateinit var stockViewModel: StockViewModel
     private lateinit var stockAdapter: StockAdapter
 
@@ -55,17 +60,21 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        stockViewModel = ViewModelProvider(this).get(StockViewModel::class.java)
-        newsViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
 
-        binding.stockViewModel = stockViewModel
-        binding.newsViewModel = newsViewModel
 
-        stockViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+//        stockViewModel = ViewModelProvider(this).get(StockViewModel::class.java)
+//        newsViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
+//
+//        binding.stockViewModel = stockViewModel
+//        binding.newsViewModel = newsViewModel
+
+        binding.mainViewModel = mainViewModel
+
+        mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it)
         })
 
-        newsViewModel.newsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        mainViewModel.newsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             newsAdapter.setData(it)
         })
 
@@ -84,6 +93,10 @@ class HomeFragment : Fragment() {
     fun btnClick2(view: View) {
 
         view.findNavController().navigate(R.id.action_HomeFragment_to_stockDetailFragment)
+    }
+
+    fun search(view: View){
+        view.findNavController().navigate(R.id.action_HomeFragment_to_searchFragment)
     }
 
 }

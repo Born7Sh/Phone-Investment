@@ -9,6 +9,7 @@
         android:layout_height="60dp">
 
         <ImageView
+            android:onClick="@{}"
             android:layout_margin="5dp"
             android:layout_width="56dp"
             android:layout_height="56dp"

@@ -3,15 +3,19 @@ package com.example.stock
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.stock.databinding.ActivityMainBinding
+import com.example.stock.model.MainViewModel
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    val mainViewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
