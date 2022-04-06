@@ -1,17 +1,7 @@
 package com.example.stock.data
 
-object Company {
-    fun getCompanyData(): List<Stock> {
-        return listOf(
-
-//            Stock(
-//                stockId = "1",
-//                name = "ABC",
-//                price = "_",
-//                imgSrc = "c_abc",
-//
-//            ),
-
-        )
-    }
-}
+data class Company(
+    var name: String,
+    var c_name:String,
+    var img: Int
+)

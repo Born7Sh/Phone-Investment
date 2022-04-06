@@ -62,12 +62,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-//        stockViewModel = ViewModelProvider(this).get(StockViewModel::class.java)
-//        newsViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-//
-//        binding.stockViewModel = stockViewModel
-//        binding.newsViewModel = newsViewModel
-
         binding.mainViewModel = mainViewModel
 
         mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {

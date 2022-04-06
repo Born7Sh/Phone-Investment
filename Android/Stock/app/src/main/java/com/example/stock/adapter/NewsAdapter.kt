@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.stock.data.News
-
 class NewsAdapter :RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
     var newsList=mutableListOf<News>()
 
