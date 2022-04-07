@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.NewsAdapter
+import com.example.stock.adapter.RankAdapter
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.data.News
 import com.example.stock.databinding.FragmentFavoriteBinding
@@ -33,11 +34,9 @@ class HomeFragment : Fragment() {
 
     private val mainViewModel by activityViewModels<MainViewModel>()
 
-    private lateinit var stockViewModel: StockViewModel
     private lateinit var stockAdapter: StockAdapter
-
-    private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
+    private lateinit var rankAdapter: RankAdapter
 
 
     override fun onCreateView(
@@ -49,9 +48,12 @@ class HomeFragment : Fragment() {
 
         stockAdapter = StockAdapter()
         newsAdapter = NewsAdapter()
+        rankAdapter = RankAdapter()
 
         binding.recyclerStock.adapter = stockAdapter
         binding.recyclerNews.adapter = newsAdapter
+        binding.recyclerRank.adapter = rankAdapter
+
         binding.homeFragment = this
 
 
@@ -72,22 +74,34 @@ class HomeFragment : Fragment() {
             newsAdapter.setData(it)
         })
 
+        mainViewModel.rankList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            rankAdapter.setData(it)
+        })
+
     }
 
-    fun btnClick(view: View) {
+    fun goNews(view: View) {
+        binding.scrollView.smoothScrollTo(0, binding.recyclerStock.bottom)
+        Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
+    }
+    fun goRank(view: View) {
         binding.scrollView.smoothScrollTo(0, binding.recyclerNews.bottom)
         Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
     }
 
-    fun textClick(view: View) {
 
+    fun stockClick(view: View) {
         view.findNavController().navigate(R.id.action_HomeFragment_to_homeStockFragment)
     }
 
-    fun btnClick2(view: View) {
-
-        view.findNavController().navigate(R.id.action_HomeFragment_to_stockDetailFragment)
+    fun newsClick(view: View) {
+        view.findNavController().navigate(R.id.action_HomeFragment_to_newsFragment)
     }
+
+    fun rankClick(view: View) {
+        view.findNavController().navigate(R.id.action_HomeFragment_to_rankFragment)
+    }
+
 
     fun search(view: View){
         view.findNavController().navigate(R.id.action_HomeFragment_to_searchFragment)

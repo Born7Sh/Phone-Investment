@@ -20,6 +20,12 @@
         <action
             android:id="@+id/action_HomeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_rankFragment"
+            app:destination="@id/rankFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
 
 
     </fragment>
@@ -58,5 +64,15 @@
         android:name="com.example.stock.views.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/rankFragment"
+        android:name="com.example.stock.views.home.RankFragment"
+        android:label="fragment_rank"
+        tools:layout="@layout/fragment_rank" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.stock.views.home.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
 
 </navigation>
