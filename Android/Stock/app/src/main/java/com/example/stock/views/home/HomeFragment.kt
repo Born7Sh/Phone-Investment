@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.mainViewModel = mainViewModel
+//        binding.mainViewModel = mainViewModel
 
         mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it)
