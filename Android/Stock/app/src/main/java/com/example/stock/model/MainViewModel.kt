@@ -45,11 +45,11 @@ class MainViewModel() : ViewModel() {
 
     init {
         stocks = arrayListOf(
-            Stock("1", "AmerisourceBergen", "ABC", "", "", R.drawable.c_abc),
-            Stock("2", "아처 대니얼스 미들랜드", "ADM", "", "", R.drawable.c_adm),
-            Stock("3", "암드", "AMD", "", "", R.drawable.c_amd),
-            Stock("4", "앤섬", "ANTM", "", "", R.drawable.c_antm),
-            Stock("5", "아메리칸 익스프레스", "AXP", "", "", R.drawable.c_axp),
+            Stock("1", "AmerisourceBergen", "ABC", "12345", "-3.9", R.drawable.c_abc),
+            Stock("2", "아처 대니얼스 미들랜드", "ADM", "12121", "+3.4", R.drawable.c_adm),
+            Stock("3", "암드", "AMD", "234441", "+3.7", R.drawable.c_amd),
+            Stock("4", "앤섬", "ANTM", "12345", "+3.1", R.drawable.c_antm),
+            Stock("5", "아메리칸 익스프레스", "AXP", "11222", "+3.2", R.drawable.c_axp),
         )
         _stockList.value = stocks
 
@@ -92,5 +92,14 @@ class MainViewModel() : ViewModel() {
 //        }
         _rankList.value = rank
     }
-
+    fun getStock(userId : String) : Stock{
+        val cp : ArrayList<Stock>? = _stockList.value
+        if (cp != null) {
+            for (id in cp){
+                if (id.stockId == userId)
+                    return id
+            }
+        }
+        return(Stock("콩쥐야","좇됐어",".",".",".",1))
+    }
 }

@@ -6,9 +6,17 @@
 
     <data>
 
+        <import type="android.view.View"></import>
+
+        <variable
+            name="stock"
+            type="com.example.stock.data.Stock" />
         <variable
             name="viewModel"
             type="com.example.stock.model.StockDetailViewModel" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
 
     </data>
 
@@ -42,7 +50,7 @@
                     android:id="@+id/stock_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{}"
+                    android:text="@{stock.name}"
                     android:textColor="@color/black"
                     android:textFontWeight="800"
                     android:textSize="20dp"
@@ -69,12 +77,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="60dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="80dp"
                 app:layout_constraintBottom_toTopOf="@id/bottom_bar"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
 
                 <LinearLayout
-
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -85,45 +92,71 @@
                         android:layout_height="1000dp" />
 
                     <TextView
+                        android:id="@+id/stock_item_stock"
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:textSize="35dp"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="방갑습니다."></TextView>
+                        android:text="@{stock.price}"
+                        android:textColor="@color/transparentBlack"
+                        ></TextView>
 
                     <TextView
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="방갑습니다."></TextView>
+                        android:text="@{stock.variation}"
+                        android:textColor="@{Float.parseFloat(stock.variation) &lt; 0 ? @color/red : @color/blue}"
+                        ></TextView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="방갑습니다."></TextView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="방갑습니다."></TextView>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottom_bar"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::btnSellClick}"
+
+                    android:text="매도하기"
+                    android:textColor="#FF0844"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+                    android:layout_margin="10dp"
+                    android:id="@+id/btn_sell"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/button_round_red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/btn_buy"
                     app:layout_constraintTop_toTopOf="parent"></Button>
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::btnBuyClick}"
+
+                    android:text="매수하기"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+                    android:layout_margin="10dp"
+                    android:id="@+id/btn_buy"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/button_round_blue"
+                    app:layout_constraintLeft_toRightOf="@id/btn_sell"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></Button>

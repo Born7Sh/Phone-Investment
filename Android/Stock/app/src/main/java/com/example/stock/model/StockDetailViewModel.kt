@@ -1,6 +1,7 @@
 package com.example.stock.model
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,4 +31,13 @@ class StockDetailViewModel() : ViewModel() {
         }
         _stockList.value = items
     }
+
+    fun btnSellClick(view : View){
+        Log.v("items","파는거 입니다. 반갑습니다 허허허")
+    }
+
+    fun btnBuyClick(view : View){
+        Log.v("items","사는거 입니다. 반갑습니다 허허허")
+    }
+
 }

@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.databinding.FragmentStockDetailBinding
+import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
 import com.example.stock.model.StockViewModel
 import com.github.mikephil.charting.data.CandleData
@@ -23,7 +25,10 @@ class StockDetailFragment : Fragment() {
 
     lateinit var binding: FragmentStockDetailBinding
     lateinit var stockDetailViewModel: StockDetailViewModel
+    private val mainViewModel by activityViewModels<MainViewModel>()
+
     private val arg: StockDetailFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +39,8 @@ class StockDetailFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_stock_detail, container, false)
 
         stockDetailViewModel = ViewModelProvider(this).get(StockDetailViewModel::class.java)
+        binding.stock = mainViewModel.getStock(arg.stockId)
         binding.viewModel = stockDetailViewModel
-        binding.stockName.text = arg.stockId
-
         return binding.root
     }
 
