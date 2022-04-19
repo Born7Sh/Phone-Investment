@@ -10,6 +10,10 @@ import com.example.stock.R
 import com.example.stock.data.Stock
 import com.example.stock.databinding.ListStockBinding
 import com.example.stock.views.home.HomeFragmentDirections
+import android.os.Bundle
+
+
+
 
 class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
     var stockList = mutableListOf<Stock>()
@@ -29,9 +33,13 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
             stock: Stock,
             view: View
         ) {
-            var sd = stock.stockId
+            val args = Bundle()
+            args.putString("stockId", stock.name)
+
+            var sd = stock.name
             val direction =
                 HomeFragmentDirections.actionHomeFragmentToStockDetailFragment(sd)
+
             view.findNavController()
                 .navigate(direction)
         }

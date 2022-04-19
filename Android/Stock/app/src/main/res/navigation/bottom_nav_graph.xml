@@ -13,6 +13,8 @@
             android:id="@+id/action_HomeFragment_to_homeStockFragment"
             app:destination="@id/homeStockFragment" />
         <action
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/HomeFragment"
             android:id="@+id/action_HomeFragment_to_stockDetailFragment"
             app:destination="@id/stockDetailFragment">
 
@@ -58,12 +60,19 @@
             android:name="stockId"
             app:argType="string"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_stockDetailFragment_to_buyFragment"
+            app:destination="@id/buyFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.stock.views.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_stockDetailFragment"
+            app:destination="@id/stockDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/rankFragment"
         android:name="com.example.stock.views.home.RankFragment"
@@ -74,5 +83,10 @@
         android:name="com.example.stock.views.home.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/buyFragment"
+        android:name="com.example.stock.views.BuyFragment"
+        android:label="fragment_buy"
+        tools:layout="@layout/fragment_buy" />
 
 </navigation>

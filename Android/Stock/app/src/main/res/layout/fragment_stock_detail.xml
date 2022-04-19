@@ -11,9 +11,15 @@
         <variable
             name="stock"
             type="com.example.stock.data.Stock" />
+
+        <variable
+            name="company"
+            type="com.example.stock.data.Company" />
+
         <variable
             name="viewModel"
             type="com.example.stock.model.StockDetailViewModel" />
+
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
@@ -82,9 +88,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.CandleStickChart
                         android:id="@+id/cdChart"
@@ -93,26 +99,153 @@
 
                     <TextView
                         android:id="@+id/stock_item_stock"
-                        android:layout_marginRight="20dp"
-                        android:gravity="right"
-                        android:textSize="35dp"
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
                         android:text="@{stock.price}"
-                        android:textColor="@color/transparentBlack"
-                        ></TextView>
+                        android:textColor="#000000"
+                        android:textSize="35dp"
+                        android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:layout_marginRight="20dp"
-                        android:gravity="right"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
                         android:text="@{stock.variation}"
                         android:textColor="@{Float.parseFloat(stock.variation) &lt; 0 ? @color/red : @color/blue}"
-                        ></TextView>
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_textview"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="기업 개요"
+                            android:textSize="30dp"
+                            android:textStyle="bold"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_description"
+                            app:layout_constraintTop_toBottomOf="@+id/company_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="@{company.description}"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/company_textview_cap"
+                            app:layout_constraintTop_toBottomOf="@+id/company_description"
+                            app:layout_constraintLeft_toLeftOf="@id/company_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="시가총액"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_cap"
+                            app:layout_constraintTop_toTopOf="@+id/company_textview_cap"
+                            app:layout_constraintLeft_toRightOf="@+id/company_textview_cap"
+                            app:layout_constraintRight_toLeftOf="@id/company_textview_volume"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.setUnit(company.market_capital)}"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:id="@+id/company_textview_volume"
+                            app:layout_constraintTop_toTopOf="@+id/company_cap"
+                            app:layout_constraintLeft_toRightOf="@+id/company_cap"
+                            app:layout_constraintRight_toLeftOf="@+id/company_volume"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="거래량"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_volume"
+                            app:layout_constraintTop_toTopOf="@+id/company_textview_volume"
+                            app:layout_constraintLeft_toRightOf="@+id/company_textview_volume"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.setUnit(company.volume)}"
+                            android:textSize="20dp"></TextView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_textview_max"
+                            app:layout_constraintTop_toBottomOf="@+id/company_textview_cap"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="@id/company_textview_cap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="최고가"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_max"
+                            app:layout_constraintTop_toTopOf="@+id/company_textview_max"
+                            app:layout_constraintLeft_toLeftOf="@+id/company_cap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.setUnit(company.max_price)}"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:id="@+id/company_textview_min"
+                            app:layout_constraintTop_toTopOf="@+id/company_max"
+                            app:layout_constraintLeft_toLeftOf="@id/company_textview_volume"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="최소가"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:id="@+id/company_min"
+                            app:layout_constraintTop_toTopOf="@+id/company_textview_min"
+                            app:layout_constraintLeft_toLeftOf="@+id/company_volume"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.setUnit(company.min_price)}"
+                            android:textSize="20dp"></TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
@@ -126,38 +259,38 @@
                 app:layout_constraintRight_toRightOf="parent">
 
                 <Button
-                    android:onClick="@{viewModel::btnSellClick}"
+                    android:id="@+id/btn_sell"
 
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/button_round_red"
+
+                    android:onClick="@{viewModel::btnSellClick}"
                     android:text="매도하기"
                     android:textColor="#FF0844"
                     android:textSize="20sp"
                     android:textStyle="bold"
-
-                    android:layout_margin="10dp"
-                    android:id="@+id/btn_sell"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/button_round_red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/btn_buy"
                     app:layout_constraintTop_toTopOf="parent"></Button>
 
                 <Button
-                    android:onClick="@{viewModel::btnBuyClick}"
+                    android:id="@+id/btn_buy"
 
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/button_round_blue"
+
+                    android:onClick="@{viewModel::btnBuyClick}"
                     android:text="매수하기"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"
-
-                    android:layout_margin="10dp"
-                    android:id="@+id/btn_buy"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/button_round_blue"
-                    app:layout_constraintLeft_toRightOf="@id/btn_sell"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/btn_sell"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></Button>
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.stock.views
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
+import com.example.stock.data.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
@@ -37,9 +39,9 @@ class StockDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_stock_detail, container, false)
-
         stockDetailViewModel = ViewModelProvider(this).get(StockDetailViewModel::class.java)
         binding.stock = mainViewModel.getStock(arg.stockId)
+        binding.company = mainViewModel.getCompany(arg.stockId)
         binding.viewModel = stockDetailViewModel
         return binding.root
     }

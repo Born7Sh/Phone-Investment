@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.databinding.FragmentFavoriteBinding
+import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -18,7 +20,8 @@ import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var stockViewModel: StockViewModel
+
+    private val mainViewModel by activityViewModels<MainViewModel>()
     private lateinit var stockAdapter: StockAdapter
 
     override fun onCreateView(
@@ -33,27 +36,12 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        stockViewModel = ViewModelProvider(this).get(StockViewModel::class.java)
-        binding.viewModel = stockViewModel
 
-        stockViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        mainViewModel.stockFavoriteList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it)
         })
 
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        dataAdd()
-    }
-
-
-    fun dataAdd() {
-        GlobalScope.launch {
-            delay(15000L)
-            stockViewModel.buttonClick()}
-        println ("Hello,")
-        Thread.sleep (2000L)
-    }
 }

@@ -11,11 +11,15 @@ import android.util.Log
 import android.view.View
 
 import android.widget.TextView
+import androidx.navigation.findNavController
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.stock.data.News
+import com.example.stock.data.Stock
 import com.example.stock.databinding.ListNewsBinding
 import com.example.stock.databinding.ListSearchBinding
+import com.example.stock.views.SearchFragmentDirections
+import com.example.stock.views.home.HomeFragmentDirections
 
 
 class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.MyViewHolder>(), Filterable {
@@ -24,6 +28,27 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.MyViewHolder>()
 
     class MyViewHolder(val binding: ListSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.setClickListener {
+                binding.stockItemName?.let { stock ->
+                    var stockID = binding.name ?: "Apple"
+                    navigateToDetailStock(stockID, it)
+                }
+            }
+        }
+
+        private fun navigateToDetailStock(
+            stockId: String,
+            view: View
+        ) {
+            var sd = stockId
+            val direction =
+                SearchFragmentDirections.actionSearchFragmentToStockDetailFragment(sd)
+            view.findNavController()
+                .navigate(direction)
+        }
+
 
         fun bind(currentString: String) {
             Log.v("items", "binding")
@@ -79,11 +104,85 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.MyViewHolder>()
 
     init {
         var items = arrayListOf(
+            "Apple",
             "AmerisourceBergen",
-            "아처 대니얼스 미들랜드",
-            "암드",
-            "앤섬",
-            "아메리칸 익스프레스",
+            "Abbot",
+            "ADM",
+            "AIG",
+            "AMD",
+            "Amazon",
+            "Anthem",
+            "American Express",
+            "BOEING",
+            "Bank of America",
+            "BEST BUY",
+            "CITI",
+            "CardinalHealth",
+            "CAT",
+            "chico's",
+            "COMCAST",
+            "ConocoPhillips",
+            "Costoco",
+            "coupang",
+            "cisco",
+            "CVSHealth",
+            "Chevron",
+            "DELTA",
+            "DUPONT",
+            "DELL",
+            "Walt Disney",
+            "Fored",
+            "Meta",
+            "FedEx",
+            "GENERAL DYNAMICS",
+            "General Electric",
+            "CHEVROLET",
+            "Google",
+            "GoldmanSachs",
+            "HCA",
+            "THE HOME DEPOT",
+            "HESS",
+            "THE HARTFORD",
+            "Honeywell",
+            "HP",
+            "IBM",
+            "intel",
+            "Johnson Controls",
+            "Johnson & Johnson",
+            "J.P.Morgan",
+            "CocaCola",
+            "Kroger",
+            "LIBERTY GLOBAL",
+            "LOCKHED MARTIN",
+            "MCKESSON",
+            "MetLife",
+            "MERCK",
+            "Marathon OIL",
+            "Morgan Stanley",
+            "Microsoft",
+            "NORTHROP GRUMMAN",
+            "NVIDIA",
+            "PEPSI",
+            "PFIZER",
+            "P&G",
+            "PHOLIP MORRIS",
+            "Invesco",
+            "RITE AID",
+            "Raytheon",
+            "STATE STREET",
+            "Sysco",
+            "AT&T",
+            "TARGET",
+            "TRAVELERS",
+            "TESLA",
+            "UnitedHealth Group",
+            "ups",
+            "VALERO",
+            "verizon",
+            "Alliance Boots",
+            "WELLS FARGO",
+            "Walmart",
+            "ExxonMobil",
         )
 
         unFilteredList = items
