@@ -4,9 +4,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.example.stock.data.Stock
 import java.sql.Types.NULL
 
@@ -26,10 +28,11 @@ class BuyViewModel(stock: Int) : ViewModel() {
     }
 
     fun btnCloseClick(view: View) {
-
+        view.findNavController().navigateUp()
     }
 
     fun btnBuyClick(view: View) {
+        Toast.makeText(view.context, "매수 버튼을 누르셨군ㅇㅅ", Toast.LENGTH_SHORT).show()
 
     }
 

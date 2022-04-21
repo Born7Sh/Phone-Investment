@@ -3,7 +3,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.BuyFragment">
+    tools:context=".views.SellFragment">
+
     <data>
 
         <variable
@@ -21,13 +22,13 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.BuyViewModel" />
+            type="com.example.stock.model.SellViewModel" />
 
     </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:id="@+id/buy_textview_account"
+                android:id="@+id/sell_textview_account"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
@@ -51,8 +52,8 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:id="@+id/buy_textview_price"
-                app:layout_constraintTop_toBottomOf="@+id/buy_textview_account"
+                android:id="@+id/sell_textview_price"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_account"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,8 +64,8 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:id="@+id/buy_textview_have"
-                app:layout_constraintTop_toBottomOf="@+id/buy_textview_price"
+                android:id="@+id/sell_textview_have"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_price"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,8 +77,8 @@
             <TextView
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/buy_account"
-                app:layout_constraintTop_toTopOf="@+id/buy_textview_account"
+                android:id="@+id/sell_account"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_account"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
@@ -89,8 +90,8 @@
                 android:layout_marginRight="20dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/buy_price"
-                app:layout_constraintTop_toTopOf="@+id/buy_textview_price"
+                android:id="@+id/sell_price"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_price"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,8 +102,8 @@
                 android:layout_marginRight="20dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/buy_have"
-                app:layout_constraintTop_toTopOf="@+id/buy_textview_have"
+                android:id="@+id/sell_have"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_have"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,12 +115,12 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:id="@+id/buy_textview_buyPrice"
-                app:layout_constraintTop_toBottomOf="@+id/buy_textview_have"
+                android:id="@+id/sell_textview_sellPrice"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_have"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="매수 가격"
+                android:text="매도 가격"
                 android:textSize="20dp"></TextView>
 
             <TextView
@@ -127,12 +128,12 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/buy_textview_buyVolume"
-                app:layout_constraintTop_toBottomOf="@+id/buy_textview_buyPrice"
+                android:id="@+id/sell_textview_sellVolume"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_sellPrice"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="매수량"
+                android:text="매도량"
                 android:textSize="20dp"></TextView>
 
 
@@ -140,8 +141,8 @@
             <TextView
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/buy_buyPrice"
-                app:layout_constraintTop_toTopOf="@+id/buy_textview_buyPrice"
+                android:id="@+id/sell_sellPrice"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_sellPrice"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
@@ -154,8 +155,8 @@
                 android:layout_marginRight="20dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:id="@+id/buy_buyVolume"
-                app:layout_constraintTop_toTopOf="@+id/buy_textview_buyVolume"
+                android:id="@+id/sell_sellVolume"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_sellVolume"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,20 +186,20 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/btn_buy"
+                    app:layout_constraintRight_toLeftOf="@id/btn_sell"
                     app:layout_constraintTop_toTopOf="parent"></Button>
 
                 <Button
-                    android:id="@+id/btn_buy"
+                    android:id="@+id/btn_sell"
 
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
-                    android:background="@drawable/button_round_blue"
+                    android:background="@drawable/button_round_red"
                     app:layout_constraintHorizontal_weight="5"
-                    android:onClick="@{viewModel::btnBuyClick}"
-                    android:text="매수하기"
-                    android:textColor="#FFFFFF"
+                    android:onClick="@{viewModel::btnSellClick}"
+                    android:text="매도하기"
+                    android:textColor="#FF0844"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
