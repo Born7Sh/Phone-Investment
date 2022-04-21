@@ -37,130 +37,153 @@
             <include layout="@layout/toolbar_search" />
 
             <TextView
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
                 android:id="@+id/sell_textview_account"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="가용 자산"
-                android:textSize="20dp"></TextView>
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></TextView>
 
             <TextView
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
                 android:id="@+id/sell_textview_price"
-                app:layout_constraintTop_toBottomOf="@+id/sell_textview_account"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="한 주 가격"
-                android:textSize="20dp"></TextView>
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_account"></TextView>
 
             <TextView
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
                 android:id="@+id/sell_textview_have"
-                app:layout_constraintTop_toBottomOf="@+id/sell_textview_price"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="현재 보유량"
-                android:textSize="20dp"></TextView>
-
-
-
-            <TextView
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/sell_account"
-                app:layout_constraintTop_toTopOf="@+id/sell_textview_account"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(user.account)}"
-                android:textSize="20dp"></TextView>
-
-            <TextView
-                android:layout_marginRight="20dp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/sell_price"
-                app:layout_constraintTop_toTopOf="@+id/sell_textview_price"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(stock.price)}"
-                android:textSize="20dp"></TextView>
-
-            <TextView
-                android:layout_marginRight="20dp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:id="@+id/sell_have"
-                app:layout_constraintTop_toTopOf="@+id/sell_textview_have"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="현재 보유량"
-                android:textSize="20dp"></TextView>
-
-
-            <TextView
-                android:textColor="#000000"
-                android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:id="@+id/sell_textview_sellPrice"
-                app:layout_constraintTop_toBottomOf="@+id/sell_textview_have"
+                android:text="현재 보유량"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="매도 가격"
-                android:textSize="20dp"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_price"></TextView>
+
 
             <TextView
+                android:id="@+id/sell_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="@{String.valueOf(user.account)}"
                 android:textColor="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_account"></TextView>
+
+            <TextView
+                android:id="@+id/sell_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="@{String.valueOf(stock.price)}"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_price"></TextView>
+
+            <TextView
+                android:id="@+id/sell_have"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="현재 보유량"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_have"></TextView>
+
+
+            <TextView
+                android:id="@+id/sell_textview_sellPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="매도 가격"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_have"></TextView>
+
+            <TextView
+                android:id="@+id/sell_textview_sellVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/sell_textview_sellVolume"
-                app:layout_constraintTop_toBottomOf="@+id/sell_textview_sellPrice"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="매도량"
-                android:textSize="20dp"></TextView>
-
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_sellPrice"></TextView>
 
 
             <TextView
-                android:textColor="#000000"
-                android:textStyle="bold"
                 android:id="@+id/sell_sellPrice"
-                app:layout_constraintTop_toTopOf="@+id/sell_textview_sellPrice"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"></TextView>
+                android:layout_marginRight="20dp"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_sellPrice"></TextView>
 
             <EditText
-                android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text)}"
-                android:inputType="number"
-                android:layout_marginRight="20dp"
-                android:textColor="#000000"
-                android:textStyle="bold"
                 android:id="@+id/sell_sellVolume"
-                app:layout_constraintTop_toTopOf="@+id/sell_textview_sellVolume"
-                app:layout_constraintRight_toRightOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"></EditText>
+                android:layout_marginRight="20dp"
+                android:inputType="number"
+                android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text)}"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_sellVolume"></EditText>
+
+            <TextView
+                android:id="@+id/sell_textview_afterSell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:text="거래후 가용 자산"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sell_textview_sellVolume"></TextView>
+
+            <TextView
+                android:text="일단 보류"
+                android:id="@+id/sell_afterSell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/sell_textview_afterSell"></TextView>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,13 +201,13 @@
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/button_round_false"
-                    app:layout_constraintHorizontal_weight="2"
                     android:onClick="@{viewModel::btnCloseClick}"
                     android:text="취소하기"
                     android:textColor="#C0C0C0"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="2"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/btn_sell"
                     app:layout_constraintTop_toTopOf="parent"></Button>
@@ -196,13 +219,13 @@
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/button_round_red"
-                    app:layout_constraintHorizontal_weight="5"
                     android:onClick="@{viewModel::btnSellClick}"
                     android:text="매도하기"
                     android:textColor="#FF0844"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="5"
                     app:layout_constraintLeft_toRightOf="@id/btn_cancel"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></Button>

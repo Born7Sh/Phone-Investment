@@ -47,7 +47,7 @@ class StockDetailViewModel() : ViewModel() {
 
     fun btnSellClick(view : View){
         Log.v("items","파는거 입니다. 반갑습니다 허허허")
-        view.findNavController().navigate(R.id.action_stockDetailFragment_to_buyFragment)
+        view.findNavController().navigate(R.id.action_stockDetailFragment_to_sellFragment)
     }
 
     fun btnBuyClick(view : View){

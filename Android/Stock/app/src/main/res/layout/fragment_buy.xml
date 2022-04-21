@@ -161,6 +161,32 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"></EditText>
 
+            <TextView
+                android:id="@+id/buy_textview_afterBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:text="거래후 가용 자산"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buy_textview_buyVolume"></TextView>
+
+            <TextView
+                android:text="일단 보류"
+                android:id="@+id/buy_afterBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/buy_textview_afterBuy"></TextView>
+
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottom_bar"

@@ -31,7 +31,7 @@ class BuyFragment : Fragment() {
 
         binding.stock = mainViewModel.getCurrentStock()
         binding.company = mainViewModel.getCurrentCompany()
-        binding.user = User("호민",10000)
+        binding.user = mainViewModel.userIam.value
         return binding.root
     }
 
@@ -42,6 +42,13 @@ class BuyFragment : Fragment() {
 
         viewModel.price.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.buyBuyPrice.text = it.toString()
+
+            binding.buyAfterBuy.text = if (binding.user?.account?.minus(it)!! < 0) { "거래불가" } else {
+                (binding.user?.account?.minus(
+                    it
+                )).toString()
+            }
+
         })
     }
 

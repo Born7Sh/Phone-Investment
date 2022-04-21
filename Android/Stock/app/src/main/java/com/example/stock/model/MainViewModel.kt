@@ -34,10 +34,15 @@ class MainViewModel() : ViewModel() {
     val rankList: LiveData<ArrayList<Rank>>
         get() = _rankList
 
-    // 유저 리스트
+    // 회사 리스트
     private val _companyList = MutableLiveData<ArrayList<Company>>()
     val companyList: LiveData<ArrayList<Company>>
         get() = _companyList
+
+    // 유저 객체
+    private val _userIam  = MutableLiveData<User>()
+    val userIam: LiveData<User>
+        get() = _userIam
 
     // 각자 초기화용도
     private var news = ArrayList<News>()
@@ -45,6 +50,8 @@ class MainViewModel() : ViewModel() {
     private var stockOwns = ArrayList<StockOwn>()
     private var rank = ArrayList<Rank>()
     private var company = ArrayList<Company>()
+
+    private var user = User("호민", 100000)
 
     private lateinit var currentCompany: Company
     private lateinit var curStock: Stock
@@ -217,6 +224,8 @@ class MainViewModel() : ViewModel() {
             )
         )
         _companyList.value = company
+
+        _userIam.value = user
     }
 
     fun getStock(companyId: String): Stock {
