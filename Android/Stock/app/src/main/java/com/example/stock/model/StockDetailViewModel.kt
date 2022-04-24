@@ -7,9 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.stock.R
-import com.example.stock.data.CandleStock
-import com.example.stock.data.DataUtil
-import com.example.stock.data.Stock
+import com.example.stock.data.*
 import com.github.mikephil.charting.data.CandleEntry
 import java.text.NumberFormat
 
@@ -19,6 +17,13 @@ class StockDetailViewModel() : ViewModel() {
         get() = _stockList
 
     private var items = ArrayList<CandleEntry>()
+
+    // 회사 리스트
+    private val _communityList = MutableLiveData<ArrayList<Community>>()
+    val communityList: LiveData<ArrayList<Community>>
+        get() = _communityList
+
+    private var community = ArrayList<Community>()
 
     init {
         for (candleStock in DataUtil.getCandleStockData()) {
@@ -33,6 +38,12 @@ class StockDetailViewModel() : ViewModel() {
             )
         }
         _stockList.value = items
+
+        community = arrayListOf(
+            Community("김규동", "Apple", "AAPL", "드자가"),
+            Community("김차동", "AmerisourceBergen", "ABC", "자 드가자"),
+        )
+        _communityList.value = community
     }
 
     fun setUnit(value : Int) : String{
@@ -53,6 +64,12 @@ class StockDetailViewModel() : ViewModel() {
     fun btnBuyClick(view : View){
         Log.v("items","사는거 입니다. 반갑습니다 허허허")
         view.findNavController().navigate(R.id.action_stockDetailFragment_to_buyFragment)
+
+    }
+
+    fun btnCommunity (view: View){
+        Log.v("items","버튼 클립ㄱ!!!! 입니다. 반갑습니다 허허허")
+        view.findNavController().navigate(R.id.action_stockDetailFragment_to_communityFragment)
 
     }
 

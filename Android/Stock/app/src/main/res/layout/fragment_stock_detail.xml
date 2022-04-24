@@ -95,7 +95,7 @@
                     <com.github.mikephil.charting.charts.CandleStickChart
                         android:id="@+id/cdChart"
                         android:layout_width="match_parent"
-                        android:layout_height="1000dp" />
+                        android:layout_height="500dp" />
 
                     <TextView
                         android:id="@+id/stock_item_stock"
@@ -194,15 +194,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
                         <TextView
                             android:textColor="#000000"
                             android:id="@+id/company_textview_max"
@@ -244,9 +235,43 @@
                             android:layout_height="wrap_content"
                             android:text="@{viewModel.setUnit(company.min_price)}"
                             android:textSize="20dp"></TextView>
+
+
+                    <TextView
+                        android:id="@+id/community_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:layout_margin="20dp"
+                        android:text="커뮤니티"
+                        android:textColor="@color/black"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/company_textview_max"></TextView>
+
+                    <TextView
+                        android:id="@+id/button_community"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:onClick="@{viewModel::btnCommunity}"
+                        android:text="더보기"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/community_textview"></TextView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_community"
+                            android:layout_width="match_parent"
+                            android:layout_height="500dp"
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@+id/community_textview"
+                            tools:layout_editor_absoluteX="0dp"></androidx.recyclerview.widget.RecyclerView>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
+import com.example.stock.adapter.CommunityAdapter
 import com.example.stock.data.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
@@ -30,7 +31,7 @@ class StockDetailFragment : Fragment() {
     private val mainViewModel by activityViewModels<MainViewModel>()
 
     private val arg: StockDetailFragmentArgs by navArgs()
-
+    private lateinit var communityAdapter: CommunityAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +44,20 @@ class StockDetailFragment : Fragment() {
         binding.stock = mainViewModel.getStock(arg.stockId)
         binding.company = mainViewModel.getCompany(arg.stockId)
         binding.viewModel = stockDetailViewModel
+
+        communityAdapter = CommunityAdapter()
+        binding.recyclerCommunity.adapter = communityAdapter
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        stockDetailViewModel.communityList.observe(viewLifecycleOwner,{
+            communityAdapter.setData(it)
+        })
+
         stockDetailViewModel.stockList.observe(viewLifecycleOwner, {
 
             val dataSet = CandleDataSet(it, "").apply {
@@ -95,7 +105,7 @@ class StockDetailFragment : Fragment() {
                 this.data = CandleData(dataSet)
                 description.isEnabled = false
                 isHighlightPerDragEnabled = true
-                requestDisallowInterceptTouchEvent(true)
+                requestDisallowInterceptTouchEvent(false)
                 invalidate()
             }
         })

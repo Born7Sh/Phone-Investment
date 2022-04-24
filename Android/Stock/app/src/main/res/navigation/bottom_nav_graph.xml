@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_stockDetailFragment_to_sellFragment"
             app:destination="@id/sellFragment" />
+        <action
+            android:id="@+id/action_stockDetailFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -94,5 +97,10 @@
         android:id="@+id/sellFragment"
         android:name="com.example.stock.views.SellFragment"
         android:label="SellFragment" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.example.stock.views.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
 
 </navigation>

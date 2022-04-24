@@ -39,10 +39,13 @@ class MainViewModel() : ViewModel() {
     val companyList: LiveData<ArrayList<Company>>
         get() = _companyList
 
+
     // 유저 객체
     private val _userIam  = MutableLiveData<User>()
     val userIam: LiveData<User>
         get() = _userIam
+
+
 
     // 각자 초기화용도
     private var news = ArrayList<News>()
@@ -50,6 +53,7 @@ class MainViewModel() : ViewModel() {
     private var stockOwns = ArrayList<StockOwn>()
     private var rank = ArrayList<Rank>()
     private var company = ArrayList<Company>()
+
 
     private var user = User("호민", 100000)
 
