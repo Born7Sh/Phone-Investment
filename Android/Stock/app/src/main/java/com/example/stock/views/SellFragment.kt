@@ -45,11 +45,22 @@ class SellFragment : Fragment() {
         viewModel.price.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.sellSellPrice.text = it.toString()
 
-            binding.sellAfterSell.text = if (binding.user?.account?.plus(it)!! < 0) { "거래불가" } else {
-                (binding.user?.account?.plus(
-                    it
-                )).toString()
+            // 조건 수정 필요
+            if (binding.user?.account?.plus(it)!! > 1111111) {
+                binding.sellAfterSell.text = "거래불가"
+                binding.btnSell.isEnabled = false
+                binding.btnSell.isClickable = false
+                binding.btnSell.setBackgroundResource(R.drawable.button_round_false)
+                binding.btnSell.setTextColor(resources.getColor(R.color.grey))
+            } else {
+                binding.sellAfterSell.text = (binding.user?.account?.plus(it)).toString()
+                binding.btnSell.isEnabled = true
+                binding.btnSell.isClickable = true
+                binding.btnSell.setBackgroundResource(R.drawable.button_round_red)
+                binding.btnSell.setTextColor(resources.getColor(R.color.red))
             }
+
+
         })
     }
 

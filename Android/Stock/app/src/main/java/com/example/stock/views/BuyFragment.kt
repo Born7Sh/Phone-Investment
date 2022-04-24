@@ -18,7 +18,7 @@ import com.example.stock.model.MainViewModel
 class BuyFragment : Fragment() {
 
 
-    private lateinit var binding : FragmentBuyBinding
+    private lateinit var binding: FragmentBuyBinding
     private lateinit var viewModel: BuyViewModel
     private val mainViewModel by activityViewModels<MainViewModel>()
 
@@ -37,16 +37,31 @@ class BuyFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, BuyViewModelFactory(mainViewModel.getCurrentStock().price.toInt())).get(BuyViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            BuyViewModelFactory(mainViewModel.getCurrentStock().price.toInt())
+        ).get(BuyViewModel::class.java)
         binding.viewModel = viewModel
 
         viewModel.price.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.buyBuyPrice.text = it.toString()
 
-            binding.buyAfterBuy.text = if (binding.user?.account?.minus(it)!! < 0) { "거래불가" } else {
-                (binding.user?.account?.minus(
+            if (binding.user?.account?.minus(it)!! < 0) {
+                binding.buyAfterBuy.text = "거래불가"
+                binding.btnBuy.isEnabled = false
+                binding.btnBuy.isClickable = false
+                binding.btnBuy.setBackgroundResource(R.drawable.button_round_false)
+                binding.btnBuy.setTextColor(resources.getColor(R.color.grey))
+
+            } else {
+                binding.buyAfterBuy.text =  (binding.user?.account?.minus(
                     it
                 )).toString()
+
+                binding.btnBuy.isEnabled = true
+                binding.btnBuy.isClickable = true
+                binding.btnBuy.setBackgroundResource(R.drawable.button_round_blue)
+                binding.btnBuy.setTextColor(resources.getColor(R.color.white))
             }
 
         })
