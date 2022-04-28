@@ -101,6 +101,10 @@
         android:id="@+id/communityFragment"
         android:name="com.example.stock.views.CommunityFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <argument
+            android:name="community"
+            app:argType="com.example.stock.data.Community[]" />
+    </fragment>
 
 </navigation>

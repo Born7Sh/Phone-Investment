@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.data.*
+import com.example.stock.views.StockDetailFragmentDirections
 import com.github.mikephil.charting.data.CandleEntry
 import java.text.NumberFormat
 
@@ -69,7 +70,8 @@ class StockDetailViewModel() : ViewModel() {
 
     fun btnCommunity (view: View){
         Log.v("items","버튼 클립ㄱ!!!! 입니다. 반갑습니다 허허허")
-        view.findNavController().navigate(R.id.action_stockDetailFragment_to_communityFragment)
+        val action = StockDetailFragmentDirections.actionStockDetailFragmentToCommunityFragment(community.toTypedArray())
+        view.findNavController().navigate(action)
 
     }
 

@@ -7,6 +7,7 @@ import com.example.stock.data.Community
 import com.example.stock.data.News
 import com.example.stock.databinding.ListCommunityBinding
 import com.example.stock.databinding.ListNewsBinding
+import com.example.stock.views.CommunityFragmentArgs
 
 class CommunityAdapter : RecyclerView.Adapter<CommunityAdapter.MyViewHolder>(){
     var communityList=mutableListOf<Community>()
