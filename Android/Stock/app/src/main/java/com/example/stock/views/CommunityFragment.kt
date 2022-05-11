@@ -6,16 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
 import com.example.stock.databinding.FragmentCommunityBinding
+import com.example.stock.model.CommunityViewModel
+import com.example.stock.model.MainViewModel
 
 
 class CommunityFragment : Fragment() {
 
     lateinit var binding: FragmentCommunityBinding
+    private val viewModel by viewModels<CommunityViewModel>()
     private lateinit var communityAdapter: CommunityAdapter
 
 
@@ -35,6 +41,21 @@ class CommunityFragment : Fragment() {
         communityAdapter.setData(itemList)
         binding.recyclerCommunity.adapter = communityAdapter
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        binding.viewModel = viewModel
+
+        viewModel.content.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+            if (binding.communityEditText.text.isNullOrEmpty()
+                &&
+                it.toString().isNotBlank()
+            ) {
+                binding.communityEditText.setText(it.toString())
+            }
+        })
     }
 
 

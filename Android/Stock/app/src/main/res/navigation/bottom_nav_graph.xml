@@ -37,9 +37,9 @@
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/AnalFragment"
-        android:name="com.example.stock.views.anal.AnalFragment"
+        android:name="com.example.stock.views.analysis.AnalysisFragment"
         android:label="AnalFragment"
-        tools:layout="@layout/fragment_anal" />
+        tools:layout="@layout/fragment_analysis" />
     <fragment
         android:id="@+id/SettingFragment"
         android:name="com.example.stock.views.setting.SettingFragment"

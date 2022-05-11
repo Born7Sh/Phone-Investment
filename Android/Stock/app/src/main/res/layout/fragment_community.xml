@@ -6,7 +6,9 @@
     tools:context=".views.CommunityFragment">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.stock.model.CommunityViewModel" />
     </data>
 
     <FrameLayout
@@ -53,9 +55,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/community_textview">
 
                 <EditText
+                    android:id="@+id/community_editText"
                     android:padding="10dp"
                     android:background="@drawable/edit_text_selector"
                     android:hint="여기에 입력해보세요"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text)}"
                     android:layout_weight="4.5"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"></EditText>
@@ -63,6 +67,7 @@
 
                 <Button
                     android:background="@drawable/button_round"
+                    android:onClick="@{viewModel::btnWriteClick}"
                     android:text="댓글 작성"
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
