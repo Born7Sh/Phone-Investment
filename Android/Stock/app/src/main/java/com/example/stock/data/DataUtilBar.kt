@@ -1,6 +1,6 @@
 package com.example.stock.data
 
-object DataUtil {
+object DataUtilBar {
     fun getCandleStockData(): List<CandleStock> {
         return listOf(
             CandleStock(

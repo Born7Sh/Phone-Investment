@@ -27,7 +27,7 @@ class StockDetailViewModel() : ViewModel() {
     private var community = ArrayList<Community>()
 
     init {
-        for (candleStock in DataUtil.getCandleStockData()) {
+        for (candleStock in DataUtilBar.getCandleStockData()) {
             items.add(
                 CandleEntry(
                     candleStock.createdAt.toFloat(),
