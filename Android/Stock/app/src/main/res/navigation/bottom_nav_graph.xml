@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
 
 
     </fragment>
@@ -106,5 +109,10 @@
             android:name="community"
             app:argType="com.example.stock.data.Community[]" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.stock.views.home.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

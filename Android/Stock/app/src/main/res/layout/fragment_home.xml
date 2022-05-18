@@ -87,8 +87,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></Button>
 
+<!--                <Button-->
+<!--                    android:onClick="@{homeFragment::goRank}"-->
+<!--                    android:text="실시간 랭킹"-->
+<!--                    app:layout_constraintLeft_toRightOf="@id/button_2"-->
+<!--                    app:layout_constraintRight_toRightOf="parent"-->
+<!--                    android:id="@+id/button_3"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/button_1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"></Button>-->
+
                 <Button
-                    android:onClick="@{homeFragment::goRank}"
+                    android:onClick="@{homeFragment::IMSI}"
                     android:text="실시간 랭킹"
                     app:layout_constraintLeft_toRightOf="@id/button_2"
                     app:layout_constraintRight_toRightOf="parent"
@@ -96,6 +106,7 @@
                     app:layout_constraintTop_toTopOf="@id/button_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></Button>
+
 
                 <TextView
                     android:id="@+id/home_ownStock"

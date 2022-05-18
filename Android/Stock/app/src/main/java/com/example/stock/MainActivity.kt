@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.main_nav_host)
         binding.mainBottomNavigation.setupWithNavController(navController)
 
-        // bottomNavigation 한거 안보이게
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.stockDetailFragment ||
-                destination.id == R.id.buyFragment ||
+                // bottomNavigation 한거 안보이게
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    if (destination.id == R.id.stockDetailFragment ||
+                        destination.id == R.id.buyFragment ||
                 destination.id == R.id.sellFragment
             ) {
                 binding.mainBottomNavigation.visibility = View.GONE

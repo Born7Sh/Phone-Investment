@@ -103,8 +103,14 @@ class HomeFragment : Fragment() {
     }
 
 
+
     fun search(view: View){
         view.findNavController().navigate(R.id.action_HomeFragment_to_searchFragment)
     }
 
+
+
+    fun IMSI(view: View) {
+        view.findNavController().navigate(R.id.action_HomeFragment_to_loginFragment)
+    }
 }

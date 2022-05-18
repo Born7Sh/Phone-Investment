@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable-hdpi/stroke_right.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable-hdpi/stroke_round.xml" value="0.2324074074074074" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable-hdpi/stroke_under.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable-hdpi/stroke_up.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable-xhdpi/baseline_mode_edit_18.xml" value="0.12916666666666668" />
@@ -14,6 +15,9 @@
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable/button_round_red.xml" value="0.22777777777777777" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable/edit_text_selector.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable/stroke_left.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable/stroke_round_selected.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable/stroke_round_selector.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/drawable/stroke_round_unselected.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/bottom_navigation_tab.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/buy_fragment.xml" value="0.12239583333333333" />
@@ -24,6 +28,7 @@
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_favorite.xml" value="0.2" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_home_stock.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_login.xml" value="0.4" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_news.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_rack.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Homin/Documents/GitHub/Phone-Investment/Android/Stock/app/src/main/res/layout/fragment_rank.xml" value="0.25364583333333335" />
