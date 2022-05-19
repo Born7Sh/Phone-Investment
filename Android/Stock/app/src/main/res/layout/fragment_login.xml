@@ -1,110 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".views.home.LoginFragment">
 
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.stock.model.LoginViewModel" />
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:src="@drawable/logo"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:text="Log In"
-            ></ImageView>
-
-        <TextView
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="12dp"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="주식 초보들을 위한 가상 투자앱 \n폰투자에 어서오세요"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></TextView>
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/logo"
+                android:text="Log In"></ImageView>
 
             <TextView
-                android:text="이메일로 로그인 하기"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></TextView>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="10dp"
+                android:text="주식 초보들을 위한 가상 투자앱 \n폰투자에 어서오세요"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
 
-            <EditText
-                android:text="안녕사세요"
-                android:padding="10dp"
-                android:background="@drawable/stroke_round_selector"
-                android:id="@+id/login_Id"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:orientation="vertical">
 
-            <EditText
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="이메일로 로그인 하기"></TextView>
+
+                <EditText
+                    android:id="@+id/login_Id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/stroke_round_selector"
+                    android:hint="이메일"
+                    android:padding="10dp"></EditText>
+
+                <EditText
+                    android:id="@+id/login_Pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/stroke_round_selector"
+                    android:hint="비밀번호"
+                    android:padding="10dp"></EditText>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/login_forgotView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/login_forgotView_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Forgot "
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/login_forgotView_email"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                <TextView
+                    android:id="@+id/login_forgotView_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=" email "
+                    android:textColor="#1CA8D4"
+                    android:textStyle=""
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toRightOf="@id/login_forgotView_text1"
+                    app:layout_constraintRight_toLeftOf="@+id/login_forgotView_text2"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                <TextView
+                    android:id="@+id/login_forgotView_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=" or "
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toRightOf="@id/login_forgotView_email"
+                    app:layout_constraintRight_toLeftOf="@id/login_forgotView_password"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                <TextView
+                    android:id="@+id/login_forgotView_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=" password ?"
+                    android:textColor="#1CA8D4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toRightOf="@+id/login_forgotView_text2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
                 android:layout_marginTop="10dp"
-                android:text="안녕사세요"
-                android:padding="10dp"
-                android:background="@drawable/stroke_round_selector"
-                android:id="@+id/login_Pwd"
+                android:background="@drawable/stroke_up"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_margin="12dp"
+                    android:id="@+id/text_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다른 플랫폼에서 로그인 하기"></TextView>
+
+
+                <Button
+                    android:id="@+id/btn_Login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_round_green"
+                    android:text="로그인"
+                    android:textColor="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/btn_Login_K"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/button_round_kakao"
+                    android:padding="8dp"
+                    android:text="카카오 로그인"
+                    android:textColor="@color/black"></Button>
+
+                <Button
+                    android:id="@+id/btn_Login_N"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/button_round_naver"
+                    android:padding="8dp"
+                    android:text="네이버 로그인"
+                    android:textColor="@color/black"></Button>
+
+                <Button
+                    android:id="@+id/btn_Login_M"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/button_round_meta"
+                    android:padding="8dp"
+                    android:text="페이스북 로그인"
+                    android:textColor="@color/black"></Button>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/login_signupView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/login_signupView_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원이 아니시라면? "
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/login_signupView_signup"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                <TextView
+                    android:id="@+id/login_signupView_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 회원가입"
+                    android:textColor="#1CA8D4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toRightOf="@+id/login_signupView_text1"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:textColor="#1CA8D4"
-            android:gravity="center"
-            android:text="Foget password?"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <Button
-            android:id="@+id/btn_Login"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#1CA8D4"
-            android:text="LOG IN"></Button>
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="회원이 아니세요?"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <Button
-            android:id="@+id/btn_Signup"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:textColor="#1CA8D4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:text="회원가입"></Button>
-
-
-
-    </LinearLayout>
-
-</FrameLayout>
+    </FrameLayout>
+</layout>
