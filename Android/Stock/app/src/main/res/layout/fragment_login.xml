@@ -57,6 +57,7 @@
                     android:text="이메일로 로그인 하기"></TextView>
 
                 <EditText
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onIdTextChanged(text)}"
                     android:id="@+id/login_Id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
                     android:padding="10dp"></EditText>
 
                 <EditText
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onPwdTextChanged(text)}"
                     android:id="@+id/login_Pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,6 +74,18 @@
                     android:background="@drawable/stroke_round_selector"
                     android:hint="비밀번호"
                     android:padding="10dp"></EditText>
+
+                <Button
+                    android:layout_marginTop="12dp"
+                    android:onClick="@{viewModel::btnLoginClick}"
+                    android:id="@+id/btn_Login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_round_green"
+                    android:text="로그인"
+                    android:textColor="@color/white"></Button>
 
             </LinearLayout>
 
@@ -150,18 +164,6 @@
 
 
                 <Button
-                    android:id="@+id/btn_Login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_round_green"
-                    android:text="로그인"
-                    android:textColor="@color/white"></Button>
-
-                <Button
                     android:id="@+id/btn_Login_K"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,7 +185,7 @@
                     android:background="@drawable/button_round_naver"
                     android:padding="8dp"
                     android:text="네이버 로그인"
-                    android:textColor="@color/black"></Button>
+                    android:textColor="@color/white"></Button>
 
                 <Button
                     android:id="@+id/btn_Login_M"
@@ -195,7 +197,7 @@
                     android:background="@drawable/button_round_meta"
                     android:padding="8dp"
                     android:text="페이스북 로그인"
-                    android:textColor="@color/black"></Button>
+                    android:textColor="@color/white"></Button>
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
