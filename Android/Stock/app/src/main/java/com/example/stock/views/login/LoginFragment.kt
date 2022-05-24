@@ -1,4 +1,4 @@
-package com.example.stock.views.home
+package com.example.stock.views.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

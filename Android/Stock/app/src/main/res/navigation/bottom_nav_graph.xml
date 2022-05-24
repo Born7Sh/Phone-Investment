@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.stock.views.home.LoginFragment"
+        android:name="com.example.stock.views.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
 
