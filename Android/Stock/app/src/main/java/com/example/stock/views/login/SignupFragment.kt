@@ -14,7 +14,7 @@ import com.example.stock.model.SignupViewModel
 
 class SignupFragment : Fragment() {
 
-    private lateinit var binding : FragmentSignupBinding
+    private lateinit var binding: FragmentSignupBinding
     private lateinit var viewModel: SignupViewModel
 
     override fun onCreateView(
@@ -28,6 +28,50 @@ class SignupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SignupViewModel::class.java)
+        binding.viewModel = viewModel
+
+        viewModel.id.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (binding.signupId.text.isNullOrEmpty()
+                &&
+                it.toString().isNotBlank()
+            ) {
+                binding.signupId.setText(it.toString())
+            }
+        })
+        viewModel.pwd.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (binding.signupPwd.text.isNullOrEmpty()
+                &&
+                it.toString().isNotBlank()
+            ) {
+                binding.signupPwd.setText(it.toString())
+            }
+        })
+        viewModel.pwdCk.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (binding.signupPwdCheck.text.isNullOrEmpty()
+                &&
+                it.toString().isNotBlank()
+            ) {
+                binding.signupPwdCheck.setText(it.toString())
+            }
+        })
+        viewModel.name.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (binding.signupName.text.isNullOrEmpty()
+                &&
+                it.toString().isNotBlank()
+            ) {
+                binding.signupName.setText(it.toString())
+            }
+        })
+        viewModel.birth.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (binding.signupBirth.text.isNullOrEmpty()
+                &&
+                it.toString().isNotBlank()
+            ) {
+                binding.signupBirth.setText(it.toString())
+            }
+        })
+
     }
+
 
 }

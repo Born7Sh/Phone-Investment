@@ -64,97 +64,99 @@
 
                 <ImageView
                     android:id="@+id/logo"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/signup_formView_text"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/logo"></ImageView>
+                    android:src="@drawable/logo"
+                    app:layout_constraintBottom_toTopOf="@+id/signup_formView_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></ImageView>
 
                 <TextView
                     android:id="@+id/signup_formView_text"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="-10dp"
-                    android:textStyle="bold"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@+id/logo"
-                    app:layout_constraintBottom_toTopOf="@+id/signup_formView_editView"
                     android:text="정보 입력"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/signup_formView_editView"
+                    app:layout_constraintTop_toBottomOf="@+id/logo" />
 
                 <LinearLayout
-                    app:layout_constraintTop_toBottomOf="@id/signup_formView_text"
-                    android:layout_margin="12dp"
                     android:id="@+id/signup_formView_editView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/signup_formView_text">
 
                     <EditText
-                        android:layout_marginTop="10dp"
                         android:id="@+id/signup_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/stroke_round_selector"
                         android:hint="이름"
-                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onIdTextChanged(text)}"
+                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onNameTextChanged(text)}"
                         android:padding="10dp"></EditText>
 
                     <EditText
-                        android:layout_marginTop="10dp"
                         android:id="@+id/signup_Id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/stroke_round_selector"
                         android:hint="이메일"
                         android:onTextChanged="@{(text, start, before, count) -> viewModel.onIdTextChanged(text)}"
                         android:padding="10dp"></EditText>
 
                     <EditText
-                        android:layout_marginTop="10dp"
                         android:id="@+id/signup_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/stroke_round_selector"
                         android:hint="비밀번호"
-                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onIdTextChanged(text)}"
+                        android:inputType="textPassword"
+                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onPwdTextChanged(text)}"
                         android:padding="10dp"></EditText>
 
                     <EditText
-                        android:layout_marginTop="10dp"
                         android:id="@+id/signup_pwd_check"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/stroke_round_selector"
                         android:hint="비밀번호 확인"
-                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onIdTextChanged(text)}"
+                        android:inputType="textPassword"
+                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onPwdCheckTextChanged(text)}"
                         android:padding="10dp"></EditText>
 
                     <EditText
-                        android:layout_marginTop="10dp"
                         android:id="@+id/signup_birth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/stroke_round_selector"
                         android:hint="생년월인 숫자 8자리 EX) 19900101"
-                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onIdTextChanged(text)}"
+                        android:onTextChanged="@{(text, start, before, count) -> viewModel.onBirthTextChanged(text)}"
                         android:padding="10dp"></EditText>
 
                     <Button
-                        android:layout_marginTop="12dp"
-                        android:onClick="@{viewModel::btnSignupClick}"
                         android:id="@+id/btn_Signup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
                         android:layout_marginBottom="12dp"
                         android:layout_weight="1"
                         android:background="@drawable/button_round_green"
+                        android:onClick="@{viewModel::btnSignupClick}"
                         android:text="가입하기"
                         android:textColor="@color/white"></Button>
                 </LinearLayout>

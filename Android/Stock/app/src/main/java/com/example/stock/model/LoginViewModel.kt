@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.example.stock.R
 
 class LoginViewModel : ViewModel(){
 
@@ -43,5 +45,9 @@ class LoginViewModel : ViewModel(){
 
     fun btnLoginClick(view : View) {
         Toast.makeText(view.context, "id : "+ id.value + "pwd : " + pwd.value, Toast.LENGTH_SHORT).show()
+    }
+
+    fun btnSignup(view : View) {
+        view.findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
     }
 }
