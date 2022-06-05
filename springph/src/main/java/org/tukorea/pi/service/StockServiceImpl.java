@@ -82,10 +82,7 @@ public class StockServiceImpl implements StockService {
 			logger.info("장외시간");
 			return stockDAO.selectLastStock(stockVO2);
 		}
-
-
 	}
-	
 	
 	//장외시간 날짜 반환
 	public String offHours(int mday) throws Exception{
