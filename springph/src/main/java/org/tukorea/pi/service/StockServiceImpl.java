@@ -39,7 +39,7 @@ public class StockServiceImpl implements StockService {
 		LocalDateTime now = LocalDateTime.now();
 		
 		//실제 주식날짜 기준 얼마나 전날로 할지
-		int mday = 30;
+		int mday = 101;
 
 		//어느 가상날짜로 지정할지
 		String monthmday = now.minusDays(mday).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -82,6 +82,20 @@ public class StockServiceImpl implements StockService {
 			logger.info("장외시간");
 			return stockDAO.selectLastStock(stockVO2);
 		}
+	}
+	
+	public StockVO readMyStock() throws Exception{
+		int mday = 101;
+		
+		String vdate = offHours(mday);
+		//db 테이블 이름 now.minusDays(mday).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String date = "stock_" + vdate;
+		
+		StockVO2 stockVO2 = new StockVO2();
+		stockVO2.setTable_name(date);
+		stockVO2.setMday(mday);
+		
+		return stockDAO.selectMyStock(stockVO2);
 	}
 	
 	//장외시간 날짜 반환

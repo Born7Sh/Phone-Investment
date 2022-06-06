@@ -31,9 +31,9 @@ public class CustomUserDetailsService implements UserDetailsService{
 			e.printStackTrace();
 		}
 
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		System.out.println(user.getRolename());
+//		System.out.println(user.getUsername());
+//		System.out.println(user.getPassword());
+//		System.out.println(user.getRolename());
 	
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
 		

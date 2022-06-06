@@ -4,9 +4,16 @@ public class StockVO {
 	private String symbol;
 	private String stock_datetime;
 	private float price;
+	private float a_price;
 	private String symbol_ko;
 	private String symbol_en;
 	
+	public float getA_price() {
+		return a_price;
+	}
+	public void setA_price(float a_price) {
+		this.a_price = a_price;
+	}
 	public String getSymbol() {
 		return symbol;
 	}

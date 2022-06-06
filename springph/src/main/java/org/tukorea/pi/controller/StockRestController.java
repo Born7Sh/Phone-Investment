@@ -45,6 +45,20 @@ public class StockRestController {
 		return new ResponseEntity<>(calendar, headers, HttpStatus.OK);
 	}
 	
+	// 내가 가지고 있는 주식 확인
+	@RequestMapping(value = "/mylist", method = RequestMethod.GET)
+	public ResponseEntity<StockVO> readMyStock() throws Exception {
+        String ip = getClientIP();
+		logger.info("ip : {}  /mylist REST-API GET method called. then method executed.",ip);
+	
+		StockVO stock = stockService.readMyStock();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		headers.set("My-Header", "MyHeaderValue");
+		return new ResponseEntity<>(stock, headers, HttpStatus.OK);
+	}
+	
     public String getClientIP() throws Exception {
 
         String ip = null;

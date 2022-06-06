@@ -16,11 +16,18 @@ public class StockDAOImpl implements StockDAO{
 	
 	private static final String namespace = "org.tukorea.pi.mapper.stock";
 	
+	@Override
 	public StockVO selectNowStock(StockVO2 symbol) throws Exception{
 		return sqlSession.selectOne(namespace+".selectNowStock", symbol);
 	}
+	
+	@Override
 	public StockVO selectLastStock(StockVO2 symbol) throws Exception{
 		return sqlSession.selectOne(namespace+".selectLastStock", symbol);
 	}
-
+	
+	@Override
+	public StockVO selectMyStock(StockVO2 symbol) throws Exception{
+		return sqlSession.selectOne(namespace+".selectMyStock", symbol);
+	}
 }
