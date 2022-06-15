@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 
 class SignupViewModel : ViewModel() {
 
@@ -93,8 +94,9 @@ class SignupViewModel : ViewModel() {
     init {}
 
     fun btnSignupClick(view: View) {
-        Toast.makeText(view.context, "id : " + id.value + " pwd : " + pwd.value, Toast.LENGTH_SHORT)
+        Toast.makeText(view.context, "id : " + id.value + " pwd : " + pwd.value + "가입을 축하드려요", Toast.LENGTH_SHORT)
             .show()
+        view.findNavController().navigateUp()
     }
 
 }

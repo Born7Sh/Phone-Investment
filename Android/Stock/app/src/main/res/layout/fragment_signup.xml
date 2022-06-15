@@ -139,6 +139,7 @@
                         android:padding="10dp"></EditText>
 
                     <EditText
+                        android:inputType="number"
                         android:id="@+id/signup_birth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
