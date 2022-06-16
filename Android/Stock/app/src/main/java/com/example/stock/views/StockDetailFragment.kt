@@ -20,8 +20,11 @@ import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
 import com.example.stock.model.StockViewModel
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
+import com.google.android.material.slider.LabelFormatter
 
 
 class StockDetailFragment : Fragment() {
@@ -54,6 +57,8 @@ class StockDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initChart()
+
         stockDetailViewModel.communityList.observe(viewLifecycleOwner,{
             communityAdapter.setData(it)
         })
@@ -63,7 +68,7 @@ class StockDetailFragment : Fragment() {
             val dataSet = CandleDataSet(it, "").apply {
                 // 심지 부분
                 shadowColor = Color.LTGRAY
-                shadowWidth = 1F
+                shadowWidth = 0.7F
 
                 // 음봄
                 decreasingColor = Color.BLUE
@@ -78,37 +83,47 @@ class StockDetailFragment : Fragment() {
                 highLightColor = Color.TRANSPARENT
             }
 
-            binding.cdChart.axisLeft.run {
-                setDrawAxisLine(false)
-                setDrawGridLines(false)
-                textColor = Color.TRANSPARENT
-            }
-
-            binding.cdChart.axisRight.run {
-                isEnabled = false
-            }
-
-            // X 축
-            binding.cdChart.xAxis.run {
-                textColor = Color.TRANSPARENT
-                setDrawAxisLine(false)
-                setDrawGridLines(false)
-                setAvoidFirstLastClipping(true)
-            }
-
-            // 범례
-            binding.cdChart.legend.run {
-                isEnabled = false
-            }
-
             binding.cdChart.apply {
                 this.data = CandleData(dataSet)
-                description.isEnabled = false
-                isHighlightPerDragEnabled = true
                 requestDisallowInterceptTouchEvent(false)
                 invalidate()
             }
         })
+    }
+
+    private fun initChart() {
+        binding.cdChart.apply {
+            description.isEnabled = false
+            setMaxVisibleValueCount(200)
+            setTouchEnabled(false) // 터치 유무
+            setPinchZoom(false)
+            setDrawGridBackground(false)
+            setExtraOffsets(10f, 0f, 40f, 0f);
+            // x축 설정
+            xAxis.apply {
+                textColor = Color.TRANSPARENT
+                position = XAxis.XAxisPosition.BOTTOM
+                // 세로선 표시 여부 설정
+                this.setDrawGridLines(true)
+                axisLineColor = Color.rgb(50, 59, 76)
+                gridColor = Color.rgb(50, 59, 76)
+            }
+            // 왼쪽 y축 설정
+            axisLeft.apply {
+                textColor = Color.WHITE
+                isEnabled = true
+            }
+            // 오른쪽 y축 설정
+            axisRight.apply {
+                setDrawGridLines(false);
+                setDrawAxisLine(false);
+                setLabelCount(7, false)
+                textColor = Color.WHITE
+                // 가로선 표시 여부 설정
+
+            }
+            binding.cdChart.legend.isEnabled = true
+        }
     }
 
 
