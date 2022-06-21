@@ -1,4 +1,4 @@
-package com.example.stock.views
+package com.example.stock.views.stockDetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
-import com.example.stock.data.User
 import com.example.stock.databinding.FragmentSellBinding
 import com.example.stock.model.*
 

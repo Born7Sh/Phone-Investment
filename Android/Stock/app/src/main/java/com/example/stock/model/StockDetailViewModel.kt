@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.data.*
-import com.example.stock.views.StockDetailFragmentDirections
+import com.example.stock.views.stockDetail.StockDetailFragmentDirections
 import com.github.mikephil.charting.data.CandleEntry
 import java.text.NumberFormat
 
 class StockDetailViewModel() : ViewModel() {
+
     private val _stockList = MutableLiveData<ArrayList<CandleEntry>>()
     val stockList: LiveData<ArrayList<CandleEntry>>
         get() = _stockList
@@ -40,7 +41,10 @@ class StockDetailViewModel() : ViewModel() {
         }
         _stockList.value = items
 
+
+
         community = arrayListOf(
+
             Community("김규동", "Apple", "AAPL", "드자가"),
             Community("김차동", "AmerisourceBergen", "ABC", "자 드가자"),
         )

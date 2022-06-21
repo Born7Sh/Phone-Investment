@@ -1,30 +1,24 @@
-package com.example.stock.views
+package com.example.stock.views.stockDetail
 
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
-import com.example.stock.data.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
-import com.example.stock.model.StockViewModel
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
-import com.google.android.material.slider.LabelFormatter
 
 
 class StockDetailFragment : Fragment() {
@@ -47,7 +41,6 @@ class StockDetailFragment : Fragment() {
         binding.stock = mainViewModel.getStock(arg.stockId)
         binding.company = mainViewModel.getCompany(arg.stockId)
         binding.viewModel = stockDetailViewModel
-
         communityAdapter = CommunityAdapter()
         binding.recyclerCommunity.adapter = communityAdapter
 

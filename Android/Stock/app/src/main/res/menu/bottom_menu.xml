@@ -3,20 +3,30 @@
     <item
         android:id="@+id/HomeFragment"
         android:icon="@drawable/home10"
+        android:visible="true"
         android:title="홈" />
 
     <item
         android:id="@+id/FavoriteFragment"
         android:icon="@drawable/heart10"
-        android:title="즐겨찾기" />
+        android:visible="true"
+        android:title="관심" />
+
+    <item
+        android:id="@+id/stockAllFragment"
+        android:icon="@drawable/baseline_list_24"
+        android:visible="true"
+        android:title="전체 주식" />
 
     <item
         android:id="@+id/AnalFragment"
         android:icon="@drawable/anal10"
+        android:visible="true"
         android:title="그래프" />
 
     <item
         android:id="@+id/SettingFragment"
         android:icon="@drawable/setting10"
+        android:visible="true"
         android:title="설정" />
 </menu>

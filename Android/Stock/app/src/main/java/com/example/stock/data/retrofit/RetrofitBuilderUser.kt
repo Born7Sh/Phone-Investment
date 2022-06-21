@@ -5,12 +5,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitBuilderUser {
-
-    val retrofit = Retrofit.Builder()
-        .baseUrl("http://localhost:8080/sleepapp/status/")
-        .client(OkHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    val retroApi = retrofit.create(RetroService::class.java)
+//
+//    val retrofit = Retrofit.Builder()
+//        .baseUrl("http://localhost:8080/sleepapp/status/")
+//        .client(OkHttpClient())
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .build()
+//
+//    val retroApi = retrofit.create(RetroService::class.java)
 }

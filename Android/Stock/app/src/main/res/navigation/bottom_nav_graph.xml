@@ -50,13 +50,23 @@
         tools:layout="@layout/fragment_setting" />
 
     <fragment
+        android:id="@+id/stockAllFragment"
+        android:name="com.example.stock.views.stockAll.StockAllFragment"
+        android:label="StockAllFragment"
+        tools:layout="@layout/fragment_stock_all" />
+
+
+    <fragment
         android:id="@+id/homeStockFragment"
         android:name="com.example.stock.views.home.HomeStockFragment"
         android:label="fragment_home_stock"
         tools:layout="@layout/fragment_home_stock"></fragment>
+
+
+
     <fragment
         android:id="@+id/stockDetailFragment"
-        android:name="com.example.stock.views.StockDetailFragment"
+        android:name="com.example.stock.views.stockDetail.StockDetailFragment"
         android:label="StockDetailFragment" >
         <argument
             android:name="stockId"
@@ -93,16 +103,16 @@
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/buyFragment"
-        android:name="com.example.stock.views.BuyFragment"
+        android:name="com.example.stock.views.stockDetail.BuyFragment"
         android:label="fragment_buy"
         tools:layout="@layout/fragment_buy" />
     <fragment
         android:id="@+id/sellFragment"
-        android:name="com.example.stock.views.SellFragment"
+        android:name="com.example.stock.views.stockDetail.SellFragment"
         android:label="SellFragment" />
     <fragment
         android:id="@+id/communityFragment"
-        android:name="com.example.stock.views.CommunityFragment"
+        android:name="com.example.stock.views.stockDetail.CommunityFragment"
         android:label="fragment_community"
         tools:layout="@layout/fragment_community" >
         <argument
@@ -123,5 +133,6 @@
         android:name="com.example.stock.views.login.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" />
+
 
 </navigation>

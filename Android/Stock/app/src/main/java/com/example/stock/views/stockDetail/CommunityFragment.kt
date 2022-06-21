@@ -1,4 +1,4 @@
-package com.example.stock.views
+package com.example.stock.views.stockDetail
 
 import android.os.Bundle
 import android.util.Log
@@ -6,16 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
 import com.example.stock.databinding.FragmentCommunityBinding
 import com.example.stock.model.CommunityViewModel
-import com.example.stock.model.MainViewModel
 
 
 class CommunityFragment : Fragment() {
