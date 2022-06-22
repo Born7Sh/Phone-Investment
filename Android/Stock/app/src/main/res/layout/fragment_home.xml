@@ -20,8 +20,7 @@
         android:id="@+id/HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.home.HomeFragment"
-        >
+        tools:context=".views.home.HomeFragment">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
@@ -30,6 +29,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_constraint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -69,54 +69,55 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
-                    android:text="내 정보"
                     android:id="@+id/button_1"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내 정보"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/button_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Button>
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></Button>
 
                 <Button
+                    android:id="@+id/button_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:onClick="@{homeFragment::goNews}"
                     android:text="실시간 뉴스"
-                    android:id="@+id/button_2"
-                    app:layout_constraintTop_toTopOf="@id/button_1"
                     app:layout_constraintLeft_toRightOf="@id/button_1"
                     app:layout_constraintRight_toLeftOf="@id/button_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Button>
+                    app:layout_constraintTop_toTopOf="@id/button_1"></Button>
 
-<!--                <Button-->
-<!--                    android:onClick="@{homeFragment::goRank}"-->
-<!--                    android:text="실시간 랭킹"-->
-<!--                    app:layout_constraintLeft_toRightOf="@id/button_2"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    android:id="@+id/button_3"-->
-<!--                    app:layout_constraintTop_toTopOf="@id/button_1"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"></Button>-->
+                <!--                <Button-->
+                <!--                    android:onClick="@{homeFragment::goRank}"-->
+                <!--                    android:text="실시간 랭킹"-->
+                <!--                    app:layout_constraintLeft_toRightOf="@id/button_2"-->
+                <!--                    app:layout_constraintRight_toRightOf="parent"-->
+                <!--                    android:id="@+id/button_3"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/button_1"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"></Button>-->
 
                 <Button
+                    android:id="@+id/button_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:onClick="@{homeFragment::IMSI}"
                     android:text="실시간 랭킹"
                     app:layout_constraintLeft_toRightOf="@id/button_2"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:id="@+id/button_3"
-                    app:layout_constraintTop_toTopOf="@id/button_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Button>
+                    app:layout_constraintTop_toTopOf="@id/button_1"></Button>
 
 
                 <TextView
                     android:id="@+id/home_ownStock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="20dp"
-                    android:text="내 정보"
+                    android:text="내 보유 주식"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="25dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button_1"></TextView>
 
                 <TextView
@@ -132,21 +133,30 @@
                     app:layout_constraintTop_toTopOf="@id/home_ownStock"></TextView>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    app:layout_constraintTop_toBottomOf="@+id/home_ownStock"
                     android:id="@+id/recycler_stock"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:overScrollMode="never"
+                    android:layout_height="0dp"
                     android:nestedScrollingEnabled="false"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></androidx.recyclerview.widget.RecyclerView>
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/recycler_stock_textEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:gravity="center"
+                    android:text="소유한 주식이 없습니다."
+                    app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></TextView>
 
                 <TextView
                     android:id="@+id/home_news"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="실시간 뉴스"
+                    android:text="화제 뉴스"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="25dp"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_stock"></TextView>
 
@@ -165,20 +175,21 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_news"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="30dp"
-                    android:overScrollMode="never"
                     android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/home_news"
                     app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/home_rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="실시간 랭킹"
+                    android:text="점수 랭킹"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_news"></TextView>
@@ -198,10 +209,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_rank"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="30dp"
-                    android:overScrollMode="never"
                     android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/home_rank"
                     app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
