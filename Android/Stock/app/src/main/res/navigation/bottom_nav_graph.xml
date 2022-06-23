@@ -10,9 +10,6 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_HomeFragment_to_homeStockFragment"
-            app:destination="@id/homeStockFragment" />
-        <action
             app:popUpTo="@id/HomeFragment"
             android:id="@+id/action_HomeFragment_to_stockDetailFragment"
             app:destination="@id/stockDetailFragment">
@@ -56,11 +53,6 @@
         tools:layout="@layout/fragment_stock_all" />
 
 
-    <fragment
-        android:id="@+id/homeStockFragment"
-        android:name="com.example.stock.views.home.HomeStockFragment"
-        android:label="fragment_home_stock"
-        tools:layout="@layout/fragment_home_stock"></fragment>
 
 
 

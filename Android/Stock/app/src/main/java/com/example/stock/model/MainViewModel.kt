@@ -14,11 +14,6 @@ class MainViewModel() : ViewModel() {
     val stockList: LiveData<ArrayList<Stock>>
         get() = _stockList
 
-    // 내가 소유한 리스트
-    private val _stockOwnList = MutableLiveData<ArrayList<StockOwn>>()
-    val stockOwnList: LiveData<ArrayList<StockOwn>>
-        get() = _stockOwnList
-
     // 내가 즐겨찾기 한 리스트
     private val _stockFavoriteList = MutableLiveData<ArrayList<Stock>>()
     val stockFavoriteList: LiveData<ArrayList<Stock>>
@@ -50,7 +45,6 @@ class MainViewModel() : ViewModel() {
     // 각자 초기화용도
     private var news = ArrayList<News>()
     private var stocks = ArrayList<Stock>()
-    private var stockOwns = ArrayList<StockOwn>()
     private var rank = ArrayList<Rank>()
     private var company = ArrayList<Company>()
 
@@ -151,11 +145,6 @@ class MainViewModel() : ViewModel() {
         )
         _stockFavoriteList.value = stocks
 
-        stockOwns = arrayListOf(
-            StockOwn("1", "AmerisourceBergen", "ABC", "", "", "@drawable/c_abc"),
-            StockOwn("5", "아메리칸 익스프레스", "AXP", "", "", "@drawable/c_axp"),
-        )
-        _stockOwnList.value = stockOwns
 
         news = arrayListOf(
             News("1", "붕괴하는 한국 경제", "2022.11.14", "", ""),

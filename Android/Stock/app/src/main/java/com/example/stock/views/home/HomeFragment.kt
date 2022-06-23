@@ -57,7 +57,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.v("items", "여기들어옴0")
 
-//        binding.mainViewModel = mainViewModel
 
         mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
@@ -128,10 +127,6 @@ class HomeFragment : Fragment() {
         Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
     }
 
-
-    fun stockClick(view: View) {
-        view.findNavController().navigate(R.id.action_HomeFragment_to_homeStockFragment)
-    }
 
     fun newsClick(view: View) {
         view.findNavController().navigate(R.id.action_HomeFragment_to_newsFragment)
