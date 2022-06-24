@@ -57,8 +57,6 @@ class StockDetailFragment : Fragment() {
         stockDetailViewModel.stockList.observe(viewLifecycleOwner, {
 
 
-
-
             val dataSet = CandleDataSet(it, "").apply {
                 // 심지 부분
                 shadowColor = Color.LTGRAY

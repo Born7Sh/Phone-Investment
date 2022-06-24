@@ -17,9 +17,9 @@
     </data>
 
     <FrameLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <!-- TODO: Update blank fragment layout -->
 
@@ -69,6 +69,7 @@
                 android:text="주식 분석"
                 android:textColor="@color/black"
                 android:textSize="25dp"
+                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></TextView>
 
@@ -78,91 +79,113 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/lineChart"
+                app:layout_constraintLeft_toLeftOf="@+id/anal_text"
                 app:layout_constraintTop_toBottomOf="@+id/anal_text">
 
-                <TextView
-                    android:background="@drawable/stroke_right"
-                    android:id="@+id/analysis_ownStockText"
+                <LinearLayout
+                    android:id="@+id/analysis_ownStock"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="#17A2B8"
+                    android:elevation="40dp"
                     android:gravity="center"
-                    android:text="보유 주식수"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:orientation="vertical"
+                    android:padding="7dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/analysis_rateText"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toLeftOf="@+id/analysis_rate"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:background="@drawable/stroke_right"
-                    android:id="@+id/analysis_rateText"
+                    <TextView
+                        android:id="@+id/analysis_ownStockText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="보유 주식수"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/analysis_ownStockText_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:id="@+id/analysis_rate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="#28A745"
+                    android:elevation="20dp"
                     android:gravity="center"
-                    android:text="비율"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toRightOf="@+id/analysis_ownStockText"
-                    app:layout_constraintRight_toLeftOf="@+id/analysis_rankText"
-                    app:layout_constraintTop_toTopOf="@+id/analysis_ownStockText" />
+                    android:orientation="vertical"
+                    android:padding="7dp"
+                    app:layout_constraintLeft_toRightOf="@+id/analysis_ownStock"
+                    app:layout_constraintRight_toLeftOf="@+id/analysis_rank"
+                    app:layout_constraintTop_toTopOf="@+id/analysis_ownStock">
 
-                <TextView
-                    android:id="@+id/analysis_rankText"
+                    <TextView
+                        android:id="@+id/analysis_rateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="비율"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/analysis_rateText_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/analysis_rank"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="#FFC107"
+                    android:elevation="20dp"
                     android:gravity="center"
-                    android:text="랭킹"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toRightOf="@+id/analysis_rateText"
+                    android:orientation="vertical"
+                    android:padding="7dp"
+                    app:layout_constraintLeft_toRightOf="@+id/analysis_rate"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/analysis_ownStockText" />
+                    app:layout_constraintTop_toTopOf="@+id/analysis_ownStock">
+
+                    <TextView
+                        android:id="@+id/analysis_rankText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="랭킹"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
 
-                <TextView
-                    android:background="@drawable/stroke_right"
-                    android:id="@+id/analysis_ownStockText_value"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="3"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/analysis_rateText"
-                    app:layout_constraintTop_toBottomOf="@+id/analysis_ownStockText" />
-
-                <TextView
-                    android:background="@drawable/stroke_right"
-                    android:id="@+id/analysis_rateText_value"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="3"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toRightOf="@+id/analysis_ownStockText_value"
-                    app:layout_constraintRight_toLeftOf="@+id/analysis_rankText_value"
-                    app:layout_constraintTop_toTopOf="@+id/analysis_ownStockText_value" />
-
-                <TextView
-                    android:id="@+id/analysis_rankText_value"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="3"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toRightOf="@+id/analysis_rateText_value"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/analysis_ownStockText_value" />
-
+                    <TextView
+                        android:id="@+id/analysis_rankText_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
