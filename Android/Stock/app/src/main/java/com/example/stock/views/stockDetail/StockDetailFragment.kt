@@ -50,13 +50,14 @@ class StockDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initChart()
-
         stockDetailViewModel.communityList.observe(viewLifecycleOwner,{
             communityAdapter.setData(it)
         })
 
         stockDetailViewModel.stockList.observe(viewLifecycleOwner, {
+
+
+
 
             val dataSet = CandleDataSet(it, "").apply {
                 // 심지 부분
@@ -81,37 +82,43 @@ class StockDetailFragment : Fragment() {
                 requestDisallowInterceptTouchEvent(false)
                 invalidate()
             }
+
+            initChart()
         })
     }
 
     private fun initChart() {
         binding.cdChart.apply {
             description.isEnabled = false
-            setMaxVisibleValueCount(200)
+//            setMaxVisibleValueCount(200)
             setTouchEnabled(false) // 터치 유무
             setPinchZoom(false)
-            setDrawGridBackground(false)
+//            setDrawGridBackground(false)
             setExtraOffsets(10f, 0f, 40f, 0f);
             // x축 설정
             xAxis.apply {
-                textColor = Color.TRANSPARENT
+                x
+                isEnabled = true
+                textColor = Color.BLACK
                 position = XAxis.XAxisPosition.BOTTOM
                 // 세로선 표시 여부 설정
-                this.setDrawGridLines(true)
+                setDrawGridLines(true)
+                setDrawAxisLine(true)
                 axisLineColor = Color.rgb(50, 59, 76)
                 gridColor = Color.rgb(50, 59, 76)
             }
             // 왼쪽 y축 설정
             axisLeft.apply {
-                textColor = Color.WHITE
+                textColor = Color.BLACK
                 isEnabled = true
             }
             // 오른쪽 y축 설정
             axisRight.apply {
-                setDrawGridLines(false);
-                setDrawAxisLine(false);
-                setLabelCount(7, false)
-                textColor = Color.WHITE
+                isEnabled = true
+                setDrawGridLines(true);
+                setDrawAxisLine(true);
+//                setLabelCount(7, false)
+                textColor = Color.BLACK
                 // 가로선 표시 여부 설정
 
             }

@@ -64,9 +64,9 @@ class AnalysisFragment : Fragment() {
             // Y 축
             binding.lineChart.axisLeft.apply {
                 // 라벨, 축라인, 그리드 사용하지 않음
-                setDrawLabels(false)
-                setDrawAxisLine(false)
-                setDrawGridLines(false)
+                setDrawLabels(true)
+                setDrawAxisLine(true)
+                setDrawGridLines(true)
 
                 // 한계선 추가
                 removeAllLimitLines()
