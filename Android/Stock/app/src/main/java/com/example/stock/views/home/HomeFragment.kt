@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
         Log.v("items", "여기들어옴0")
 
 
-        mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        mainViewModel.myStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
             val constraintLayout = binding.homeConstraint
             val constraintSet = ConstraintSet()

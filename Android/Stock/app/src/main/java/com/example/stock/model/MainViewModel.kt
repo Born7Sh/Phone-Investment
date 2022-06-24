@@ -9,6 +9,11 @@ import com.example.stock.data.*
 
 class MainViewModel() : ViewModel() {
 
+    // 내 회사 리스트
+    private val _myStockList = MutableLiveData<ArrayList<Stock>>()
+    val myStockList: LiveData<ArrayList<Stock>>
+        get() = _myStockList
+
     // 전체 회사 리스트
     private val _stockList = MutableLiveData<ArrayList<Stock>>()
     val stockList: LiveData<ArrayList<Stock>>
@@ -36,15 +41,15 @@ class MainViewModel() : ViewModel() {
 
 
     // 유저 객체
-    private val _userIam  = MutableLiveData<User>()
+    private val _userIam = MutableLiveData<User>()
     val userIam: LiveData<User>
         get() = _userIam
-
 
 
     // 각자 초기화용도
     private var news = ArrayList<News>()
     private var stocks = ArrayList<Stock>()
+    private var myStocks = ArrayList<Stock>()
     private var rank = ArrayList<Rank>()
     private var company = ArrayList<Company>()
 
@@ -137,6 +142,16 @@ class MainViewModel() : ViewModel() {
             Stock("79", "ExxonMobil", "XOM", "11222", "+3.2", R.drawable.c_xom),
         )
         _stockList.value = stocks
+
+        myStocks = arrayListOf(
+            Stock("1", "Apple", "AAPL", "12345", "-3.9", R.drawable.c_aapl),
+            Stock("2", "AmerisourceBergen", "ABC", "12345", "-3.9", R.drawable.c_abc),
+            Stock("3", "Abbot", "ABT", "12121", "+3.4", R.drawable.c_abt),
+            Stock("4", "ADM", "ADM", "12121", "+3.4", R.drawable.c_adm),
+            Stock("5", "AIG", "AIG", "12121", "+3.4", R.drawable.c_alg)
+        )
+        _myStockList.value = myStocks
+
 
         stocks = arrayListOf(
             Stock("2", "아처 대니얼스 미들랜드", "ADM", "", "", R.drawable.c_adm),
