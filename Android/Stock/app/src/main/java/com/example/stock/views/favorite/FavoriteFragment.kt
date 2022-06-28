@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.databinding.FragmentFavoriteBinding
@@ -31,6 +32,7 @@ class FavoriteFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite, container, false)
         stockAdapter = StockAdapter()
         binding.recycler.adapter = stockAdapter
+        binding.favoriteFragment = this
         return binding.root
     }
 
@@ -42,6 +44,10 @@ class FavoriteFragment : Fragment() {
         })
 
 
+    }
+
+    fun search(view: View) {
+        view.findNavController().navigate(R.id.action_FavoriteFragment_to_searchFragment)
     }
 
 }

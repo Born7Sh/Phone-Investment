@@ -10,9 +10,9 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            app:popUpTo="@id/HomeFragment"
             android:id="@+id/action_HomeFragment_to_stockDetailFragment"
-            app:destination="@id/stockDetailFragment">
+            app:destination="@id/stockDetailFragment"
+            app:popUpTo="@id/HomeFragment">
 
         </action>
         <action
@@ -34,12 +34,18 @@
         android:id="@+id/FavoriteFragment"
         android:name="com.example.stock.views.favorite.FavoriteFragment"
         android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_FavoriteFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/AnalFragment"
         android:name="com.example.stock.views.analysis.AnalysisFragment"
         android:label="AnalFragment"
-        tools:layout="@layout/fragment_analysis" />
+        tools:layout="@layout/fragment_analysis">
+
+    </fragment>
     <fragment
         android:id="@+id/SettingFragment"
         android:name="com.example.stock.views.setting.SettingFragment"
@@ -50,20 +56,21 @@
         android:id="@+id/stockAllFragment"
         android:name="com.example.stock.views.stockAll.StockAllFragment"
         android:label="StockAllFragment"
-        tools:layout="@layout/fragment_stock_all" />
-
-
-
+        tools:layout="@layout/fragment_stock_all">
+        <action
+            android:id="@+id/action_stockAllFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/stockDetailFragment"
         android:name="com.example.stock.views.stockDetail.StockDetailFragment"
-        android:label="StockDetailFragment" >
+        android:label="StockDetailFragment">
         <argument
             android:name="stockId"
-            app:argType="string"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="string" />
         <action
             android:id="@+id/action_stockDetailFragment_to_buyFragment"
             app:destination="@id/buyFragment" />
@@ -78,7 +85,7 @@
         android:id="@+id/searchFragment"
         android:name="com.example.stock.views.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_stockDetailFragment"
             app:destination="@id/stockDetailFragment" />
@@ -106,7 +113,7 @@
         android:id="@+id/communityFragment"
         android:name="com.example.stock.views.stockDetail.CommunityFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" >
+        tools:layout="@layout/fragment_community">
         <argument
             android:name="community"
             app:argType="com.example.stock.data.Community[]" />
@@ -115,7 +122,7 @@
         android:id="@+id/loginFragment"
         android:name="com.example.stock.views.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />

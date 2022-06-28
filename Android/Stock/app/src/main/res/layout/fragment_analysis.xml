@@ -47,17 +47,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"></ImageView>
 
-                <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/search"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,6 +67,7 @@
                 android:id="@+id/analysisView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 app:layout_constraintBottom_toTopOf="@id/lineChart"
                 app:layout_constraintLeft_toLeftOf="@+id/anal_text"
                 app:layout_constraintTop_toBottomOf="@+id/anal_text">
@@ -193,6 +183,7 @@
                 android:id="@+id/lineChart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/analysisView" />
 
 

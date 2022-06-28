@@ -98,8 +98,8 @@ class HomeFragment : Fragment() {
         mainViewModel.newsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             // 최신순으로 정렬하는 함수
             // 최신순으로 3개만
-            var newsList : ArrayList<News> = arrayListOf()
-            for(i in 0..2){
+            var newsList: ArrayList<News> = arrayListOf()
+            for (i in 0..2) {
                 newsList.add(it[i])
             }
             newsAdapter.setData(newsList)
@@ -108,8 +108,8 @@ class HomeFragment : Fragment() {
         mainViewModel.rankList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             // 1,2,3위 순으로 정렬하는 함수
             // 총 3개만 나오게끔
-            var rankList : ArrayList<Rank> = arrayListOf()
-            for(i in 0..2){
+            var rankList: ArrayList<Rank> = arrayListOf()
+            for (i in 0..2) {
                 rankList.add(it[i])
             }
             rankAdapter.setData(rankList)

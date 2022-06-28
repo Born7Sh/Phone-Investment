@@ -6,6 +6,7 @@
     tools:context=".views.stockDetail.CommunityFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.stock.model.CommunityViewModel" />
@@ -19,77 +20,85 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/community_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                android:text="기업 커뮤니티 댓글"
-                android:textColor="@color/black"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></TextView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toTopOf="@+id/community_editView"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/community_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="20dp"
+                    android:text="커뮤니티"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
 
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="56dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:scaleX="-1"
-                android:src="@drawable/back30"
-                app:layout_constraintBottom_toBottomOf="@+id/community_textview"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/community_textview"></ImageView>
+                <ImageView
+                    android:onClick="@{viewModel::btnBackClick}"
+                    android:id="@+id/back"
+                    android:layout_width="56dp"
+                    android:layout_height="50dp"
+                    android:scaleType="fitCenter"
+                    android:scaleX="-1"
+                    android:src="@drawable/back30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></ImageView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/community_editView"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal"
                 android:weightSum="5"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/community_textview">
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                 <EditText
                     android:id="@+id/community_editText"
-                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4.5"
                     android:background="@drawable/edit_text_selector"
                     android:hint="여기에 입력해보세요"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text)}"
-                    android:layout_weight="4.5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"></EditText>
+                    android:padding="10dp"></EditText>
 
 
                 <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:background="@drawable/button_round"
                     android:onClick="@{viewModel::btnWriteClick}"
-                    android:text="댓글 작성"
-                    android:layout_weight="0.5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"></Button>
+                    android:text="댓글 작성"></Button>
 
             </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="10dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/recycler_community"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="10dp"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/community_editView"></androidx.recyclerview.widget.RecyclerView>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </FrameLayout>
 </layout>

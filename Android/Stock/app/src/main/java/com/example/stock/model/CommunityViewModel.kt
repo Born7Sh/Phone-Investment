@@ -16,6 +16,10 @@ class CommunityViewModel : ViewModel() {
 
     init {}
 
+    fun btnBackClick(view: View) {
+        view.findNavController().navigateUp()
+    }
+
     fun btnWriteClick(view: View) {
         Toast.makeText(view.context, _content.value, Toast.LENGTH_SHORT).show()
     }

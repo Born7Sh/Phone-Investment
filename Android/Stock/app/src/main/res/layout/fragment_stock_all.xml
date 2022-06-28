@@ -12,8 +12,8 @@
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="homeFragment"
-            type="com.example.stock.views.home.HomeFragment" />
+            name="stokeAllFragment"
+            type="com.example.stock.views.stockAll.StockAllFragment" />
 
     </data>
 
@@ -24,7 +24,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
@@ -47,7 +46,7 @@
                 <ImageView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:onClick="@{homeFragment.search}"
+                    android:onClick="@{stokeAllFragment.search}"
                     android:padding="10dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/search"
@@ -56,6 +55,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"></ImageView>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <TextView

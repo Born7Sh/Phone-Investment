@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.databinding.FragmentStockAllBinding
@@ -29,7 +30,7 @@ class StockAllFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_stock_all, container, false)
         stockAdapter = StockAdapter()
         binding.recyclerAllStock.adapter = stockAdapter
-
+        binding.stokeAllFragment = this
         return binding.root
     }
 
@@ -38,6 +39,10 @@ class StockAllFragment : Fragment() {
         mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it)
         })
+    }
+
+    fun search(view: View) {
+        view.findNavController().navigate(R.id.action_stockAllFragment_to_searchFragment)
     }
 
 

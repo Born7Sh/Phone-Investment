@@ -61,19 +61,27 @@ class StockDetailViewModel() : ViewModel() {
 
     }
 
+    fun btnBackClick(view: View) {
+        view.findNavController().navigateUp()
+    }
+
+    fun btnHeartClick(view: View){
+        Log.v("items","하트 클릭")
+    }
+
     fun btnSellClick(view : View){
-        Log.v("items","파는거 입니다. 반갑습니다 허허허")
+        Log.v("items","파는")
         view.findNavController().navigate(R.id.action_stockDetailFragment_to_sellFragment)
     }
 
     fun btnBuyClick(view : View){
-        Log.v("items","사는거 입니다. 반갑습니다 허허허")
+        Log.v("items","사는")
         view.findNavController().navigate(R.id.action_stockDetailFragment_to_buyFragment)
 
     }
 
     fun btnCommunity (view: View){
-        Log.v("items","버튼 클립ㄱ!!!! 입니다. 반갑습니다 허허허")
+        Log.v("items","커뮤니티")
         val action = StockDetailFragmentDirections.actionStockDetailFragmentToCommunityFragment(community.toTypedArray())
         view.findNavController().navigate(action)
 
