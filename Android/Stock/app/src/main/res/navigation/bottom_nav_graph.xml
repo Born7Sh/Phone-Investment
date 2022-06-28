@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_FavoriteFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_FavoriteFragment_to_stockDetailFragment"
+            app:destination="@id/stockDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/AnalFragment"
@@ -60,6 +63,9 @@
         <action
             android:id="@+id/action_stockAllFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_stockAllFragment_to_stockDetailFragment"
+            app:destination="@id/stockDetailFragment" />
     </fragment>
 
 

@@ -154,9 +154,11 @@ class MainViewModel() : ViewModel() {
 
 
         stocks = arrayListOf(
-            Stock("2", "아처 대니얼스 미들랜드", "ADM", "", "", R.drawable.c_adm),
-            Stock("3", "암드", "AMD", "", "", R.drawable.c_amd),
-            Stock("4", "앤섬", "ANTM", "", "", R.drawable.c_antm),
+            Stock("1", "Apple", "AAPL", "12345", "-3.9", R.drawable.c_aapl),
+            Stock("2", "AmerisourceBergen", "ABC", "12345", "-3.9", R.drawable.c_abc),
+            Stock("3", "Abbot", "ABT", "12121", "+3.4", R.drawable.c_abt),
+            Stock("4", "ADM", "ADM", "12121", "+3.4", R.drawable.c_adm),
+            Stock("5", "AIG", "AIG", "12121", "+3.4", R.drawable.c_alg)
         )
         _stockFavoriteList.value = stocks
 

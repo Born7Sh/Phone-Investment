@@ -11,8 +11,13 @@ import com.example.stock.data.Stock
 import com.example.stock.databinding.ListStockBinding
 import com.example.stock.views.home.HomeFragmentDirections
 import android.os.Bundle
-
-
+import androidx.fragment.app.findFragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
+import com.example.stock.views.favorite.FavoriteFragmentDirections
+import com.example.stock.views.home.HomeFragment
+import com.example.stock.views.stockAll.StockAllFragmentDirections
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
@@ -25,6 +30,7 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
             binding.setClickListener {
                 binding.stock?.let { stock ->
                     navigateToDetailStock(stock, it)
+
                 }
             }
         }
@@ -36,12 +42,25 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
             val args = Bundle()
             args.putString("stockId", stock.name)
 
+            val currentFragment = view.findNavController().currentDestination!!.id
+            Log.v("items", currentFragment.toString())
+            Log.v("items", R.id.HomeFragment.toString())
             var sd = stock.name
-            val direction =
-                HomeFragmentDirections.actionHomeFragmentToStockDetailFragment(sd)
+            var direction: NavDirections? = null
+            if (currentFragment == R.id.HomeFragment) {
+                direction =
+                    HomeFragmentDirections.actionHomeFragmentToStockDetailFragment(sd)
+            } else if (currentFragment == R.id.FavoriteFragment) {
+                direction =
+                    FavoriteFragmentDirections.actionFavoriteFragmentToStockDetailFragment(sd)
 
-            view.findNavController()
-                .navigate(direction)
+            } else if (currentFragment == R.id.stockAllFragment) {
+                direction =
+                    StockAllFragmentDirections.actionStockAllFragmentToStockDetailFragment(sd)
+            }
+            if (direction != null) {
+                view.findNavController().navigate(direction)
+            }
         }
 
         fun bind(currentStock: Stock) {
