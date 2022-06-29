@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
+import com.example.stock.data.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
@@ -44,13 +45,38 @@ class StockDetailFragment : Fragment() {
         communityAdapter = CommunityAdapter()
         binding.recyclerCommunity.adapter = communityAdapter
 
+        // 메인 뷰모델에 있어야하는데 부담 많이될까봐 뺴옴
+        var stockFavoriteList: ArrayList<Stock>? = mainViewModel.stockFavoriteList.value
+        if (stockFavoriteList != null) {
+            for (i in stockFavoriteList) {
+                if (i == binding.stock) {
+                    binding.heart.setImageResource(R.drawable.heart_red)
+                    break
+                }
+            }
+        }
+
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        stockDetailViewModel.communityList.observe(viewLifecycleOwner,{
+        stockDetailViewModel.isFavorite.observe(viewLifecycleOwner, {
+
+
+            if (it == 1) {
+
+            } else if (it == 0) {
+            } else if (it == 2) {
+
+            }
+
+        })
+
+        stockDetailViewModel.communityList.observe(viewLifecycleOwner, {
             communityAdapter.setData(it)
         })
 

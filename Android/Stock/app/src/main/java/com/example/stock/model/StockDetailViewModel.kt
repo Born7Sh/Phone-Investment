@@ -18,6 +18,10 @@ class StockDetailViewModel() : ViewModel() {
     val stockList: LiveData<ArrayList<CandleEntry>>
         get() = _stockList
 
+    private val  _isFavorite = MutableLiveData<Int>()
+    val isFavorite: LiveData<Int>
+        get() = _isFavorite
+
     private var items = ArrayList<CandleEntry>()
 
     // 회사 리스트
@@ -26,6 +30,7 @@ class StockDetailViewModel() : ViewModel() {
         get() = _communityList
 
     private var community = ArrayList<Community>()
+
 
     init {
         for (candleStock in DataUtilBar.getCandleStockData()) {
@@ -49,6 +54,8 @@ class StockDetailViewModel() : ViewModel() {
             Community("김차동", "AmerisourceBergen", "ABC", "자 드가자"),
         )
         _communityList.value = community
+
+        _isFavorite.value = 2
     }
 
     fun setUnit(value : Int) : String{

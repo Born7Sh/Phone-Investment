@@ -66,6 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent"></TextView>
 
                 <ImageView
+                    android:id="@+id/heart"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:onClick="@{viewModel::btnHeartClick}"
