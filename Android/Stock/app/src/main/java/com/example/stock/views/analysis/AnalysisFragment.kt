@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.utils.HyperSpline
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.stock.R
@@ -15,6 +16,7 @@ import com.example.stock.model.CommunityViewModel
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 
 
 class AnalysisFragment : Fragment() {
@@ -37,24 +39,27 @@ class AnalysisFragment : Fragment() {
         viewModel.barDataEntryList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
             val dataSet = LineDataSet(it, "").apply {
-                setDrawCircles(false)
-                color = Color.RED
+                setDrawCircles(true)
+                setDrawFilled(true)
+                color = ColorTemplate.getHoloBlue()
                 highLightColor = Color.TRANSPARENT
                 valueTextSize = 0F
                 lineWidth = 1.5F
+                circleRadius = 2F
+                circleHoleRadius = 3F
+                mode = LineDataSet.Mode.CUBIC_BEZIER // 둥글게 만드는거
+                cubicIntensity = 0.1F
+                fillAlpha = 50
+                fillColor = ColorTemplate.getHoloBlue()
+
             }
 
             val lineData = LineData(dataSet)
             binding.lineChart.run {
                 data = lineData
                 description.isEnabled = false // 하단 Description Label 제거함
+                animateXY(1000, 1000)
                 invalidate() // refresh
-            }
-
-            val averageLine = LimitLine(viewModel.getAverage()).apply {
-                lineWidth = 1F
-                enableDashedLine(4F, 10F, 10F)
-                lineColor = Color.DKGRAY
             }
 
             // 범례
@@ -65,12 +70,11 @@ class AnalysisFragment : Fragment() {
             binding.lineChart.axisLeft.apply {
                 // 라벨, 축라인, 그리드 사용하지 않음
                 setDrawLabels(true)
-                setDrawAxisLine(true)
-                setDrawGridLines(true)
+                setDrawAxisLine(false)
+                setDrawGridLines(false)
+                axisMinimum = 1000.0f
+                axisMaximum = 10000.0f
 
-                // 한계선 추가
-                removeAllLimitLines()
-                addLimitLine(averageLine)
             }
             binding.lineChart.axisRight.apply {
                 // 우측 Y축은 사용하지 않음
