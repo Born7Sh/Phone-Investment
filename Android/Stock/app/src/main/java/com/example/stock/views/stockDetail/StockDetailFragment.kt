@@ -46,11 +46,12 @@ class StockDetailFragment : Fragment() {
         binding.recyclerCommunity.adapter = communityAdapter
 
         // 메인 뷰모델에 있어야하는데 부담 많이될까봐 뺴옴
+        // binding Adapter로도 안됨 데이터 가져와야하니깐
         var stockFavoriteList: ArrayList<Stock>? = mainViewModel.stockFavoriteList.value
         if (stockFavoriteList != null) {
             for (i in stockFavoriteList) {
                 if (i == binding.stock) {
-                    binding.heart.setImageResource(R.drawable.heart_red)
+                    stockDetailViewModel.favoriteTurnOn()
                     break
                 }
             }
@@ -68,10 +69,9 @@ class StockDetailFragment : Fragment() {
 
 
             if (it == 1) {
-
+                binding.heart.setImageResource(R.drawable.heart_red)
             } else if (it == 0) {
-            } else if (it == 2) {
-
+                binding.heart.setImageResource(R.drawable.heart10)
             }
 
         })

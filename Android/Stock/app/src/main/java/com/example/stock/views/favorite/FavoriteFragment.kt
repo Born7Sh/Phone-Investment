@@ -7,16 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.databinding.FragmentFavoriteBinding
 import com.example.stock.model.MainViewModel
-import com.example.stock.model.StockViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 class FavoriteFragment : Fragment() {

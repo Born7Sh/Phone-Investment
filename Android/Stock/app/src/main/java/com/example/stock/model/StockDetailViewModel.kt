@@ -18,7 +18,7 @@ class StockDetailViewModel() : ViewModel() {
     val stockList: LiveData<ArrayList<CandleEntry>>
         get() = _stockList
 
-    private val  _isFavorite = MutableLiveData<Int>()
+    private val _isFavorite = MutableLiveData<Int>()
     val isFavorite: LiveData<Int>
         get() = _isFavorite
 
@@ -54,11 +54,9 @@ class StockDetailViewModel() : ViewModel() {
             Community("김차동", "AmerisourceBergen", "ABC", "자 드가자"),
         )
         _communityList.value = community
-
-        _isFavorite.value = 2
     }
 
-    fun setUnit(value : Int) : String{
+    fun setUnit(value: Int): String {
         return when {
             value >= 1E9 -> "${(value.toFloat() / 1E9).toInt()}B"
             value >= 1E6 -> "${(value.toFloat() / 1E6).toInt()}M"
@@ -72,24 +70,37 @@ class StockDetailViewModel() : ViewModel() {
         view.findNavController().navigateUp()
     }
 
-    fun btnHeartClick(view: View){
-        Log.v("items","하트 클릭")
+    fun btnHeartClick(view: View) {
+        if(_isFavorite.value == 1){
+            favoriteTurnOff()
+        }else{
+            favoriteTurnOn()
+        }
     }
 
-    fun btnSellClick(view : View){
-        Log.v("items","파는")
+    fun favoriteTurnOn() {
+        _isFavorite.value = 1
+    }
+
+    private fun favoriteTurnOff() {
+        _isFavorite.value = 0
+    }
+
+    fun btnSellClick(view: View) {
+        Log.v("items", "파는")
         view.findNavController().navigate(R.id.action_stockDetailFragment_to_sellFragment)
     }
 
-    fun btnBuyClick(view : View){
-        Log.v("items","사는")
+    fun btnBuyClick(view: View) {
+        Log.v("items", "사는")
         view.findNavController().navigate(R.id.action_stockDetailFragment_to_buyFragment)
 
     }
 
-    fun btnCommunity (view: View){
-        Log.v("items","커뮤니티")
-        val action = StockDetailFragmentDirections.actionStockDetailFragmentToCommunityFragment(community.toTypedArray())
+    fun btnCommunity(view: View) {
+        Log.v("items", "커뮤니티")
+        val action =
+            StockDetailFragmentDirections.actionStockDetailFragmentToCommunityFragment(community.toTypedArray())
         view.findNavController().navigate(action)
 
     }
