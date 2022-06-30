@@ -66,7 +66,6 @@
                 android:text="전체 주식"
                 android:textColor="@color/black"
                 android:textSize="25dp"
-                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></TextView>
 

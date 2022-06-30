@@ -12,7 +12,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_stockDetailFragment"
             app:destination="@id/stockDetailFragment"
-            app:popUpTo="@id/HomeFragment">
+            app:popUpTo="@id/HomeFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out">
 
         </action>
         <action
@@ -40,7 +42,9 @@
             app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_FavoriteFragment_to_stockDetailFragment"
-            app:destination="@id/stockDetailFragment" />
+            app:destination="@id/stockDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/AnalFragment"
@@ -65,7 +69,9 @@
             app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_stockAllFragment_to_stockDetailFragment"
-            app:destination="@id/stockDetailFragment" />
+            app:destination="@id/stockDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
 
@@ -79,10 +85,14 @@
             app:argType="string" />
         <action
             android:id="@+id/action_stockDetailFragment_to_buyFragment"
-            app:destination="@id/buyFragment" />
+            app:destination="@id/buyFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_stockDetailFragment_to_sellFragment"
-            app:destination="@id/sellFragment" />
+            app:destination="@id/sellFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_stockDetailFragment_to_communityFragment"
             app:destination="@id/communityFragment" />
@@ -131,7 +141,9 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:popExitAnim="@anim/slide_left_exit"
+            app:enterAnim="@anim/slide_right_enter" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"

@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.NewsAdapter
@@ -20,17 +23,20 @@ import com.example.stock.data.News
 import com.example.stock.data.Rank
 
 import com.example.stock.databinding.FragmentHomeBinding
+import com.example.stock.model.HomeViewModel
 import com.example.stock.model.MainViewModel
+import com.example.stock.model.StockDetailViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
     private val mainViewModel by activityViewModels<MainViewModel>()
-
+    lateinit var homeViewModel: HomeViewModel
     private lateinit var stockAdapter: StockAdapter
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var rankAdapter: RankAdapter
+    private var waitTime = 0L
 
 
     override fun onCreateView(
@@ -38,7 +44,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         stockAdapter = StockAdapter()
         newsAdapter = NewsAdapter()
@@ -47,6 +53,7 @@ class HomeFragment : Fragment() {
         binding.recyclerStock.adapter = stockAdapter
         binding.recyclerNews.adapter = newsAdapter
         binding.recyclerRank.adapter = rankAdapter
+        binding.viewModel = homeViewModel
 
         binding.homeFragment = this
 
@@ -55,15 +62,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.v("items", "여기들어옴0")
-
 
         mainViewModel.myStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
             val constraintLayout = binding.homeConstraint
             val constraintSet = ConstraintSet()
             constraintSet.clone(constraintLayout)
-
             // 평상시 recycleview에 대이터가 있어서 있는 만큼 높이를 맞춰준거
             binding.recyclerStockTextEmpty.isVisible = false
             binding.recyclerStock.isVisible = true
@@ -128,21 +131,19 @@ class HomeFragment : Fragment() {
     }
 
 
-    fun newsClick(view: View) {
-        view.findNavController().navigate(R.id.action_HomeFragment_to_newsFragment)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    fun rankClick(view: View) {
-        view.findNavController().navigate(R.id.action_HomeFragment_to_rankFragment)
-    }
+        // This callback will only be called when MyFragment is at least Started.
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (System.currentTimeMillis() - waitTime >= 1500) {
+                waitTime = System.currentTimeMillis()
+                Toast.makeText(context, "뒤로가기 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                activity?.finish() // 액티비티 종료
+            }
+        }
 
-
-    fun search(view: View) {
-        view.findNavController().navigate(R.id.action_HomeFragment_to_searchFragment)
-    }
-
-
-    fun IMSI(view: View) {
-        view.findNavController().navigate(R.id.action_HomeFragment_to_loginFragment)
+        // The callback can be enabled or disabled here or in the lambda
     }
 }

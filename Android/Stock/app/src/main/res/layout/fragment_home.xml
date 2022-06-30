@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.stock.model.HomeViewModel" />
 
         <variable
             name="clickListener"
@@ -60,7 +62,7 @@
                     <ImageView
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:onClick="@{homeFragment.search}"
+                        android:onClick="@{viewModel.search}"
                         android:padding="10dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/search"
@@ -77,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="내 정보"
+                    android:onClick="@{viewModel::IMSI}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/button_2"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></Button>
@@ -105,7 +108,7 @@
                     android:id="@+id/button_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{homeFragment::IMSI}"
+                    android:onClick="@{homeFragment::goRank}"
                     android:text="실시간 랭킹"
                     app:layout_constraintLeft_toRightOf="@id/button_2"
                     app:layout_constraintRight_toRightOf="parent"
@@ -120,7 +123,6 @@
                     android:text="내 보유 주식"
                     android:textColor="@color/black"
                     android:textSize="25dp"
-                    android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button_1"></TextView>
 
@@ -149,7 +151,6 @@
                     android:text="화제 뉴스"
                     android:textColor="@color/black"
                     android:textSize="25dp"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_stock"></TextView>
 
                 <TextView
@@ -159,7 +160,7 @@
                     android:layout_margin="12dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="16dp"
-                    android:onClick="@{homeFragment::newsClick}"
+                    android:onClick="@{viewModel::newsClick}"
                     android:text="더 보기"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/home_news"></TextView>
@@ -183,7 +184,6 @@
                     android:text="점수 랭킹"
                     android:textColor="@color/black"
                     android:textSize="25dp"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_news"></TextView>
 
                 <TextView
@@ -193,7 +193,7 @@
                     android:layout_margin="12dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="16dp"
-                    android:onClick="@{homeFragment::rankClick}"
+                    android:onClick="@{viewModel::rankClick}"
                     android:text="더 보기"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/home_rank"></TextView>
