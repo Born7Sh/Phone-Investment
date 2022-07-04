@@ -56,7 +56,7 @@
                     android:id="@+id/stock_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{stock.name}"
+                    android:text="@{stock.symbol_en}"
                     android:textColor="@color/black"
                     android:textFontWeight="800"
                     android:textSize="20dp"
@@ -122,8 +122,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:gravity="right"
-                            android:text="@{stock.variation}"
-                            android:textColor="@{Float.parseFloat(stock.variation) &lt; 0 ? @color/red : @color/blue}"
+                            android:text="@{stock.a_price}"
+                            android:textColor="@{Float.parseFloat(stock.a_price) &lt; 0 ? @color/red : @color/blue}"
                             android:textSize="20dp"
                             android:textStyle="bold"></TextView>
                     </LinearLayout>

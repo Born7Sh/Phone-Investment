@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/stock_item_title"
-                android:text="@{stock.name}"
+                android:text="@{stock.symbol_en}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -52,7 +52,7 @@
 
             <TextView
                 android:id="@+id/stock_item_own_price"
-                android:text="@{stock.name}"
+                android:text="@{stock.symbol_en}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"

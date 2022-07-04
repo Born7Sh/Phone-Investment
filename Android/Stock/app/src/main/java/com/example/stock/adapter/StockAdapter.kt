@@ -40,12 +40,12 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
             view: View
         ) {
             val args = Bundle()
-            args.putString("stockId", stock.name)
+            args.putString("stockId", stock.symbol_en)
 
             val currentFragment = view.findNavController().currentDestination!!.id
             Log.v("items", currentFragment.toString())
             Log.v("items", R.id.HomeFragment.toString())
-            var sd = stock.name
+            var sd = stock.symbol_en
             var direction: NavDirections? = null
             if (currentFragment == R.id.HomeFragment) {
                 direction =
