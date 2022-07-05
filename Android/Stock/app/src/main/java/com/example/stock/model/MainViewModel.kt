@@ -54,7 +54,7 @@ class MainViewModel() : ViewModel() {
     private var company = ArrayList<Company>()
 
 
-    private var user = User("호민", 100000)
+    private var user = User("호민", "s","d",10000)
 
     private lateinit var currentCompany: Company
     private lateinit var curStock: Stock

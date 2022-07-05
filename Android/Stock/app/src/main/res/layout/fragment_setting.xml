@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.setting.SettingFragment">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="user"
+            type="com.example.stock.data.User" />
+
+
+    </data>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -11,7 +27,97 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setting_profile"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/stock_item_img"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/someone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/stock_item_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@{user.username}"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/stock_item_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:weightSum="4"
+                app:layout_constraintTop_toBottomOf="@id/setting_profile"
+                app:layout_constraintBottom_toTopOf="@id/setting_icon2"
+                android:id="@+id/setting_icon1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="4"
+                app:layout_constraintTop_toBottomOf="@id/setting_icon1"
+                android:id="@+id/setting_icon2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+                <ImageView
+                    android:layout_weight="1"
+                    android:src="@drawable/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
