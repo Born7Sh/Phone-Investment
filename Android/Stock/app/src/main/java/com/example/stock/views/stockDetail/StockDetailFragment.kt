@@ -69,9 +69,9 @@ class StockDetailFragment : Fragment() {
 
 
             if (it == 1) {
-                binding.heart.setImageResource(R.drawable.heart_red)
+                binding.heart.setImageResource(R.drawable.icon_heart_red)
             } else if (it == 0) {
-                binding.heart.setImageResource(R.drawable.heart10)
+                binding.heart.setImageResource(R.drawable.icon_bot_heart10)
             }
 
         })
@@ -104,6 +104,7 @@ class StockDetailFragment : Fragment() {
             binding.cdChart.apply {
                 this.data = CandleData(dataSet)
                 requestDisallowInterceptTouchEvent(false)
+                animateXY(2000, 2000)
                 invalidate()
             }
 

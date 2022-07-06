@@ -48,7 +48,7 @@
                     android:layout_height="50dp"
                     android:scaleType="fitCenter"
                     android:scaleX="-1"
-                    android:src="@drawable/back30"
+                    android:src="@drawable/icon_back30"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:background="@drawable/button_round"
+                    android:background="@drawable/background_button_round"
                     android:onClick="@{viewModel::btnWriteClick}"
                     android:text="댓글 작성"></Button>
 

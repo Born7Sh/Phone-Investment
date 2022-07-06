@@ -47,7 +47,7 @@
                     android:layout_height="50dp"
                     android:onClick="@{viewModel::btnBackClick}"
                     android:scaleX="-1"
-                    android:src="@drawable/back30"
+                    android:src="@drawable/icon_back30"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -72,7 +72,7 @@
                     android:onClick="@{viewModel::btnHeartClick}"
                     android:padding="7dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/heart10"
+                    android:src="@drawable/icon_bot_heart10"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -97,7 +97,7 @@
                         android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/stroke_rect_balck"
+                        android:background="@drawable/background_stroke_rect_balck"
                         android:orientation="vertical">
 
                         <com.github.mikephil.charting.charts.CandleStickChart
@@ -293,7 +293,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
-                    android:background="@drawable/button_round_red"
+                    android:background="@drawable/background_button_round_red"
 
                     android:onClick="@{viewModel::btnSellClick}"
                     android:text="매도하기"
@@ -311,7 +311,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
-                    android:background="@drawable/button_round_blue"
+                    android:background="@drawable/background_button_round_blue"
 
                     android:onClick="@{viewModel::btnBuyClick}"
                     android:text="매수하기"

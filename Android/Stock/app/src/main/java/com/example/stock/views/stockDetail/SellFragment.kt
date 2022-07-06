@@ -49,13 +49,13 @@ class SellFragment : Fragment() {
                 binding.sellAfterSell.text = "거래불가"
                 binding.btnSell.isEnabled = false
                 binding.btnSell.isClickable = false
-                binding.btnSell.setBackgroundResource(R.drawable.button_round_false)
+                binding.btnSell.setBackgroundResource(R.drawable.background_button_round_false)
                 binding.btnSell.setTextColor(resources.getColor(R.color.grey))
             } else {
                 binding.sellAfterSell.text = (binding.user?.account?.plus(it)).toString()
                 binding.btnSell.isEnabled = true
                 binding.btnSell.isClickable = true
-                binding.btnSell.setBackgroundResource(R.drawable.button_round_red)
+                binding.btnSell.setBackgroundResource(R.drawable.background_button_round_red)
                 binding.btnSell.setTextColor(resources.getColor(R.color.red))
             }
 

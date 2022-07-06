@@ -49,7 +49,7 @@ class BuyFragment : Fragment() {
                 binding.buyAfterBuy.text = "거래불가"
                 binding.btnBuy.isEnabled = false
                 binding.btnBuy.isClickable = false
-                binding.btnBuy.setBackgroundResource(R.drawable.button_round_false)
+                binding.btnBuy.setBackgroundResource(R.drawable.background_button_round_false)
                 binding.btnBuy.setTextColor(resources.getColor(R.color.grey))
 
             } else {
@@ -59,7 +59,7 @@ class BuyFragment : Fragment() {
 
                 binding.btnBuy.isEnabled = true
                 binding.btnBuy.isClickable = true
-                binding.btnBuy.setBackgroundResource(R.drawable.button_round_blue)
+                binding.btnBuy.setBackgroundResource(R.drawable.background_button_round_blue)
                 binding.btnBuy.setTextColor(resources.getColor(R.color.white))
             }
 

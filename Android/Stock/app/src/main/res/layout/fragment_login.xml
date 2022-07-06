@@ -27,7 +27,7 @@
                 android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/img_logo"
                 android:text="Log In"></ImageView>
 
             <TextView
@@ -61,7 +61,7 @@
                     android:id="@+id/login_Id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/stroke_round_selector"
+                    android:background="@drawable/background_stroke_round_selector"
                     android:hint="이메일"
                     android:padding="10dp"></EditText>
 
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/stroke_round_selector"
+                    android:background="@drawable/background_stroke_round_selector"
                     android:hint="비밀번호"
                     android:padding="10dp"></EditText>
 
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_round_green"
+                    android:background="@drawable/background_button_round_green"
                     android:text="로그인"
                     android:textColor="@color/white"></Button>
 
@@ -150,7 +150,7 @@
 
             <LinearLayout
                 android:layout_marginTop="10dp"
-                android:background="@drawable/stroke_up"
+                android:background="@drawable/background_stroke_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -170,7 +170,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="12dp"
-                    android:background="@drawable/button_round_kakao"
+                    android:background="@drawable/background_button_round_kakao"
                     android:padding="8dp"
                     android:text="카카오 로그인"
                     android:textColor="@color/black"></Button>
@@ -182,7 +182,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="12dp"
-                    android:background="@drawable/button_round_naver"
+                    android:background="@drawable/background_button_round_naver"
                     android:padding="8dp"
                     android:text="네이버 로그인"
                     android:textColor="@color/white"></Button>
@@ -194,7 +194,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="12dp"
-                    android:background="@drawable/button_round_meta"
+                    android:background="@drawable/background_button_round_meta"
                     android:padding="8dp"
                     android:text="페이스북 로그인"
                     android:textColor="@color/white"></Button>

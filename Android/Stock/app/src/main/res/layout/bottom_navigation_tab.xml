@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/home10" />
+            android:src="@drawable/icon_bot_home10" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/heart10" />
+            android:src="@drawable/icon_bot_heart10" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/anal10" />
+            android:src="@drawable/icon_bot_anal10" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/setting10" />
+            android:src="@drawable/icon_bot_setting10" />
     </RelativeLayout>
 
 </LinearLayout>
