@@ -104,13 +104,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_feedback"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="피드백"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
@@ -128,13 +128,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_alarmlist"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="알람"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
@@ -152,13 +152,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_payment"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="결제"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
@@ -183,13 +183,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_code"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="코드"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
@@ -207,13 +207,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_develop"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="개발자"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
@@ -231,13 +231,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_information"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="문의"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
@@ -255,13 +255,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_setting_check"></ImageView>
+                        android:src="@drawable/icon_setting_logout"></ImageView>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="체크"
+                        android:text="로그아웃"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 
