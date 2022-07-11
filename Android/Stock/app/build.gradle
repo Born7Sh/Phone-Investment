@@ -96,4 +96,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    // 보안 Sharedpreference
+    // https://hyperconnect.github.io/2018/06/03/android-secure-sharedpref-howto.html
+    implementation "com.jakewharton.timber:timber:4.7.1"
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+
 }
