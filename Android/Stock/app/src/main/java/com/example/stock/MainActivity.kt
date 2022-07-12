@@ -18,6 +18,7 @@ import android.app.Activity
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.stock.data.AndroidKeyStoreUtil
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,16 +35,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getKey() {
+        AndroidKeyStoreUtil.init(this)
         var sharedPrefs = getSharedPreferences("key", MODE_PRIVATE)
-        val secureSharedPreferences = SecureSharedPreferences(sharedPrefs)
-        val a = secureSharedPreferences.get("key", "NULL")
+        val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
+//        secureSharedPreferences.put("key", "Jang Ho Min")
+        val a = secureSharedPreferences.get("key", "")
         Log.v("items", "a = " + a)
-        if(a == "NULL"){
-            Log.v("items", "YOU FIRST VISIT")
-            Log.v("items", "GO TO LOGIN")
-        }
 
-//        secureSharedPreferences.put("key", "hello")
+
+//        if(a == "NULL"){
+//            Log.v("items", "YOU FIRST VISIT")
+//            Log.v("items", "GO TO LOGIN")
+//            secureSharedPreferences.put("key2", "nicetonmeetyou2")
+//            val a = secureSharedPreferences.get("key2", "NULL")
+//            Log.v("items", "a = " + a)
+//        }else{
+//            Log.v("items", "a = " + a)
+//        }
+
+
 //        val a = secureSharedPreferences.get("key", "")
 //        Log.v("items", "a = " + a)
 

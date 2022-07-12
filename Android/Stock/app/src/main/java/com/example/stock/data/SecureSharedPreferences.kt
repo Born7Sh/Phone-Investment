@@ -1,6 +1,7 @@
 package com.example.stock.data
 
 import android.content.SharedPreferences
+import android.util.Log
 
 // https://hyperconnect.github.io/2018/06/03/android-secure-sharedpref-howto.html (참고 블로그)
 // 키 교환을 위한 보안
@@ -24,7 +25,7 @@ class SecureSharedPreferences(private val sharedPref: SharedPreferences) {
         if (str.isNullOrEmpty()) {
             return defaultValue
         }
-        val value = AndroidRsaCipherHelper.decrypt(str)
+        val value = AndroidKeyStoreUtil.decrypt(str)
 
         @Suppress("PlatformExtensionReceiverOfInline", "UNCHECKED_CAST", "IMPLICIT_CAST_TO_ANY")
         return when (defaultValue) {
@@ -51,9 +52,11 @@ class SecureSharedPreferences(private val sharedPref: SharedPreferences) {
         try {
             sharedPref.edit().run {
                 if (value == null) {
+                    Log.v("items", "putInternal 조건 들어감")
                     remove(key)
                 } else {
-                    putString(key, AndroidRsaCipherHelper.encrypt(value.toString()))
+                    Log.v("items", "value.toString() = " + value.toString())
+                    putString(key, AndroidKeyStoreUtil.encrypt(value.toString()))
                 }
 
                 apply()
