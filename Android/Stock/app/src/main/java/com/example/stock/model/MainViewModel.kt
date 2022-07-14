@@ -29,7 +29,7 @@ class MainViewModel() : ViewModel() {
     val newsList: LiveData<ArrayList<News>>
         get() = _newsList
 
-    // 유저 리스트
+    // 랭킹 리스트
     private val _rankList = MutableLiveData<ArrayList<Rank>>()
     val rankList: LiveData<ArrayList<Rank>>
         get() = _rankList

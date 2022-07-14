@@ -19,6 +19,9 @@ import android.app.Activity
 import android.content.SharedPreferences
 import android.util.Log
 import com.example.stock.data.AndroidKeyStoreUtil
+import com.example.stock.data.retrofit.GlobalApplication
+import com.example.stock.data.retrofit.RetroAPI
+import retrofit2.create
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,10 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getKey() {
-//        var sharedPrefs = getSharedPreferences("key", MODE_PRIVATE)
-//        val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
-//        val a = secureSharedPreferences.get("key", "")
-//        Log.v("items", "a = " + a)
+        val a = GlobalApplication.baseService.create(RetroAPI::class.java)
+        a.getUserKey()
     }
 
     private fun initBinding() {

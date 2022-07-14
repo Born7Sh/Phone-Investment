@@ -2,9 +2,9 @@ package com.example.stock.data
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
-    val key: String,
+data class Auth(
+    @SerializedName("password")
     val password: String,
+    @SerializedName("username")
     val username: String,
-    val account: Int
 )
