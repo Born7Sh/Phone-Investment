@@ -35,30 +35,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getKey() {
-        AndroidKeyStoreUtil.init(this)
-        var sharedPrefs = getSharedPreferences("key", MODE_PRIVATE)
-        val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
-//        secureSharedPreferences.put("key", "Jang Ho Min")
-        val a = secureSharedPreferences.get("key", "")
-        Log.v("items", "a = " + a)
-
-
-//        if(a == "NULL"){
-//            Log.v("items", "YOU FIRST VISIT")
-//            Log.v("items", "GO TO LOGIN")
-//            secureSharedPreferences.put("key2", "nicetonmeetyou2")
-//            val a = secureSharedPreferences.get("key2", "NULL")
-//            Log.v("items", "a = " + a)
-//        }else{
-//            Log.v("items", "a = " + a)
-//        }
-
-
+//        var sharedPrefs = getSharedPreferences("key", MODE_PRIVATE)
+//        val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
 //        val a = secureSharedPreferences.get("key", "")
 //        Log.v("items", "a = " + a)
-
-
-
     }
 
     private fun initBinding() {

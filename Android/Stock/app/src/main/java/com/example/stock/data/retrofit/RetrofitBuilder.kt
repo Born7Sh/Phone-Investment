@@ -1,11 +1,11 @@
-package com.example.stock.data.retrofit
-
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-class RetrofitBuilder {
-
+//package com.example.stock.data.retrofit
+//
+//import okhttp3.OkHttpClient
+//import retrofit2.Retrofit
+//import retrofit2.converter.gson.GsonConverterFactory
+//
+//class RetrofitBuilder {
+//
 //    val retrofit = Retrofit.Builder()
 //        .baseUrl("http://localhost:8080/sleepapp/status/")
 //        .client(OkHttpClient())
@@ -13,4 +13,4 @@ class RetrofitBuilder {
 //        .build()
 //
 //    val retroApi = retrofit.create(RetroService::class.java)
-}
+//}
