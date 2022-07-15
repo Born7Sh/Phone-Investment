@@ -3,18 +3,26 @@ package com.example.stock.data.retrofit
 import android.app.Application
 import android.util.Log
 import com.example.stock.data.AndroidKeyStoreUtil
+import com.example.stock.data.Auth
 import com.example.stock.data.SecureSharedPreferences
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.converter.gson.GsonConverterFactory
 
 class GlobalApplication : Application() {
     companion object {
 //        lateinit var prefs: SharedPreferences
 
-        //Retrofit2
+        // Retrofit2
         lateinit var baseService: Retrofit
+            private set
+
+        // 키 반환용 변수
+        lateinit var auth: Auth
+            private set
+
+        // 로그인 했냐?
+        var haveLogin: Boolean = true
             private set
 
 
@@ -31,18 +39,22 @@ class GlobalApplication : Application() {
 
         secureSharedPreferences.put("id", "HoMinXio")
         secureSharedPreferences.put("pass", "1234")
-        secureSharedPreferences.put("key", "ghghghghgh")
 
-        val a = secureSharedPreferences.get("id", "")
-        val b = secureSharedPreferences.get("pass", "")
-        val c = secureSharedPreferences.get("key", "")
+        val sharedPreferenceId = secureSharedPreferences.get("id", "NULL")
+        val sharedPreferencePw =  secureSharedPreferences.get("pass", "NULL")
+//        val c = secureSharedPreferences.get("key2", "NULL")
 
-        Log.v("items", "id = " + a)
-        Log.v("items", "pass = " + b)
-        Log.v("items", "key = " + c)
+//        Log.v("items", "id = " + auth.username)
+//        Log.v("items", "pass = " + auth.username)
+//        Log.v("items", "key = " + c)
+
+        if (sharedPreferenceId == "NULL" && sharedPreferencePw == "NULL") {
+            haveLogin = false
+        }else{
+            auth = Auth(sharedPreferenceId,sharedPreferencePw)
+        }
 
         baseService = initRetrofitBuilder()
-
     }
 
     private fun initRetrofitBuilder(): Retrofit {

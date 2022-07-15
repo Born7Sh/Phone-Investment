@@ -18,6 +18,11 @@ class LoginViewModel : ViewModel(){
     val pwd: LiveData<String>
         get() = _pwd
 
+    private val _successLogin = MutableLiveData<Boolean>(false)
+    val successLogin: LiveData<Boolean>
+        get() = _successLogin
+
+
     fun onIdTextChanged(s: CharSequence) {
         var b: String? = s.toString()
 
@@ -45,6 +50,7 @@ class LoginViewModel : ViewModel(){
 
     fun btnLoginClick(view : View) {
         Toast.makeText(view.context, "id : "+ id.value + "pwd : " + pwd.value, Toast.LENGTH_SHORT).show()
+
     }
 
     fun btnSignup(view : View) {
