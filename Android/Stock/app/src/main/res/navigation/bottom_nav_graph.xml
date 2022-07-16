@@ -144,6 +144,9 @@
             app:destination="@id/signupFragment"
             app:popExitAnim="@anim/slide_left_exit"
             app:enterAnim="@anim/slide_right_enter" />
+        <action
+            android:id="@+id/action_loginFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
