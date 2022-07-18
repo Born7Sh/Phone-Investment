@@ -77,7 +77,7 @@
 
                 <Button
                     android:layout_marginTop="12dp"
-                    android:onClick="@{viewModel::btnLoginClick}"
+                    android:onClick="@{() -> viewModel.btnLoginClick()}"
                     android:id="@+id/btn_Login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
 
 
                 <TextView
-                    android:onClick="@{viewModel::btnSignup}"
+                    android:onClick="@{() -> viewModel.btnSignup()}"
                     android:id="@+id/login_signupView_signup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -139,13 +139,13 @@
                         android:padding="10dp"></EditText>
 
                     <EditText
-                        android:inputType="number"
                         android:id="@+id/signup_birth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_stroke_round_selector"
                         android:hint="생년월인 숫자 8자리 EX) 19900101"
+                        android:inputType="number"
                         android:onTextChanged="@{(text, start, before, count) -> viewModel.onBirthTextChanged(text)}"
                         android:padding="10dp"></EditText>
 
@@ -156,8 +156,9 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="12dp"
                         android:layout_weight="1"
-                        android:background="@drawable/background_button_round_green"
-                        android:onClick="@{viewModel::btnSignupClick}"
+                        android:background="@drawable/selector_button_enable"
+                        android:enabled="@{!signupId.text.toString().isEmpty() &amp;&amp; !signupName.text.toString().isEmpty() &amp;&amp; !signupPwd.text.toString().isEmpty() &amp;&amp; !signupPwdCheck.text.toString().isEmpty() &amp;&amp; !signupBirth.text.toString().isEmpty()}"
+                        android:onClick="@{()->viewModel.btnSignupClick()}"
                         android:text="가입하기"
                         android:textColor="@color/white"></Button>
                 </LinearLayout>

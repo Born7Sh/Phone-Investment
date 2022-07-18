@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.stock.R
+import com.example.stock.data.EventObserver
 import com.example.stock.databinding.FragmentCommunityBinding
 import com.example.stock.databinding.FragmentSignupBinding
 import com.example.stock.model.SignupViewModel
@@ -29,7 +32,7 @@ class SignupFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SignupViewModel::class.java)
         binding.viewModel = viewModel
-
+        binding.signupPwdCheck
         viewModel.id.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (binding.signupId.text.isNullOrEmpty()
                 &&
@@ -71,6 +74,20 @@ class SignupFragment : Fragment() {
             }
         })
 
+        viewModel.loginBtnText.observe(viewLifecycleOwner,EventObserver {
+            when (it) {
+                "1" -> Toast.makeText(activity, "비밀번호 - check 불일치!", Toast.LENGTH_SHORT).show()
+                "200" -> signUpSuccess()
+                else -> Toast.makeText(activity, "실패", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+
+    }
+    private fun signUpSuccess() {
+        Toast.makeText(activity, "로그인 성공!", Toast.LENGTH_SHORT).show()
+        findNavController().navigateUp()
     }
 
 

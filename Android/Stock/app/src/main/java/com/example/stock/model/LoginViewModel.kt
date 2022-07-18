@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.data.Auth
+import com.example.stock.data.Event
 import com.example.stock.data.SecureSharedPreferences
 import com.example.stock.data.retrofit.GlobalApplication
 import com.example.stock.data.retrofit.RetroAPI
@@ -27,26 +28,19 @@ class LoginViewModel : ViewModel() {
     val pwd: LiveData<String>
         get() = _pwd
 
-    private val _successLogin = MutableLiveData<Boolean>(false)
-    val successLogin: LiveData<Boolean>
-        get() = _successLogin
+    // 버튼 클릭했을 때
+    // 1. viewmodel 함수로 들어감
+    // 2. 함수로 들어가서 값 준비 (성공/실패)
+    // 3. 값을 Event 타입으로 넣어서 값 변경
+    // 4. 값 변경 됐으니깐, observer 탐지해서 바뀐 값 it으로 날라감.
+    private val _loginBtnClick = MutableLiveData<Event<String>>()
+    val loginBtnClick: LiveData<Event<String>>
+        get() = _loginBtnClick
 
-    private val _errorText = MutableLiveData<String>()
-    val errorText: LiveData<String>
-        get() = _errorText
+    private val _signUpBtnClick = MutableLiveData<Event<Boolean>>()
+    val signUpBtnClick: LiveData<Event<Boolean>>
+        get() = _signUpBtnClick
 
-//    1. 저장되어 있는 아이디랑 비밀번호가 있는지 확인
-//2. 없으면, 1)로 있으면 2)로
-//
-//1) 처음 로그인 할 때 / 일단
-//
-//2) 로그인 해서 키 / 아이디 / 비번 / sharedPrefernece있는 경우
-//get 요청 하려면 : 키 + 쿼리 필요함
-//1. 저장되어있는 아이디/비번으로 키받아와야함. (키업데이트)
-//2. 키 가지고 / user, stock 가져오기
-//
-//로그인은 동기.
-//stock 받아오는건 비동기.
 
     fun onIdTextChanged(s: CharSequence) {
         var b: String? = s.toString()
@@ -74,29 +68,34 @@ class LoginViewModel : ViewModel() {
 
 
     fun btnLoginClick() {
-        var auth = Auth(id.value!!, pwd.value!!)
+        var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
         val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-            .getUserKey(GlobalApplication.auth)
+            .getUserKey(auth)
         call.enqueue(object : retrofit2.Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Log.v("items", "HI response")
                 if (response.isSuccessful) {
-                    _successLogin.value = true
-//                    var key = response.body()!!
-//                    var sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
-//                    val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
-//                    secureSharedPreferences.put("key", key)
+
+                    var key = response.body()!!
+
+                    val secureSharedPreferences =
+                        SecureSharedPreferences.wrap(GlobalApplication.sharedPrefs)
+                    secureSharedPreferences.put("key", key)
+
+                    _loginBtnClick.value = Event("200")
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.v("items", "HI Failure")
+                Log.v("items", "로그인 실패")
+                _loginBtnClick.value = Event("100")
             }
 
         })
+
     }
 
-    fun btnSignup(view: View) {
-        view.findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
+    fun btnSignup() {
+        _signUpBtnClick.value = Event(true)
     }
 }

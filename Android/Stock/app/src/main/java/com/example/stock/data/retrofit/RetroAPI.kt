@@ -12,7 +12,11 @@ interface RetroAPI {
 
     @POST("/authenticate")
     fun getUserKey(
-        @Body ld: Auth?
+        @Body auth: Auth?
     ): Call<String>
 
+    @POST("/signup")
+    fun setSignUp(
+        @Body auth: Auth?
+    ): Call<Auth>
 }

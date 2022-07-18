@@ -1,11 +1,19 @@
 package com.example.stock.model
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.example.stock.data.Auth
+import com.example.stock.data.Event
+import com.example.stock.data.SecureSharedPreferences
+import com.example.stock.data.retrofit.GlobalApplication
+import com.example.stock.data.retrofit.RetroAPI
+import retrofit2.Call
+import retrofit2.Response
 
 class SignupViewModel : ViewModel() {
 
@@ -28,6 +36,11 @@ class SignupViewModel : ViewModel() {
     private val _name = MutableLiveData<String>()
     val name: LiveData<String>
         get() = _name
+
+
+    private val _loginBtnText = MutableLiveData<Event<String>>()
+    val loginBtnText: LiveData<Event<String>>
+        get() = _loginBtnText
 
 
     fun onIdTextChanged(s: CharSequence) {
@@ -91,12 +104,31 @@ class SignupViewModel : ViewModel() {
     }
 
 
-    init {}
+    fun btnSignupClick() {
 
-    fun btnSignupClick(view: View) {
-        Toast.makeText(view.context, "id : " + id.value + " pwd : " + pwd.value + "가입을 축하드려요", Toast.LENGTH_SHORT)
-            .show()
-        view.findNavController().navigateUp()
+        if (pwd.value ?: "ho" == pwdCk.value ?: "ho") {
+            var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
+            val call = GlobalApplication.baseService.create(RetroAPI::class.java)
+                .getUserKey(auth)
+            call.enqueue(object : retrofit2.Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.v("items", "HI response")
+                    if (response.isSuccessful) {
+                        _loginBtnText.value = Event("200")
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.v("items", "로그인 실패")
+                    _loginBtnText.value = Event("100")
+                }
+
+            })
+        } else {
+            _loginBtnText.value = Event("1")
+        }
+
+
     }
 
 }

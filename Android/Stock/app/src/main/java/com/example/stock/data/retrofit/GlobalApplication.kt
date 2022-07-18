@@ -1,6 +1,7 @@
 package com.example.stock.data.retrofit
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.stock.data.AndroidKeyStoreUtil
 import com.example.stock.data.Auth
@@ -11,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class GlobalApplication : Application() {
     companion object {
-//        lateinit var prefs: SharedPreferences
+        lateinit var sharedPrefs: SharedPreferences
 
         // Retrofit2
         lateinit var baseService: Retrofit
@@ -34,14 +35,14 @@ class GlobalApplication : Application() {
 //        https://hyperconnect.github.io/2018/06/03/android-secure-sharedpref-howto.html
 
         AndroidKeyStoreUtil.init(this)
-        var sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
+        sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
         val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
 
         secureSharedPreferences.put("id", "HoMinXio")
         secureSharedPreferences.put("pass", "1234")
 
-        val sharedPreferenceId = secureSharedPreferences.get("id", "NULL")
-        val sharedPreferencePw =  secureSharedPreferences.get("pass", "NULL")
+        val sharedPreferenceId = secureSharedPreferences.get("id2", "NULL")
+        val sharedPreferencePw =  secureSharedPreferences.get("pass2", "NULL")
 //        val c = secureSharedPreferences.get("key2", "NULL")
 
 //        Log.v("items", "id = " + auth.username)
