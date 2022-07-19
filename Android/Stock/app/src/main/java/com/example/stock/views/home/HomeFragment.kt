@@ -1,5 +1,6 @@
 package com.example.stock.views.home
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -39,7 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var rankAdapter: RankAdapter
     private var waitTime = 0L
-
+    private var isFabOpen = false // 이동 제어용 변수
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -130,6 +131,36 @@ class HomeFragment : Fragment() {
 
         homeViewModel.rankBtnClick.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(R.id.action_HomeFragment_to_rankFragment)
+        })
+
+        homeViewModel.isMainBtnClick.observe(viewLifecycleOwner, EventObserver {
+
+            if (isFabOpen) {
+                ObjectAnimator.ofFloat(binding.fabStoke, "translationY", 0f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabNews, "translationY", 0f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabRank, "translationY", 0f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
+            } else {
+                ObjectAnimator.ofFloat(binding.fabStoke, "translationY", -540f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabNews, "translationY", -360f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabRank, "translationY", -180f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 0f, 45f).apply { start() }
+            }
+
+            isFabOpen = !isFabOpen
+        })
+
+        homeViewModel.myStockGoBtnClick.observe(viewLifecycleOwner, EventObserver {
+            binding.scrollView.smoothScrollTo(0, binding.homeOwnStock.top)
+            Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
+        })
+        homeViewModel.newsGoBtnClick.observe(viewLifecycleOwner, EventObserver {
+            binding.scrollView.smoothScrollTo(0, binding.recyclerStock.bottom)
+            Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
+        })
+        homeViewModel.rankGoBtnClick.observe(viewLifecycleOwner, EventObserver {
+            binding.scrollView.smoothScrollTo(0, binding.recyclerNews.bottom)
+            Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
         })
 
     }

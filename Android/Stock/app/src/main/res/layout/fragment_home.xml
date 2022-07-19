@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.stock.model.HomeViewModel" />
@@ -24,192 +25,250 @@
         android:layout_height="match_parent"
         tools:context=".views.home.HomeFragment">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:scrollbars="vertical"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            android:layout_height="match_parent">
 
-        
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/home_constraint"
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/background_stroke_under">
+                android:clipToPadding="false"
+                android:scrollbars="vertical"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/toolbar_main"
+                    android:id="@+id/home_constraint"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="0dp">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_stroke_under">
 
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_margin="5dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/img_logo"
-                        app:layout_constraintBottom_toBottomOf="parent"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/toolbar_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <ImageView
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_margin="5dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/img_logo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"></ImageView>
+
+                        <ImageView
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:onClick="@{()->viewModel.search()}"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/icon_search"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"></ImageView>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Button
+                        android:id="@+id/button_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{()->viewModel.IMSI()}"
+                        android:text="내 정보"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0"></ImageView>
+                        app:layout_constraintRight_toLeftOf="@id/button_2"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></Button>
 
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:onClick="@{()->viewModel.search()}"
-                        android:padding="10dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/icon_search"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0"></ImageView>
+                    <Button
+                        android:id="@+id/button_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{homeFragment::goNews}"
+                        android:text="실시간 뉴스"
+                        app:layout_constraintLeft_toRightOf="@id/button_1"
+                        app:layout_constraintRight_toLeftOf="@id/button_3"
+                        app:layout_constraintTop_toTopOf="@id/button_1"></Button>
 
+                    <!--                <Button-->
+                    <!--                    android:onClick="@{homeFragment::goRank}"-->
+                    <!--                    android:text="실시간 랭킹"-->
+                    <!--                    app:layout_constraintLeft_toRightOf="@id/button_2"-->
+                    <!--                    app:layout_constraintRight_toRightOf="parent"-->
+                    <!--                    android:id="@+id/button_3"-->
+                    <!--                    app:layout_constraintTop_toTopOf="@id/button_1"-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"></Button>-->
+
+                    <Button
+                        android:id="@+id/button_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{homeFragment::goRank}"
+                        android:text="실시간 랭킹"
+                        app:layout_constraintLeft_toRightOf="@id/button_2"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/button_1"></Button>
+
+
+                    <TextView
+                        android:id="@+id/home_ownStock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="내 보유 주식"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button_1"></TextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_stock"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:id="@+id/recycler_stock_textEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:gravity="center"
+                        android:text="소유한 주식이 없습니다."
+                        app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></TextView>
+
+                    <TextView
+                        android:id="@+id/home_news"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="화제 뉴스"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_stock"></TextView>
+
+                    <TextView
+                        android:id="@+id/button_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:onClick="@{()->viewModel.newsClick()}"
+                        android:text="더 보기"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/home_news"></TextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_news"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="5dp"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@+id/home_news"
+                        app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:id="@+id/home_rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="점수 랭킹"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_news"></TextView>
+
+                    <TextView
+                        android:id="@+id/button_rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        android:onClick="@{()->viewModel.rankClick()}"
+                        android:text="더 보기"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/home_rank"></TextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="5dp"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@+id/home_rank"
+                        app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <Button
-                    android:id="@+id/button_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="내 정보"
-                    android:onClick="@{()->viewModel.IMSI()}"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/button_2"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></Button>
-
-                <Button
-                    android:id="@+id/button_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{homeFragment::goNews}"
-                    android:text="실시간 뉴스"
-                    app:layout_constraintLeft_toRightOf="@id/button_1"
-                    app:layout_constraintRight_toLeftOf="@id/button_3"
-                    app:layout_constraintTop_toTopOf="@id/button_1"></Button>
-
-                <!--                <Button-->
-                <!--                    android:onClick="@{homeFragment::goRank}"-->
-                <!--                    android:text="실시간 랭킹"-->
-                <!--                    app:layout_constraintLeft_toRightOf="@id/button_2"-->
-                <!--                    app:layout_constraintRight_toRightOf="parent"-->
-                <!--                    android:id="@+id/button_3"-->
-                <!--                    app:layout_constraintTop_toTopOf="@id/button_1"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"></Button>-->
-
-                <Button
-                    android:id="@+id/button_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{homeFragment::goRank}"
-                    android:text="실시간 랭킹"
-                    app:layout_constraintLeft_toRightOf="@id/button_2"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/button_1"></Button>
+            </androidx.core.widget.NestedScrollView>
 
 
-                <TextView
-                    android:id="@+id/home_ownStock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="내 보유 주식"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button_1"></TextView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:onClick="@{()->viewModel.myStockGoClick()}"
+                android:id="@+id/fab_stoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_bot_heart10"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_main"
+                app:layout_constraintEnd_toEndOf="@+id/fab_main"
+                app:layout_constraintStart_toStartOf="@+id/fab_main"
+                app:layout_constraintTop_toTopOf="@+id/fab_main" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_stock"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></androidx.recyclerview.widget.RecyclerView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:onClick="@{()->viewModel.rankGoClick()}"
+                android:id="@+id/fab_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_bot_heart20"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_main"
+                app:layout_constraintEnd_toEndOf="@+id/fab_main"
+                app:layout_constraintStart_toStartOf="@+id/fab_main"
+                app:layout_constraintTop_toTopOf="@+id/fab_main" />
 
-                <TextView
-                    android:id="@+id/recycler_stock_textEmpty"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="소유한 주식이 없습니다."
-                    app:layout_constraintTop_toBottomOf="@+id/home_ownStock"></TextView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:onClick="@{()->viewModel.newsGoClick()}"
+                android:id="@+id/fab_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_bot_heart30"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_main"
+                app:layout_constraintEnd_toEndOf="@+id/fab_main"
+                app:layout_constraintStart_toStartOf="@+id/fab_main"
+                app:layout_constraintTop_toTopOf="@+id/fab_main" />
 
-                <TextView
-                    android:id="@+id/home_news"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="화제 뉴스"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_stock"></TextView>
-
-                <TextView
-                    android:id="@+id/button_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="@{()->viewModel.newsClick()}"
-                    android:text="더 보기"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/home_news"></TextView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_news"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/home_news"
-                    app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/home_rank"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="점수 랭킹"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_news"></TextView>
-
-                <TextView
-                    android:id="@+id/button_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="@{()->viewModel.rankClick()}"
-                    android:text="더 보기"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/home_rank"></TextView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_rank"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/home_rank"
-                    app:layout_goneMarginTop="40dp"></androidx.recyclerview.widget.RecyclerView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:onClick="@{()->viewModel.mainBtnClick()}"
+                android:id="@+id/fab_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:baselineAlignBottom="true"
+                android:src="@drawable/icon_heart_red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

@@ -22,8 +22,40 @@ class HomeViewModel() : ViewModel() {
     val searchBtnClick: LiveData<Event<Boolean>>
         get() = _searchBtnClick
 
+    private val _newsGoBtnClick = MutableLiveData<Event<Boolean>>()
+    val newsGoBtnClick: LiveData<Event<Boolean>>
+        get() = _newsGoBtnClick
+
+    private val _rankGoBtnClick = MutableLiveData<Event<Boolean>>()
+    val rankGoBtnClick: LiveData<Event<Boolean>>
+        get() = _rankGoBtnClick
+
+    private val _myStockGoBtnClick = MutableLiveData<Event<Boolean>>()
+    val myStockGoBtnClick: LiveData<Event<Boolean>>
+        get() = _myStockGoBtnClick
+
+    private val _isMainBtnClick = MutableLiveData<Event<Boolean>>()
+    val isMainBtnClick: LiveData<Event<Boolean>>
+        get() = _isMainBtnClick
+
     fun search() {
         _searchBtnClick.value = Event(true)
+    }
+
+    fun myStockGoClick() {
+        _myStockGoBtnClick.value = Event(true)
+    }
+
+    fun rankGoClick() {
+        _rankGoBtnClick.value = Event(true)
+    }
+
+    fun newsGoClick() {
+        _newsGoBtnClick.value = Event(true)
+    }
+
+    fun mainBtnClick() {
+        _isMainBtnClick.value = Event(true)
     }
 
     fun newsClick() {
