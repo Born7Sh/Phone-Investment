@@ -41,8 +41,8 @@ class GlobalApplication : Application() {
         secureSharedPreferences.put("id", "HoMinXio")
         secureSharedPreferences.put("pass", "1234")
 
-        val sharedPreferenceId = secureSharedPreferences.get("id2", "NULL")
-        val sharedPreferencePw =  secureSharedPreferences.get("pass2", "NULL")
+        val sharedPreferenceId = secureSharedPreferences.get("id", "NULL")
+        val sharedPreferencePw =  secureSharedPreferences.get("pass", "NULL")
 //        val c = secureSharedPreferences.get("key2", "NULL")
 
 //        Log.v("items", "id = " + auth.username)

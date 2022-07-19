@@ -32,7 +32,7 @@
             android:scrollbars="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-
+        
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_constraint"
                 android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                     <ImageView
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:onClick="@{viewModel.search}"
+                        android:onClick="@{()->viewModel.search()}"
                         android:padding="10dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/icon_search"
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="내 정보"
-                    android:onClick="@{viewModel::IMSI}"
+                    android:onClick="@{()->viewModel.IMSI()}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/button_2"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar_main"></Button>
@@ -160,7 +160,7 @@
                     android:layout_margin="12dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="16dp"
-                    android:onClick="@{viewModel::newsClick}"
+                    android:onClick="@{()->viewModel.newsClick()}"
                     android:text="더 보기"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/home_news"></TextView>
@@ -193,7 +193,7 @@
                     android:layout_margin="12dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="16dp"
-                    android:onClick="@{viewModel::rankClick}"
+                    android:onClick="@{()->viewModel.rankClick()}"
                     android:text="더 보기"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/home_rank"></TextView>

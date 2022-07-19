@@ -15,10 +15,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.NewsAdapter
 import com.example.stock.adapter.RankAdapter
 import com.example.stock.adapter.StockAdapter
+import com.example.stock.data.EventObserver
 import com.example.stock.data.News
 import com.example.stock.data.Rank
 
@@ -116,6 +118,18 @@ class HomeFragment : Fragment() {
                 rankList.add(it[i])
             }
             rankAdapter.setData(rankList)
+        })
+
+        homeViewModel.searchBtnClick.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(R.id.action_HomeFragment_to_searchFragment)
+        })
+
+        homeViewModel.newsBtnClick.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(R.id.action_HomeFragment_to_newsFragment)
+        })
+
+        homeViewModel.rankBtnClick.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(R.id.action_HomeFragment_to_rankFragment)
         })
 
     }

@@ -109,16 +109,16 @@ class SignupViewModel : ViewModel() {
         if (pwd.value ?: "ho" == pwdCk.value ?: "ho") {
             var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
             val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-                .getUserKey(auth)
-            call.enqueue(object : retrofit2.Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+                .setSignUp(auth)
+            call.enqueue(object : retrofit2.Callback<Auth> {
+                override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
                     Log.v("items", "HI response")
                     if (response.isSuccessful) {
                         _loginBtnText.value = Event("200")
                     }
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<Auth>, t: Throwable) {
                     Log.v("items", "로그인 실패")
                     _loginBtnText.value = Event("100")
                 }
