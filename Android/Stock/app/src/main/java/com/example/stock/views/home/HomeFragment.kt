@@ -139,12 +139,12 @@ class HomeFragment : Fragment() {
                 ObjectAnimator.ofFloat(binding.fabStoke, "translationY", 0f).apply { start() }
                 ObjectAnimator.ofFloat(binding.fabNews, "translationY", 0f).apply { start() }
                 ObjectAnimator.ofFloat(binding.fabRank, "translationY", 0f).apply { start() }
-                ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 90f, 0f).apply { start() }
             } else {
                 ObjectAnimator.ofFloat(binding.fabStoke, "translationY", -540f).apply { start() }
                 ObjectAnimator.ofFloat(binding.fabNews, "translationY", -360f).apply { start() }
                 ObjectAnimator.ofFloat(binding.fabRank, "translationY", -180f).apply { start() }
-                ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 0f, 45f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 0f, 90f).apply { start() }
             }
 
             isFabOpen = !isFabOpen
@@ -164,17 +164,6 @@ class HomeFragment : Fragment() {
         })
 
     }
-
-    fun goNews(view: View) {
-        binding.scrollView.smoothScrollTo(0, binding.recyclerStock.bottom)
-        Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
-    }
-
-    fun goRank(view: View) {
-        binding.scrollView.smoothScrollTo(0, binding.recyclerNews.bottom)
-        Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

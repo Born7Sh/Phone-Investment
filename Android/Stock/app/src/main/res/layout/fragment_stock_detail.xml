@@ -45,7 +45,7 @@
                 <ImageView
                     android:layout_width="56dp"
                     android:layout_height="50dp"
-                    android:onClick="@{viewModel::btnBackClick}"
+                    android:onClick="@{()->viewModel.btnBackClick()}"
                     android:scaleX="-1"
                     android:src="@drawable/icon_back30"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +69,7 @@
                     android:id="@+id/heart"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:onClick="@{viewModel::btnHeartClick}"
+                    android:onClick="@{()->viewModel.btnHeartClick()}"
                     android:padding="7dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/icon_bot_heart10"
@@ -94,11 +94,11 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_stroke_rect_balck"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
                         <com.github.mikephil.charting.charts.CandleStickChart
                             android:id="@+id/cdChart"
@@ -129,9 +129,9 @@
                     </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_marginTop="12dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="12dp">
 
                         <TextView
                             android:id="@+id/company_textview"
@@ -260,7 +260,7 @@
                             android:layout_margin="12dp"
                             android:layout_marginTop="12dp"
                             android:layout_marginRight="16dp"
-                            android:onClick="@{viewModel::btnCommunity}"
+                            android:onClick="@{()->viewModel.btnCommunity()}"
                             android:text="더보기"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="@id/community_textview"></TextView>
@@ -295,7 +295,7 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/background_button_round_red"
 
-                    android:onClick="@{viewModel::btnSellClick}"
+                    android:onClick="@{()->viewModel.btnSellClick()}"
                     android:text="매도하기"
                     android:textColor="#FF0844"
                     android:textSize="20sp"
@@ -313,7 +313,7 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/background_button_round_blue"
 
-                    android:onClick="@{viewModel::btnBuyClick}"
+                    android:onClick="@{()->viewModel.btnBuyClick()}"
                     android:text="매수하기"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"

@@ -31,6 +31,21 @@ class StockDetailViewModel() : ViewModel() {
 
     private var community = ArrayList<Community>()
 
+    private var _btnBackClick = MutableLiveData<Event<Boolean>>()
+    val btnBackClick: LiveData<Event<Boolean>>
+        get() = _btnBackClick
+
+    private var _btnBuyClick = MutableLiveData<Event<Boolean>>()
+    val btnBuyClick: LiveData<Event<Boolean>>
+        get() = _btnBuyClick
+
+    private var _btnSellClick = MutableLiveData<Event<Boolean>>()
+    val btnSellClick: LiveData<Event<Boolean>>
+        get() = _btnSellClick
+
+    private var _btnCommunityClick = MutableLiveData<Event<Array<Community>>>()
+    val btnCommunityClick: LiveData<Event<Array<Community>>>
+        get() = _btnCommunityClick
 
     init {
         for (candleStock in DataUtilBar.getCandleStockData()) {
@@ -66,14 +81,11 @@ class StockDetailViewModel() : ViewModel() {
 
     }
 
-    fun btnBackClick(view: View) {
-        view.findNavController().navigateUp()
-    }
 
-    fun btnHeartClick(view: View) {
-        if(_isFavorite.value == 1){
+    fun btnHeartClick() {
+        if (_isFavorite.value == 1) {
             favoriteTurnOff()
-        }else{
+        } else {
             favoriteTurnOn()
         }
     }
@@ -86,22 +98,20 @@ class StockDetailViewModel() : ViewModel() {
         _isFavorite.value = 0
     }
 
-    fun btnSellClick(view: View) {
-        Log.v("items", "파는")
-        view.findNavController().navigate(R.id.action_stockDetailFragment_to_sellFragment)
+    fun btnBackClick() {
+        _btnBackClick.value = Event(true)
     }
 
-    fun btnBuyClick(view: View) {
-        Log.v("items", "사는")
-        view.findNavController().navigate(R.id.action_stockDetailFragment_to_buyFragment)
-
+    fun btnSellClick() {
+        _btnSellClick.value = Event(true)
     }
 
-    fun btnCommunity(view: View) {
-        Log.v("items", "커뮤니티")
-        val action =
-            StockDetailFragmentDirections.actionStockDetailFragmentToCommunityFragment(community.toTypedArray())
-        view.findNavController().navigate(action)
+    fun btnBuyClick() {
+        _btnBuyClick.value = Event(true)
+    }
+
+    fun btnCommunity() {
+        _btnCommunityClick.value = Event(community.toArray(arrayOfNulls<Community>(community.size)))
 
     }
 

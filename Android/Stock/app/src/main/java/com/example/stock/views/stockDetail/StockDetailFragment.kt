@@ -10,9 +10,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
+import com.example.stock.data.Community
+import com.example.stock.data.EventObserver
 import com.example.stock.data.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
@@ -57,8 +61,6 @@ class StockDetailFragment : Fragment() {
             }
         }
 
-
-
         return binding.root
     }
 
@@ -66,14 +68,30 @@ class StockDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         stockDetailViewModel.isFavorite.observe(viewLifecycleOwner, {
-
-
             if (it == 1) {
                 binding.heart.setImageResource(R.drawable.icon_heart_red)
             } else if (it == 0) {
                 binding.heart.setImageResource(R.drawable.icon_bot_heart10)
             }
 
+        })
+
+        stockDetailViewModel.btnBackClick.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigateUp()
+        })
+
+        stockDetailViewModel.btnBuyClick.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(R.id.action_stockDetailFragment_to_buyFragment)
+        })
+
+        stockDetailViewModel.btnSellClick.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(R.id.action_stockDetailFragment_to_sellFragment)
+        })
+
+        stockDetailViewModel.btnCommunityClick.observe(viewLifecycleOwner, EventObserver {
+            val action =
+                StockDetailFragmentDirections.actionStockDetailFragmentToCommunityFragment(it)
+            findNavController().navigate(action)
         })
 
         stockDetailViewModel.communityList.observe(viewLifecycleOwner, {
