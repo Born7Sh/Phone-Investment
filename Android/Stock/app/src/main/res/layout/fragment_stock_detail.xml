@@ -100,12 +100,6 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <com.github.mikephil.charting.charts.CandleStickChart
-                            android:id="@+id/cdChart"
-                            android:layout_width="match_parent"
-                            android:layout_height="500dp"
-                            android:layout_weight="2" />
-
                         <TextView
                             android:id="@+id/stock_item_stock"
                             android:layout_width="match_parent"
@@ -126,6 +120,61 @@
                             android:textColor="@{Float.parseFloat(stock.a_price) &lt; 0 ? @color/red : @color/blue}"
                             android:textSize="20dp"
                             android:textStyle="bold"></TextView>
+
+                        <com.github.mikephil.charting.charts.CandleStickChart
+                            android:id="@+id/cdChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="500dp"
+                            android:layout_weight="2" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="5">
+
+                            <Button
+                                android:id="@+id/graph_btn1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->viewModel.btnGraphNum1Click()}"
+                                android:text="1일"></Button>
+
+                            <Button
+                                android:id="@+id/graph_btn2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->viewModel.btnGraphNum2Click()}"
+                                android:text="1주"></Button>
+
+                            <Button
+                                android:id="@+id/graph_btn3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->viewModel.btnGraphNum3Click()}"
+                                android:text="3개월"></Button>
+
+                            <Button
+                                android:id="@+id/graph_btn4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->viewModel.btnGraphNum4Click()}"
+                                android:text="1년"></Button>
+
+                            <Button
+                                android:id="@+id/graph_btn5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->viewModel.btnGraphNum5Click()}"
+                                android:text="3년"></Button>
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout

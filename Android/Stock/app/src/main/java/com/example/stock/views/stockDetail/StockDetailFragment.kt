@@ -21,7 +21,9 @@ import com.example.stock.data.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
 import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
 
@@ -102,18 +104,18 @@ class StockDetailFragment : Fragment() {
 
 
             val dataSet = CandleDataSet(it, "").apply {
-                // 심지 부분
+                axisDependency = YAxis.AxisDependency.LEFT
+                // 심지 부분 설정
                 shadowColor = Color.LTGRAY
                 shadowWidth = 0.7F
-
-                // 음봄
-                decreasingColor = Color.BLUE
+                // 음봉 설정
+                decreasingColor = Color.rgb(18, 98, 197)
                 decreasingPaintStyle = Paint.Style.FILL
-                // 양봉
-                increasingColor = Color.RED
+                // 양봉 설정
+                increasingColor = Color.rgb(200, 74, 49)
                 increasingPaintStyle = Paint.Style.FILL
 
-                neutralColor = Color.DKGRAY
+                neutralColor = Color.rgb(6, 18, 34)
                 setDrawValues(false)
                 // 터치시 노란 선 제거
                 highLightColor = Color.TRANSPARENT
@@ -122,7 +124,6 @@ class StockDetailFragment : Fragment() {
             binding.cdChart.apply {
                 this.data = CandleData(dataSet)
                 requestDisallowInterceptTouchEvent(false)
-                animateXY(2000, 2000)
                 invalidate()
             }
 
@@ -137,35 +138,42 @@ class StockDetailFragment : Fragment() {
             setTouchEnabled(false) // 터치 유무
             setPinchZoom(false)
 //            setDrawGridBackground(false)
-            setExtraOffsets(10f, 0f, 40f, 0f);
+            setExtraOffsets(10f, 0f, 10f, 0f);
             // x축 설정
             xAxis.apply {
-                x
                 isEnabled = true
                 textColor = Color.BLACK
                 position = XAxis.XAxisPosition.BOTTOM
                 // 세로선 표시 여부 설정
                 setDrawGridLines(true)
-                setDrawAxisLine(true)
+                setDrawAxisLine(false)
                 axisLineColor = Color.rgb(50, 59, 76)
                 gridColor = Color.rgb(50, 59, 76)
             }
             // 왼쪽 y축 설정
             axisLeft.apply {
                 textColor = Color.BLACK
-                isEnabled = true
+                isEnabled = false
             }
             // 오른쪽 y축 설정
             axisRight.apply {
                 isEnabled = true
-                setDrawGridLines(true);
-                setDrawAxisLine(true);
-//                setLabelCount(7, false)
+                // 가로선 표시 여부 설정
+                setDrawGridLines(true)
+                // 차트의 오른쪽 테두리 라인 설정
+                setDrawAxisLine(true)
                 textColor = Color.BLACK
                 // 가로선 표시 여부 설정
 
             }
-            binding.cdChart.legend.isEnabled = true
+            legend.apply {
+                isEnabled = true
+                textColor = Color.BLACK
+                verticalAlignment = Legend.LegendVerticalAlignment.TOP
+                horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+                orientation = Legend.LegendOrientation.HORIZONTAL
+                setDrawInside(true)
+            }
         }
     }
 

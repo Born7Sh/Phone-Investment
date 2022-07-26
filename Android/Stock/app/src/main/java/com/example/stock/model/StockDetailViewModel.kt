@@ -48,20 +48,8 @@ class StockDetailViewModel() : ViewModel() {
         get() = _btnCommunityClick
 
     init {
-        for (candleStock in DataUtilBar.getCandleStockData()) {
-            items.add(
-                CandleEntry(
-                    candleStock.createdAt.toFloat(),
-                    candleStock.shadowHigh,
-                    candleStock.shadowLow,
-                    candleStock.open,
-                    candleStock.close
-                )
-            )
-        }
-        _stockList.value = items
 
-
+        btnGraphNum1Click()
 
         community = arrayListOf(
 
@@ -113,6 +101,47 @@ class StockDetailViewModel() : ViewModel() {
     fun btnCommunity() {
         _btnCommunityClick.value = Event(community.toArray(arrayOfNulls<Community>(community.size)))
 
+    }
+
+    fun btnGraphNum1Click() {
+        graphDataSet(3)
+    }
+
+    fun btnGraphNum2Click() {
+        graphDataSet(5)
+    }
+
+    fun btnGraphNum3Click() {
+        graphDataSet(7)
+    }
+
+    fun btnGraphNum4Click() {
+        graphDataSet(9)
+    }
+
+    fun btnGraphNum5Click() {
+        graphDataSet(100)
+    }
+
+    private fun graphDataSet(num: Int) {
+        items.clear()
+        var i = 0
+        for (candleStock in DataUtilBar.getCandleStockData()) {
+            if (i == num) {
+                break
+            }
+            items.add(
+                CandleEntry(
+                    candleStock.createdAt.toFloat(),
+                    candleStock.shadowHigh,
+                    candleStock.shadowLow,
+                    candleStock.open,
+                    candleStock.close
+                )
+            )
+            i += 1
+        }
+        _stockList.value = items
     }
 
 }
