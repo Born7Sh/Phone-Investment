@@ -21,32 +21,72 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar_main"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"></ImageView>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/background_stroke_rect_balck"
                 android:id="@+id/setting_profile"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="190dp"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_main">
+
+                <TextView
+                    android:id="@+id/setting_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="프로필)"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                   app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/stock_item_img"
+                    android:id="@+id/setting_user_img"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/img_someone"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/setting_user_id" />
 
 
                 <TextView
-                    android:id="@+id/stock_item_title"
+                    android:id="@+id/setting_user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -54,19 +94,33 @@
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/stock_item_img"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/setting_user_img" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/setting_iconBox_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="설정"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/setting_profile"></TextView>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setting_iconBox1"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toTopOf="@id/setting_iconBox2"
-                app:layout_constraintTop_toBottomOf="@id/setting_profile">
+                app:layout_constraintTop_toBottomOf="@id/setting_iconBox_text">
 
                 <LinearLayout
                     android:id="@+id/setting_icon1"
@@ -237,7 +291,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="문의"
+                        android:text="회원탈퇴"
                         android:textColor="#28A745"
                         android:textSize="10dp"></TextView>
 

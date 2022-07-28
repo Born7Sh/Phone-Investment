@@ -103,6 +103,9 @@ dependencies {
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
-    //
+    // 홈페이지 위아래 이동 때문
     implementation 'com.google.android.material:material:1.6.1'
+
+    // 코루틴용
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 }

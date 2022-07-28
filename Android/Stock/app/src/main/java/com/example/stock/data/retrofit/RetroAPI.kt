@@ -1,12 +1,10 @@
 package com.example.stock.data.retrofit
 
 import com.example.stock.data.Auth
+import com.example.stock.data.Stock
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
-
-
-
+import retrofit2.Response
+import retrofit2.http.*
 
 interface RetroAPI {
 
@@ -19,4 +17,9 @@ interface RetroAPI {
     fun setSignUp(
         @Body auth: Auth?
     ): Call<Auth>
+
+    @GET("/mylist")
+    suspend fun getMyStockList(
+        @Header ("Authorization") auth: Auth?
+    ) :Response<Stock>
 }
