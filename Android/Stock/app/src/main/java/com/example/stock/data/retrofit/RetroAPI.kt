@@ -20,6 +20,6 @@ interface RetroAPI {
 
     @GET("/mylist")
     suspend fun getMyStockList(
-        @Header ("Authorization") auth: Auth?
+        @Header ("Authorization") auth: String?
     ) :Response<Stock>
 }

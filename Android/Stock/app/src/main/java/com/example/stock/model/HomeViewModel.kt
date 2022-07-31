@@ -1,5 +1,6 @@
 package com.example.stock.model
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,10 +9,13 @@ import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.data.Event
 import com.example.stock.data.Stock
+import com.example.stock.data.retrofit.RetroAPIRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.net.ConnectException
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     // 버튼 클릭 변수
     private val _newsBtnClick = MutableLiveData<Event<Boolean>>()
     val newsBtnClick: LiveData<Event<Boolean>>
@@ -79,10 +83,10 @@ class HomeViewModel() : ViewModel() {
 
 
 
-    fun getMyStockList(){
+    fun getMyStockList(key :String){
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.getUserData(handle).let {
+                repository.getMyStockList("s").let {
                         response ->
                     Log.d("api_request_url::", response.raw().request.url.toString())
                     Log.d("get_user_api", response.code().toString() + " " + response.message())
@@ -91,19 +95,17 @@ class HomeViewModel() : ViewModel() {
                         //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
                         response.body()?.code = response.code()
 
-                        response.body()?.let { setTierText(it) }
-
-                        getUserDataRepositories.postValue(response.body())
+                        _myStockList.postValue(response.body())
                         Log.d("api_success", response.body().toString())
                     } else {
                         //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
-                        getUserDataRepositories.postValue(SolveAcGetUserDataModel(
+                        _myStockList.postValue(Stock(
+                            "1",
+                            "1",
                             "",
                             "",
-                            mutableListOf(),
-                            SolveAcGetUserDataModel.BackgroundData("", "", ""),
-                            "",
-                            0,
+                            "0",
+                            "0",
                             0
                         ).apply { code = response.code() }
                         )

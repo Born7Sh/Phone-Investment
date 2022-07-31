@@ -36,6 +36,8 @@ class HomeFragment : Fragment() {
 
     private val mainViewModel by activityViewModels<MainViewModel>()
     lateinit var homeViewModel: HomeViewModel
+
+
     private lateinit var stockAdapter: StockAdapter
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var rankAdapter: RankAdapter
@@ -179,5 +181,9 @@ class HomeFragment : Fragment() {
         }
 
         // The callback can be enabled or disabled here or in the lambda
+    }
+
+    private fun initViewModel(){
+
     }
 }
