@@ -52,10 +52,8 @@ class SecureSharedPreferences(private val sharedPref: SharedPreferences) {
         try {
             sharedPref.edit().run {
                 if (value == null) {
-                    Log.v("items", "putInternal 조건 들어감")
                     remove(key)
                 } else {
-                    Log.v("items", "value.toString() = " + value.toString())
                     putString(key, AndroidKeyStoreUtil.encrypt(value.toString()))
                 }
 

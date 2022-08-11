@@ -8,7 +8,7 @@ import retrofit2.http.*
 
 interface RetroAPI {
 
-    @POST("/authenticate")
+    @POST("authenticate")
     fun getUserKey(
         @Body auth: Auth?
     ): Call<String>
@@ -18,8 +18,40 @@ interface RetroAPI {
         @Body auth: Auth?
     ): Call<Auth>
 
-    @GET("/mylist")
-    suspend fun getMyStockList(
-        @Header ("Authorization") auth: String?
-    ) :Response<Stock>
+    @GET("/stock/mylist/{username}")
+    fun getMyStockList(
+        @Path("username") name: String,
+//        @Header("Authorization") key: String
+        @Header("Authorization") Authorization: String?
+
+    ): Call<Stock>
+
+    @GET("stock/mymoney/{username}")
+    fun getMyMoney(
+        @Header("Authorization") Authorization: String?,
+        @Path("username") name: String
+//        @Header("Authorization") key: String
+    ): Call<Stock>
+
+    @GET("/stock/stocklist")
+    fun getStocklist(
+        @Header("Authorization") Authorization: String?
+    )
+
+//    @GET("stock/mylist/{username}")
+//    fun getMyStockList(
+//        @Path("username") name: String,
+//        @Header("Authorization") key: String
+//    ): Call<Stock>
+
+//    @GET("stock/SPY")
+//    suspend fun getMyStockList(
+//        @Header ("authorization") key: String?
+//    ) :Response<Stock>
+
+//    @GET("stock/SPY")
+//    suspend fun getStockSPY(
+//        @Header ("authorization") key: String?
+//    ) :Response<Stock>
+
 }

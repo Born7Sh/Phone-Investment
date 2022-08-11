@@ -1,18 +1,20 @@
 package com.example.stock.model
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
-import com.example.stock.R
 import com.example.stock.data.Event
 import com.example.stock.data.Stock
+import com.example.stock.data.retrofit.GlobalApplication
+import com.example.stock.data.retrofit.RetroAPI
 import com.example.stock.data.retrofit.RetroAPIRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.net.ConnectException
 
 class HomeViewModel(private val repository: RetroAPIRepository) : ViewModel() {
@@ -46,9 +48,13 @@ class HomeViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         get() = _isMainBtnClick
 
     // Retro용 변수
-    private val _myStockList = MutableLiveData<Stock>()
-    val myStockList: LiveData<Stock>
+    private val _myStockList = MutableLiveData<List<Stock>>()
+    val myStockList: LiveData<List<Stock>>
         get() = _myStockList
+
+    private val _IMSI = MutableLiveData<Event<Boolean>>()
+    val IMSI: LiveData<Event<Boolean>>
+        get() = _IMSI
 
     fun search() {
         _searchBtnClick.value = Event(true)
@@ -79,46 +85,77 @@ class HomeViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     }
 
     fun IMSI() {
+        _IMSI.value = Event(true)
     }
 
 
+    fun getMyStockList(username: String, key: String) {
 
-    fun getMyStockList(key :String){
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                repository.getMyStockList("s").let {
-                        response ->
-                    Log.d("api_request_url::", response.raw().request.url.toString())
-                    Log.d("get_user_api", response.code().toString() + " " + response.message())
-
-                    if(response.code() == 200) {
-                        //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
-                        response.body()?.code = response.code()
-
-                        _myStockList.postValue(response.body())
-                        Log.d("api_success", response.body().toString())
-                    } else {
-                        //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
-                        _myStockList.postValue(Stock(
-                            "1",
-                            "1",
-                            "",
-                            "",
-                            "0",
-                            "0",
-                            0
-                        ).apply { code = response.code() }
-                        )
-                    }
-
+        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
+            .getMyStockList(username, key)
+        call.enqueue(object : Callback<Stock> {
+            override fun onResponse(
+                call: Call<Stock>,
+                response: Response<Stock>
+            ) {
+                Log.v("items", "StockList 받는 함수임.")
+                Log.v(
+                    "items",
+                    "Response code : " + response.code().toString() + " " + response.message()
+                )
+                if (response.isSuccessful) {
+                    var key = response.body()!!
+                    Log.v("items", "getMyStockList 의 심지어 성공적임")
                 }
-            } catch (e: ConnectException) {
-                e.printStackTrace()
-                Log.d("api_exception", e.toString())
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.d("api_exception", e.toString())
+
             }
-        }
+
+            override fun onFailure(call: Call<Stock>, t: Throwable) {
+                Log.v("items", " getMyStockList의 Failure : " + t)
+            }
+
+        })
+
     }
 }
+//    fun getMyStockList(key: String) {
+//        Log.v("items", "getMyStockList의 키는 = " + key)
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                repository.getMyStockList(key).let { response ->
+//                    Log.v("items", "일단 들어옴1" + response.raw().request.url.toString())
+//                    Log.v("items", "일단 들어옴2" + response.code().toString() + " " + response.message())
+//
+//                    if (response.code() == 200) {
+//                        //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
+//                        _myStockList.postValue(response.body())
+//                        Log.v("items", "성공" + response.body().toString())
+//                    } else {
+//                        Log.v("items", "실패")
+//                        //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
+//                        _myStockList.postValue(
+//                            Stock(
+//                                "1",
+//                                "1",
+//                                "",
+//                                "",
+//                                "0",
+//                                "0",
+//                                0
+//                            )
+//                        )
+//                    }
+//
+//                }
+//            } catch (e: ConnectException) {
+//                e.printStackTrace()
+//                Log.v("items", "연결 불능" + e.toString() + "api_exception")
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                Log.v("items", "예외 처리" + e.toString() + "api_exception")
+//            }
+//        }
+//    }
+
+
+

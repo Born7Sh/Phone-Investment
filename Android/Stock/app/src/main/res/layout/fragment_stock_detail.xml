@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:gravity="right"
-                            android:text="@{stock.price}"
+                            android:text="@{String.valueOf(stock.price)}"
                             android:textColor="#000000"
                             android:textSize="35dp"
                             android:textStyle="bold"></TextView>
@@ -116,8 +116,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:gravity="right"
-                            android:text="@{stock.a_price}"
-                            android:textColor="@{Float.parseFloat(stock.a_price) &lt; 0 ? @color/red : @color/blue}"
+                            android:text="@{String.valueOf(stock.a_price)}"
+                            android:textColor="@{stock.a_price &lt; 0 ? @color/red : @color/blue}"
                             android:textSize="20dp"
                             android:textStyle="bold"></TextView>
 

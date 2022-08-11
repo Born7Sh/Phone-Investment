@@ -3,7 +3,7 @@ package com.example.stock.data
 import com.google.gson.annotations.SerializedName
 
 data class Auth(
-    @SerializedName("username")
+    @SerializedName("userName")
     var username: String,
 
     @SerializedName("password")

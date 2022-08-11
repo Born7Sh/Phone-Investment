@@ -1,6 +1,7 @@
 package com.example.stock.views.home
 
 import android.animation.ObjectAnimator
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -24,9 +26,13 @@ import com.example.stock.adapter.StockAdapter
 import com.example.stock.data.EventObserver
 import com.example.stock.data.News
 import com.example.stock.data.Rank
+import com.example.stock.data.SecureSharedPreferences
+import com.example.stock.data.retrofit.GlobalApplication
+import com.example.stock.data.retrofit.RetroAPIRepository
 
 import com.example.stock.databinding.FragmentHomeBinding
 import com.example.stock.model.HomeViewModel
+import com.example.stock.model.HomeViewModelFactory
 import com.example.stock.model.MainViewModel
 import com.example.stock.model.StockDetailViewModel
 
@@ -34,22 +40,31 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
+    // viewmodel
     private val mainViewModel by activityViewModels<MainViewModel>()
-    lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModelFactory: HomeViewModelFactory
 
-
+    // adapter
     private lateinit var stockAdapter: StockAdapter
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var rankAdapter: RankAdapter
+
+    // 뒤로가기용 변수
     private var waitTime = 0L
-    private var isFabOpen = false // 이동 제어용 변수
+
+    // 이동 제어용 변수 (home 버튼 3개)
+    private var isFabOpen = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        homeViewModelFactory = HomeViewModelFactory(RetroAPIRepository())
+        homeViewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
 
         stockAdapter = StockAdapter()
         newsAdapter = NewsAdapter()
@@ -64,6 +79,13 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+    private fun getData(){
+        var key = GlobalApplication.key
+        var username = GlobalApplication.auth.username
+        homeViewModel.getMyStockList(username, key)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -164,7 +186,9 @@ class HomeFragment : Fragment() {
             binding.scrollView.smoothScrollTo(0, binding.recyclerNews.bottom)
             Toast.makeText(activity, "Button Click", Toast.LENGTH_SHORT).show()
         })
-
+        homeViewModel.IMSI.observe(viewLifecycleOwner, EventObserver {
+            getData()
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -183,7 +207,5 @@ class HomeFragment : Fragment() {
         // The callback can be enabled or disabled here or in the lambda
     }
 
-    private fun initViewModel(){
 
-    }
 }

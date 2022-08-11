@@ -3,11 +3,15 @@ package com.example.stock.data.retrofit
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.stock.BuildConfig
 import com.example.stock.data.AndroidKeyStoreUtil
 import com.example.stock.data.Auth
 import com.example.stock.data.SecureSharedPreferences
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
 
 class GlobalApplication : Application() {
@@ -26,7 +30,7 @@ class GlobalApplication : Application() {
         var haveLogin: Boolean = true
             private set
 
-
+        lateinit var key : String
     }
 
     override fun onCreate() {
@@ -38,12 +42,12 @@ class GlobalApplication : Application() {
         sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
         val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
 
-        secureSharedPreferences.put("id", "HoMinXio")
+        secureSharedPreferences.put("id", "homin")
         secureSharedPreferences.put("pass", "1234")
 
         val sharedPreferenceId = secureSharedPreferences.get("id", "NULL")
         val sharedPreferencePw =  secureSharedPreferences.get("pass", "NULL")
-//        val c = secureSharedPreferences.get("key2", "NULL")
+//        key = secureSharedPreferences.get("key", "NULL")
 
 //        Log.v("items", "id = " + auth.username)
 //        Log.v("items", "pass = " + auth.username)
@@ -60,13 +64,29 @@ class GlobalApplication : Application() {
 
     private fun initRetrofitBuilder(): Retrofit {
         // 기본 주소
-        val BASE_URL = "http://localhost:8080/sleepapp/status/"
+        val BASE_URL = "http://222.112.18.141:8080/"
 
+        val gson : Gson = GsonBuilder()
+            .setLenient()
+            .create()
+
+
+        // 로그용도
+        val interceptor  = HttpLoggingInterceptor()
+        if (BuildConfig.DEBUG){
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+        }else{
+            interceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+        val client = OkHttpClient().newBuilder().addNetworkInterceptor(interceptor).build()
 
         //리턴하는 레트로핏 빌더 반환
         return Retrofit.Builder().baseUrl(BASE_URL)
-            .client(OkHttpClient())
-            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+
+
     }
+
 }

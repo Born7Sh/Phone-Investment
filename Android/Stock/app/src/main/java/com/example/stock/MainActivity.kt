@@ -20,6 +20,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.navigation.NavController
 import com.example.stock.data.AndroidKeyStoreUtil
+import com.example.stock.data.Stock
 import com.example.stock.data.retrofit.GlobalApplication
 import com.example.stock.data.retrofit.RetroAPI
 import retrofit2.Call
@@ -84,22 +85,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUserKey() {
-        Log.v("items", "HI getKey")
+
         val call = GlobalApplication.baseService.create(RetroAPI::class.java)
             .getUserKey(GlobalApplication.auth)
         call.enqueue(object : retrofit2.Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.v("items", "HI response")
                 if (response.isSuccessful) {
                     var key = response.body()!!
+                    GlobalApplication.key = "Bearer $key"
+
+                    Log.v("items", "key is : " + key)
                     var sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
                     val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
                     secureSharedPreferences.put("key", key)
+
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.v("items", "HI Failure")
+                Log.v("items", " authentic Failure : "+ t)
             }
 
         })
