@@ -91,30 +91,30 @@ class HomeViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
     fun getMyStockList(username: String, key: String) {
 
-        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-            .getMyStockList(username, key)
-        call.enqueue(object : Callback<Stock> {
-            override fun onResponse(
-                call: Call<Stock>,
-                response: Response<Stock>
-            ) {
-                Log.v("items", "StockList 받는 함수임.")
-                Log.v(
-                    "items",
-                    "Response code : " + response.code().toString() + " " + response.message()
-                )
-                if (response.isSuccessful) {
-                    var key = response.body()!!
-                    Log.v("items", "getMyStockList 의 심지어 성공적임")
-                }
-
-            }
-
-            override fun onFailure(call: Call<Stock>, t: Throwable) {
-                Log.v("items", " getMyStockList의 Failure : " + t)
-            }
-
-        })
+//        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
+//            .getMyStockList(username, key)
+//        call.enqueue(object : Callback<Stock> {
+//            override fun onResponse(
+//                call: Call<Stock>,
+//                response: Response<Stock>
+//            ) {
+//                Log.v("items", "StockList 받는 함수임.")
+//                Log.v(
+//                    "items",
+//                    "Response code : " + response.code().toString() + " " + response.message()
+//                )
+//                if (response.isSuccessful) {
+//                    var key = response.body()!!
+//                    Log.v("items", "getMyStockList 의 심지어 성공적임")
+//                }
+//
+//            }
+//
+//            override fun onFailure(call: Call<Stock>, t: Throwable) {
+//                Log.v("items", " getMyStockList의 Failure : " + t)
+//            }
+//
+//        })
 
     }
 }

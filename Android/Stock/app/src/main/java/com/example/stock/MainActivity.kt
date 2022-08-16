@@ -18,11 +18,14 @@ import android.app.Activity
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.example.stock.data.AndroidKeyStoreUtil
 import com.example.stock.data.Stock
 import com.example.stock.data.retrofit.GlobalApplication
 import com.example.stock.data.retrofit.RetroAPI
+import com.example.stock.data.retrofit.RetroAPIRepository
+import com.example.stock.model.HomeViewModelFactory
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.create
@@ -31,7 +34,9 @@ import retrofit2.create
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    val mainViewModel by viewModels<MainViewModel>()
+    lateinit var mainViewModel: MainViewModel
+    private lateinit var homeViewModelFactory: HomeViewModelFactory
+
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -41,12 +46,15 @@ class MainActivity : AppCompatActivity() {
 
         initBinding()
         initNavigation()
+        initViewModel()
+        getInitData()
     }
 
 
     private fun initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
+
     }
 
     private fun initNavigation() {
@@ -83,30 +91,38 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+    private fun initViewModel(){
+        homeViewModelFactory = HomeViewModelFactory(RetroAPIRepository())
+        mainViewModel = ViewModelProvider(this,homeViewModelFactory).get(MainViewModel::class.java)
+    }
+
+    private fun getInitData(){
+        mainViewModel.initDataLoading(GlobalApplication.auth)
+    }
 
     private fun getUserKey() {
 
-        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-            .getUserKey(GlobalApplication.auth)
-        call.enqueue(object : retrofit2.Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.isSuccessful) {
-                    var key = response.body()!!
-                    GlobalApplication.key = "Bearer $key"
-
-                    Log.v("items", "key is : " + key)
-                    var sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
-                    val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
-                    secureSharedPreferences.put("key", key)
-
-                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.v("items", " authentic Failure : "+ t)
-            }
-
-        })
+//        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
+//            .getUserKey(GlobalApplication.auth)
+//        call.enqueue(object : retrofit2.Callback<String> {
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                if (response.isSuccessful) {
+//                    var key = response.body()!!
+//                    GlobalApplication.key = "Bearer $key"
+//
+//                    Log.v("items", "key is : " + key)
+//                    var sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
+//                    val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
+//                    secureSharedPreferences.put("key", key)
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                Log.v("items", " authentic Failure : "+ t)
+//            }
+//
+//        })
 
     }
 

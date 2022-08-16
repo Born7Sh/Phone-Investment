@@ -68,30 +68,31 @@ class LoginViewModel : ViewModel() {
 
 
     fun btnLoginClick() {
-        var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
-        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-            .getUserKey(auth)
-        call.enqueue(object : retrofit2.Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.v("items", "HI response")
-                if (response.isSuccessful) {
-
-                    var key = response.body()!!
-
-                    val secureSharedPreferences =
-                        SecureSharedPreferences.wrap(GlobalApplication.sharedPrefs)
-                    secureSharedPreferences.put("key", key)
-
-                    _loginBtnClick.value = Event("200")
-                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.v("items", "로그인 실패")
-                _loginBtnClick.value = Event("100")
-            }
-
-        })
+        // 22/08/16 비동기 통신 처리를 위한 잠시 주석 처리
+//        var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
+//        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
+//            .getUserKey(auth)
+//        call.enqueue(object : retrofit2.Callback<String> {
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                Log.v("items", "HI response")
+//                if (response.isSuccessful) {
+//
+//                    var key = response.body()!!
+//
+//                    val secureSharedPreferences =
+//                        SecureSharedPreferences.wrap(GlobalApplication.sharedPrefs)
+//                    secureSharedPreferences.put("key", key)
+//
+//                    _loginBtnClick.value = Event("200")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                Log.v("items", "로그인 실패")
+//                _loginBtnClick.value = Event("100")
+//            }
+//
+//        })
 
     }
 

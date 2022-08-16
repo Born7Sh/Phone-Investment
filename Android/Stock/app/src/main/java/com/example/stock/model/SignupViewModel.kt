@@ -105,28 +105,28 @@ class SignupViewModel : ViewModel() {
 
 
     fun btnSignupClick() {
-
-        if (pwd.value ?: "ho" == pwdCk.value ?: "ho") {
-            var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
-            val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-                .setSignUp(auth)
-            call.enqueue(object : retrofit2.Callback<Auth> {
-                override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
-                    Log.v("items", "HI response")
-                    if (response.isSuccessful) {
-                        _loginBtnText.value = Event("200")
-                    }
-                }
-
-                override fun onFailure(call: Call<Auth>, t: Throwable) {
-                    Log.v("items", "로그인 실패")
-                    _loginBtnText.value = Event("100")
-                }
-
-            })
-        } else {
-            _loginBtnText.value = Event("1")
-        }
+        // 22/08/16 비동기 통신 처리를 위한 잠시 주석 처리
+//        if (pwd.value ?: "ho" == pwdCk.value ?: "ho") {
+//            var auth = Auth(id.value ?: "ho", pwd.value ?: "go")
+//            val call = GlobalApplication.baseService.create(RetroAPI::class.java)
+//                .setSignUp(auth)
+//            call.enqueue(object : retrofit2.Callback<Auth> {
+//                override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
+//                    Log.v("items", "HI response")
+//                    if (response.isSuccessful) {
+//                        _loginBtnText.value = Event("200")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<Auth>, t: Throwable) {
+//                    Log.v("items", "로그인 실패")
+//                    _loginBtnText.value = Event("100")
+//                }
+//
+//            })
+//        } else {
+//            _loginBtnText.value = Event("1")
+//        }
 
 
     }

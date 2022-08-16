@@ -6,8 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.stock.R
 import com.example.stock.data.*
+import com.example.stock.data.retrofit.GlobalApplication
+import com.example.stock.data.retrofit.RetroAPIRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import java.net.ConnectException
 
-class MainViewModel() : ViewModel() {
+class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
     // 내 회사 리스트
     private val _myStockList = MutableLiveData<ArrayList<Stock>>()
@@ -280,4 +287,73 @@ class MainViewModel() : ViewModel() {
     fun getCurrentStock(): Stock {
         return curStock
     }
+
+    fun initDataLoading(auth: Auth) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                //
+                Log.d("items", "코루틴 1. 진입")
+                // 1. 키 받아오기 getUserKey
+                repository.getUserKey(auth).let { response ->
+                    Log.d("items", "코루틴 1. 진행중")
+                    Log.d("api_request_url::", response.raw().request.url.toString())
+                    Log.d("get_user_api", response.code().toString() + " " + response.message())
+
+                    if (response.code() == 200) {
+                        //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
+                        _key.postValue(response.body())
+                        GlobalApplication.key = response.body().toString()
+                        Log.d("api_success", response.body().toString())
+                        Log.d("items", "코루틴 1. 완료")
+                    } else {
+                        //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
+                        Log.d("items", "코루틴 1. 200아님")
+                        GlobalApplication.key = "444"
+                    }
+
+                }
+            } catch (e: ConnectException) {
+                e.printStackTrace()
+                Log.d("items", "코루틴 1. 에러 connection Exception")
+                Log.d("api_exception", e.toString())
+                GlobalApplication.key = "444"
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.d("items", "코루틴 1. 에러 Exception")
+                Log.d("api_exception", e.toString())
+                GlobalApplication.key = "444"
+            }
+            if (GlobalApplication.key != "444") {
+                try {
+                    // 2. 전체 데이터 받아오기 getStockList
+                    Log.d("items", "코루틴 2. 진입")
+                    repository.getUserKey(auth).let { response ->
+                        Log.d("items", "코루틴 2. 진행")
+                        Log.d("api_request_url::", response.raw().request.url.toString())
+                        Log.d("get_user_api", response.code().toString() + " " + response.message())
+
+                        if (response.code() == 200) {
+                            //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
+                            _key.postValue(response.body())
+                            Log.d("api_success", response.body().toString())
+                        } else {
+                            //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
+                        }
+
+                    }
+                } catch (e: ConnectException) {
+                    e.printStackTrace()
+                    Log.d("api_exception", e.toString())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.d("api_exception", e.toString())
+                }
+            }
+        }
+    }
+    // 1. 키 받아오기 getUserKey
+    // 2. 전체 데이터 받아오기 getStockList
+    // 3. 나머지 데이터 받아오기
 }
+
+
