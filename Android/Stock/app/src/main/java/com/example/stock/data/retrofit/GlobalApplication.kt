@@ -22,15 +22,18 @@ class GlobalApplication : Application() {
         lateinit var baseService: Retrofit
             private set
 
-        // 키 반환용 변수
-        lateinit var auth: Auth
-            private set
-
         // 로그인 했냐?
         var haveLogin: Boolean = true
             private set
 
+        // 키 반환용 변수
+        lateinit var auth: Auth
+            private set
+
         lateinit var key : String
+
+        // 유저 돈
+//        lateinit var money: Int = 0
     }
 
     override fun onCreate() {

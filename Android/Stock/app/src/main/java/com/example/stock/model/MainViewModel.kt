@@ -8,10 +8,7 @@ import com.example.stock.R
 import com.example.stock.data.*
 import com.example.stock.data.retrofit.GlobalApplication
 import com.example.stock.data.retrofit.RetroAPIRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.ConnectException
 
 class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
@@ -46,7 +43,6 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     val companyList: LiveData<ArrayList<Company>>
         get() = _companyList
 
-
     // 유저 객체
     private val _userIam = MutableLiveData<User>()
     val userIam: LiveData<User>
@@ -56,6 +52,10 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     val key: LiveData<String>
         get() = _key
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
+
 
     // 각자 초기화용도
     private var news = ArrayList<News>()
@@ -64,6 +64,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     private var rank = ArrayList<Rank>()
     private var company = ArrayList<Company>()
 
+    private lateinit var tockenJob: Job
 
     private var user = User("호민", "s", "d", 10000)
 
@@ -252,6 +253,8 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         _companyList.value = company
 
         _userIam.value = user
+
+        _errorMessage.value = "404"
     }
 
     fun getStock(companyId: String): Stock {
@@ -288,72 +291,67 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         return curStock
     }
 
-    fun initDataLoading(auth: Auth) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                //
-                Log.d("items", "코루틴 1. 진입")
-                // 1. 키 받아오기 getUserKey
-                repository.getUserKey(auth).let { response ->
-                    Log.d("items", "코루틴 1. 진행중")
-                    Log.d("api_request_url::", response.raw().request.url.toString())
-                    Log.d("get_user_api", response.code().toString() + " " + response.message())
+    private suspend fun initTokenSetting(auth: Auth) {
+        // 데이터 초기 설정
 
-                    if (response.code() == 200) {
-                        //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
-                        _key.postValue(response.body())
-                        GlobalApplication.key = response.body().toString()
-                        Log.d("api_success", response.body().toString())
-                        Log.d("items", "코루틴 1. 완료")
-                    } else {
-                        //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
-                        Log.d("items", "코루틴 1. 200아님")
-                        GlobalApplication.key = "444"
-                    }
+        try {
+            //
+            Log.d("items", " initTokenSetting 진입")
+            // 1. 키 받아오기 getUserKey
+            repository.getUserKey(auth).let { response ->
+                Log.d("items::", response.raw().request.url.toString())
+                Log.d("items", response.code().toString() + " " + response.message())
 
+                if (response.code() == 200) {
+                    //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
+                    _key.postValue(response.body())
+                    GlobalApplication.key = response.body().toString()
+                    Log.d("items", response.body().toString())
+                    Log.d("items", "initTokenSetting 완료")
+                } else {
+                    //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
+                    Log.d("items", "코루틴 1. 200아님")
+                    GlobalApplication.key = "444"
+                    _errorMessage.value = "400"
                 }
-            } catch (e: ConnectException) {
-                e.printStackTrace()
-                Log.d("items", "코루틴 1. 에러 connection Exception")
-                Log.d("api_exception", e.toString())
-                GlobalApplication.key = "444"
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.d("items", "코루틴 1. 에러 Exception")
-                Log.d("api_exception", e.toString())
-                GlobalApplication.key = "444"
-            }
-            if (GlobalApplication.key != "444") {
-                try {
-                    // 2. 전체 데이터 받아오기 getStockList
-                    Log.d("items", "코루틴 2. 진입")
-                    repository.getUserKey(auth).let { response ->
-                        Log.d("items", "코루틴 2. 진행")
-                        Log.d("api_request_url::", response.raw().request.url.toString())
-                        Log.d("get_user_api", response.code().toString() + " " + response.message())
 
-                        if (response.code() == 200) {
-                            //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
-                            _key.postValue(response.body())
-                            Log.d("api_success", response.body().toString())
-                        } else {
-                            //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
-                        }
-
-                    }
-                } catch (e: ConnectException) {
-                    e.printStackTrace()
-                    Log.d("api_exception", e.toString())
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    Log.d("api_exception", e.toString())
-                }
             }
+        } catch (e: ConnectException) {
+            Log.d("items", "initTokenSetting() connection Exception")
+            Log.d("items", "에러 내용 : " + e.toString())
+            _errorMessage.postValue("100")
+        } catch (e: Exception) {
+            Log.d("items", "initTokenSetting() Exception")
+            _errorMessage.postValue("500")
         }
+
+
     }
-    // 1. 키 받아오기 getUserKey
-    // 2. 전체 데이터 받아오기 getStockList
-    // 3. 나머지 데이터 받아오기
+
+
+    suspend fun dataLoading(auth: Auth){
+        try {
+            Log.d("items", "dataLoading 집입")
+            repository.getMyStockList(
+                GlobalApplication.auth.username,
+                GlobalApplication.key
+            ).let { response ->
+                if (response.code() == 200) {
+                    
+                } else {
+
+                }
+
+            }
+        } catch (e: Exception) {
+
+        }
+
+        fun sse(){
+            CoroutineScope(Dispatchers.IO).lauch {}
+        }
+
+    }
 }
 
 
