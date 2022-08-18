@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun getData(){
+    private fun getData() {
         var key = GlobalApplication.key
         var username = GlobalApplication.auth.username
         homeViewModel.getMyStockList(username, key)
@@ -89,6 +89,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            binding.homeDataState.isVisible = true
+            binding.homeDataState.text = it
+        })
 
         mainViewModel.myStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val constraintLayout = binding.homeConstraint

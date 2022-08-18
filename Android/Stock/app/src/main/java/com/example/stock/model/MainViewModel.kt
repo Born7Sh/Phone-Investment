@@ -52,9 +52,9 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     val key: LiveData<String>
         get() = _key
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String>
-        get() = _errorMessage
+    private val _stateMessage = MutableLiveData<String>()
+    val stateMessage: LiveData<String>
+        get() = _stateMessage
 
 
     // 각자 초기화용도
@@ -63,8 +63,6 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     private var myStocks = ArrayList<Stock>()
     private var rank = ArrayList<Rank>()
     private var company = ArrayList<Company>()
-
-    private lateinit var tockenJob: Job
 
     private var user = User("호민", "s", "d", 10000)
 
@@ -254,7 +252,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
         _userIam.value = user
 
-        _errorMessage.value = "404"
+        _stateMessage.value = "200"
     }
 
     fun getStock(companyId: String): Stock {
@@ -291,8 +289,45 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         return curStock
     }
 
-    private suspend fun initTokenSetting(auth: Auth) {
-        // 데이터 초기 설정
+    fun dataCoroutineFun(auth: Auth) {
+        val mainCoroutineJob = Job()
+        CoroutineScope(Dispatchers.IO + mainCoroutineJob).launch {
+            // dataTestLoading 통해서
+            // 키 유효한지 판별 200이면 유효 / 400이면 만료 / 100이면 네트워크 안되는거
+            // dataTestLoading await() 통해서 그전까지 멈춰둠.
+
+            Log.d("items", "dataCoroutineFun 시작!")
+            var job = async { dataTestLoading(auth) }
+            var code = job.await()
+
+            Log.d("items", "code 값은 = " + code.toString())
+            when (code) {
+
+                200 -> dataLoading(auth) // 모든게 정상적인 경우
+                400 -> {
+                    // 네트워크는 되는데 토큰 문제로 안받아와지는 경우
+                    // 1. tockenUpdate() 호출
+                    // 2. job으로 묶어서 대기 시킴
+                    // 3. 메인 코루틴 중지시키고 dataInitFlow() 재호출
+                    Log.d("items", "100 번 들어와서 initTokenSetting() 들어가기 전")
+                    var job = launch { tokenUpdate(auth) }
+                    job.join()
+                    mainCoroutineJob.cancel()
+                    if (isActive) {
+                        Log.d("items", "코루틴 아직 종료 안됨")
+                    }
+                    Log.d("items", "dataInitFlow() 재시작")
+                    dataCoroutineFun(auth)
+                }
+                else -> stateErrorNetwork() // 네트워크가 안되는 경우
+
+            }
+
+        }
+    }
+
+    private suspend fun tokenUpdate(auth: Auth) {
+        // 토큰 받아오기
 
         try {
             //
@@ -312,32 +347,51 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
                     //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
                     Log.d("items", "코루틴 1. 200아님")
                     GlobalApplication.key = "444"
-                    _errorMessage.value = "400"
+                    _stateMessage.value = "400"
                 }
 
             }
         } catch (e: ConnectException) {
-            Log.d("items", "initTokenSetting() connection Exception")
-            Log.d("items", "에러 내용 : " + e.toString())
-            _errorMessage.postValue("100")
+
         } catch (e: Exception) {
-            Log.d("items", "initTokenSetting() Exception")
-            _errorMessage.postValue("500")
+            Log.d("items", "initTokenSetting() 값 받아짐")
         }
 
 
     }
 
-
-    suspend fun dataLoading(auth: Auth){
+    private suspend fun dataTestLoading(auth: Auth): Int {
         try {
+            // 본격적으로 테스트로 하나 받아오기.
+            Log.d("items", "dataLoading 집입")
+            repository.getMyStockList(
+                GlobalApplication.auth.username,
+                GlobalApplication.key
+            ).let { response ->
+                return if (response.code() == 200) {
+                    200
+                } else {
+                    400
+                }
+
+            }
+        } catch (e: Exception) {
+            return 100
+        }
+
+    }
+
+    private suspend fun dataLoading(auth: Auth) {
+        // 본격적으로 데이터 받아오기.
+        try {
+            stateDataLoading()
             Log.d("items", "dataLoading 집입")
             repository.getMyStockList(
                 GlobalApplication.auth.username,
                 GlobalApplication.key
             ).let { response ->
                 if (response.code() == 200) {
-                    
+
                 } else {
 
                 }
@@ -347,10 +401,15 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
         }
 
-        fun sse(){
-            CoroutineScope(Dispatchers.IO).lauch {}
-        }
+    }
 
+
+    private fun stateErrorNetwork() {
+        _stateMessage.postValue("서버와의 통신이 불가합니다.")
+    }
+
+    private fun stateDataLoading(){
+//        _stateMessage.value = "데이터를 서버로부터 받아오고 있습니다."
     }
 }
 

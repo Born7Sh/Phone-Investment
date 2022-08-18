@@ -3,32 +3,19 @@ package com.example.stock
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.stock.data.SecureSharedPreferences
 import com.example.stock.databinding.ActivityMainBinding
 import com.example.stock.model.MainViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import android.app.Activity
 
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.example.stock.data.AndroidKeyStoreUtil
-import com.example.stock.data.Stock
 import com.example.stock.data.retrofit.GlobalApplication
-import com.example.stock.data.retrofit.RetroAPI
 import com.example.stock.data.retrofit.RetroAPIRepository
 import com.example.stock.model.HomeViewModelFactory
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.create
 
 
 class MainActivity : AppCompatActivity() {
@@ -103,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         //2. 기존의 key 값이 있는 경우 (dataLoading)
         //3. 기존의 key 값이 만료된 경우 (dataLoading -> initDataLoading 호출)
         // 에러 코드 확인 한 후 key 값 받아오는 함수 호출
-        mainViewModel.dataLoading(GlobalApplication.auth)
+        mainViewModel.dataCoroutineFun(GlobalApplication.auth)
     }
 
     private fun getUserKey() {
