@@ -19,4 +19,16 @@ interface RetroAPI {
         @Header("Authorization") Authorization: String?
     ): Response<Stock>
 
+    @GET("/stock/mymoney/{username}")
+    suspend fun getMyMoney(
+        @Path("username") name: String,
+        @Header("Authorization") Authorization: String?
+    ): Response<String>
+
+    @POST("/stock/{SYMBOL}")
+    suspend fun getStockPrice(
+        @Path("SYMBOL") SYMBOL: String,
+        @Header("Authorization") Authorization: String?
+    ): Response<String>
+
 }

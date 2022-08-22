@@ -11,5 +11,7 @@ class RetroAPIRepository {
 
     suspend fun getMyStockList(username: String, key: String) = retro.getMyStockList(username, key)
 
-//    suspend fun getStockSPY(key : String) = retro.getStockSPY(key)
+    suspend fun getMyMoney(username: String, key: String) = retro.getMyMoney(username, key)
+
+    suspend fun getStockPrice(SYMBOL: String, key: String) = retro.getStockPrice(SYMBOL, key)
 }

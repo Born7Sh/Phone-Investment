@@ -376,7 +376,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
             }
         } catch (e: Exception) {
-            return 100
+            return 200
         }
 
     }
@@ -384,22 +384,41 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     private suspend fun dataLoading(auth: Auth) {
         // 본격적으로 데이터 받아오기.
         try {
-            stateDataLoading()
-            Log.d("items", "dataLoading 집입")
+            Log.d("items", "getmyStock 집입 전")
             repository.getMyStockList(
                 GlobalApplication.auth.username,
                 GlobalApplication.key
             ).let { response ->
+                Log.d("items", "getmyStock 집입")
                 if (response.code() == 200) {
-
+                    Log.d("items", "getmyStock 성공")
                 } else {
-
+                    Log.d("items", "getmyStock 집입")
                 }
-
             }
         } catch (e: Exception) {
-
+            Log.d("items", "getmyStock 에러")
         }
+        Log.d("items", "getmyStock 집입 후")
+
+        try {
+            repository.getMyMoney(GlobalApplication.auth.username, GlobalApplication.key)
+            Log.d("items", "getMyMoney 집입 전")
+            repository.getMyMoney(GlobalApplication.auth.username, GlobalApplication.key)
+                .let { response ->
+                    Log.d("items", "getMyMoney 집입")
+                    if (response.code() == 200) {
+                        Log.d("items", "getMyMoney 성공")
+                    } else {
+                        Log.d("items", "getMyMoney 실패")
+                    }
+
+                }
+        } catch (e: Exception) {
+            Log.d("items", "getMyMoney 에러")
+        }
+        Log.d("items", "getMyMoney 집입 후")
+
 
     }
 
@@ -408,7 +427,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         _stateMessage.postValue("서버와의 통신이 불가합니다.")
     }
 
-    private fun stateDataLoading(){
+    private fun stateDataLoading() {
 //        _stateMessage.value = "데이터를 서버로부터 받아오고 있습니다."
     }
 }
