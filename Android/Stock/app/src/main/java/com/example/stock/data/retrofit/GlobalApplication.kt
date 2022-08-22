@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class GlobalApplication : Application() {
     companion object {
@@ -67,7 +68,10 @@ class GlobalApplication : Application() {
 
     private fun initRetrofitBuilder(): Retrofit {
         // 기본 주소
-        val BASE_URL = "http://222.112.18.141:8080/"
+//        val BASE_URL = "http://222.112.18.141:8080/"
+        val BASE_URL = "https://9de12e98-1be1-47bd-90c2-c2a6f1b00cd3.mock.pstmn.io/"
+
+
 
         val gson : Gson = GsonBuilder()
             .setLenient()
@@ -86,6 +90,7 @@ class GlobalApplication : Application() {
         //리턴하는 레트로핏 빌더 반환
         return Retrofit.Builder().baseUrl(BASE_URL)
             .client(client)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 

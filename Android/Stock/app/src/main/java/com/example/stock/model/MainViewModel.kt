@@ -331,7 +331,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
         try {
             //
-            Log.d("items", " initTokenSetting 진입")
+            Log.d("items", " tokenUpdate 진입")
             // 1. 키 받아오기 getUserKey
             repository.getUserKey(auth).let { response ->
                 Log.d("items::", response.raw().request.url.toString())
@@ -341,8 +341,8 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
                     //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
                     _key.postValue(response.body())
                     GlobalApplication.key = response.body().toString()
-                    Log.d("items", response.body().toString())
-                    Log.d("items", "initTokenSetting 완료")
+                    Log.d("items", response.body()!!)
+                    Log.d("items", "tokenUpdate 완료")
                 } else {
                     //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
                     Log.d("items", "코루틴 1. 200아님")
@@ -354,7 +354,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         } catch (e: ConnectException) {
 
         } catch (e: Exception) {
-            Log.d("items", "initTokenSetting() 값 받아짐")
+            Log.d("items", "tokenUpdate() 에러값 : " +  e.toString() + "api_exception")
         }
 
 
@@ -376,7 +376,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
 
             }
         } catch (e: Exception) {
-            return 200
+            return 400
         }
 
     }

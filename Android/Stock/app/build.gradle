@@ -111,4 +111,7 @@ dependencies {
 
     // 통신확인용
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+    //[Android] 레트로핏2.x에서 response를 String으로 받아오는 법
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 }

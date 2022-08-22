@@ -25,6 +25,8 @@ interface RetroAPI {
         @Header("Authorization") Authorization: String?
     ): Response<String>
 
+
+    // 데이터 받기
     @POST("/stock/{SYMBOL}")
     suspend fun getStockPrice(
         @Path("SYMBOL") SYMBOL: String,
