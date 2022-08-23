@@ -363,19 +363,26 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
     private suspend fun dataTestLoading(auth: Auth): Int {
         try {
             // 본격적으로 테스트로 하나 받아오기.
-            Log.d("items", "dataLoading 집입")
+            Log.d("items", "dataTestLoading 집입")
+            Log.d("items", "GlobalApplication.auth.username = " + GlobalApplication.auth.username)
+            Log.d("items", "GlobalApplication.key = " + GlobalApplication.key)
             repository.getMyStockList(
                 GlobalApplication.auth.username,
                 GlobalApplication.key
             ).let { response ->
+                Log.d("items", "dataTestLoading response 완료")
                 return if (response.code() == 200) {
+                    Log.d("items", "dataTestLoading response 200")
                     200
                 } else {
+                    Log.d("items", "dataTestLoading response : " + response.code())
+                    Log.d("items", "dataTestLoading body : " + response.body()?.symbol)
                     400
                 }
 
             }
         } catch (e: Exception) {
+            Log.d("items", "dataTestLoading 에러 Exception")
             return 400
         }
 
@@ -389,9 +396,9 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
                 GlobalApplication.auth.username,
                 GlobalApplication.key
             ).let { response ->
-                Log.d("items", "getmyStock 집입")
                 if (response.code() == 200) {
                     Log.d("items", "getmyStock 성공")
+                    Log.d("items", "getmyStock 값" + response.body()?.symbol)
                 } else {
                     Log.d("items", "getmyStock 집입")
                 }
