@@ -2,7 +2,9 @@ package com.example.stock.global
 
 import android.app.Application
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.example.stock.BuildConfig
+import com.example.stock.data.AppDataBase
 import com.example.stock.util.AndroidKeyStoreUtil
 import com.example.stock.data.model.Auth
 import com.example.stock.util.SecureSharedPreferences
@@ -34,10 +36,32 @@ class GlobalApplication : Application() {
 
         // 유저 돈
 //        lateinit var money: Int = 0
+
+
+        // ROOM 설정용 데이터베이스 변수 2개
+        lateinit var appInstance: GlobalApplication
+            private set
+
+        lateinit var appDataBaseInstance: AppDataBase
+            private set
     }
 
     override fun onCreate() {
         super.onCreate()
+        // room 초기화용도
+        appInstance = this
+
+        // room 초기화용도
+        appDataBaseInstance = Room.databaseBuilder(
+            appInstance.applicationContext,
+            AppDataBase::class.java, "stock.db"
+        )
+            .fallbackToDestructiveMigration() // DB version 달라졌을 경우 데이터베이스 초기화
+            .allowMainThreadQueries() // 메인 스레드에서 접근 허용
+            .build()
+
+        // 여기 밑에는 Retrofit 용도
+
 //        prefs = MySharedPreferences(applicationContext)
 //        https://hyperconnect.github.io/2018/06/03/android-secure-sharedpref-howto.html
 

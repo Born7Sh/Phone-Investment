@@ -5,9 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-//@Entity
+@Entity (tableName = "Stock")
 data class Stock(
     @SerializedName("symbol")
+    @PrimaryKey(autoGenerate = true)
     val symbol: String, // 영어 약자
     @SerializedName("stock_datetime")
     val stock_datetime: String, // 날짜
