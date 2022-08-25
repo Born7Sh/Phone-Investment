@@ -1,4 +1,4 @@
-package com.example.stock.data
+package com.example.stock.util
 
 import androidx.lifecycle.Observer
 

@@ -1,14 +1,11 @@
 package com.example.stock.model
 
-import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
-import com.example.stock.R
-import com.example.stock.data.*
-import com.example.stock.views.stockDetail.StockDetailFragmentDirections
+import com.example.stock.data.Community
+import com.example.stock.util.DataUtilBar
+import com.example.stock.util.Event
 import com.github.mikephil.charting.data.CandleEntry
 import java.text.NumberFormat
 

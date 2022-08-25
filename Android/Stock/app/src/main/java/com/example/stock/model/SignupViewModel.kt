@@ -1,19 +1,9 @@
 package com.example.stock.model
 
-import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
-import com.example.stock.data.Auth
-import com.example.stock.data.Event
-import com.example.stock.data.SecureSharedPreferences
-import com.example.stock.data.retrofit.GlobalApplication
-import com.example.stock.data.retrofit.RetroAPI
-import retrofit2.Call
-import retrofit2.Response
+import com.example.stock.util.Event
 
 class SignupViewModel : ViewModel() {
 

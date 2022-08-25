@@ -1,4 +1,4 @@
-package com.example.stock.data
+package com.example.stock.data.model
 
 data class CandleStock(
     var createdAt: Long = 0,

@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stock.R
-import com.example.stock.data.Stock
+import com.example.stock.data.model.Stock
 import com.example.stock.databinding.ListStockBinding
 import com.example.stock.views.home.HomeFragmentDirections
 import android.os.Bundle
-import androidx.fragment.app.findFragment
 import androidx.navigation.NavDirections
-import androidx.navigation.fragment.NavHostFragment
 import com.example.stock.views.favorite.FavoriteFragmentDirections
-import com.example.stock.views.home.HomeFragment
 import com.example.stock.views.stockAll.StockAllFragmentDirections
 import kotlinx.android.synthetic.main.fragment_home.view.*
 

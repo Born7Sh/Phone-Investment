@@ -1,4 +1,4 @@
-package com.example.stock.data
+package com.example.stock.util
 
 open class Event<out T>(private val content: T) {
     var hasBeenHandled = false

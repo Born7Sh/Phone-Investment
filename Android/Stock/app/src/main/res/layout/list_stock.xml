@@ -8,7 +8,7 @@
             type="android.view.View.OnClickListener" />
         <variable
             name="stock"
-            type="com.example.stock.data.Stock" />
+            type="com.example.stock.data.model.Stock" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_margin="10dp"

@@ -8,7 +8,7 @@
             type="android.view.View.OnClickListener" />
         <variable
             name="rank"
-            type="com.example.stock.data.Rank" />
+            type="com.example.stock.data.model.Rank" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_margin="10dp"

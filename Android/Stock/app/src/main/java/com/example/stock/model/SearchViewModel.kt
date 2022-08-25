@@ -3,9 +3,6 @@ package com.example.stock.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.stock.R
-import com.example.stock.data.News
-import com.example.stock.data.Stock
 
 class SearchViewModel : ViewModel() {
 

@@ -1,4 +1,6 @@
-package com.example.stock.data
+package com.example.stock.util
+
+import com.example.stock.data.model.BarData
 
 object DataUtilLine {
     fun getBarData(): List<BarData> {

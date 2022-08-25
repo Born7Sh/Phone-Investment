@@ -3,8 +3,7 @@ package com.example.stock.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stock.data.Rank
-import com.example.stock.databinding.ListNewsBinding
+import com.example.stock.data.model.Rank
 import com.example.stock.databinding.ListRankBinding
 
 class RankAdapter : RecyclerView.Adapter<RankAdapter.MyViewHolder>(){

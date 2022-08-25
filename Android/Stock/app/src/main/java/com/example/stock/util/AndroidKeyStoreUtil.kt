@@ -1,4 +1,4 @@
-package com.example.stock.data
+package com.example.stock.util
 
 
 import android.content.Context
@@ -8,12 +8,10 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
 import android.util.Log
-import timber.log.Timber
 import java.math.BigInteger
 import java.security.GeneralSecurityException
 import java.security.KeyPairGenerator
 import java.security.KeyStore
-import java.security.Security
 import java.security.spec.RSAKeyGenParameterSpec
 import java.security.spec.RSAKeyGenParameterSpec.F4
 import java.util.*
@@ -74,7 +72,7 @@ object AndroidKeyStoreUtil {
             return
         }
         Log.d("items", "생성됨")
-        this.appContext = applicationContext
+        appContext = applicationContext
         val alias = "${appContext.packageName}.rsakeypairs"
         val keyStore = KeyStore.getInstance(KEYSOTRE_INSTANCE_TYPE).apply {
             load(null)
@@ -91,7 +89,7 @@ object AndroidKeyStoreUtil {
             }
         }
 
-        this.keyEntry = keyStore.getEntry(alias, null)
+        keyEntry = keyStore.getEntry(alias, null)
         _isSupported = result
     }
 

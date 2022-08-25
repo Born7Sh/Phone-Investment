@@ -1,7 +1,6 @@
-package com.example.stock.data
+package com.example.stock.util
 
 import android.content.SharedPreferences
-import android.util.Log
 
 // https://hyperconnect.github.io/2018/06/03/android-secure-sharedpref-howto.html (참고 블로그)
 // 키 교환을 위한 보안

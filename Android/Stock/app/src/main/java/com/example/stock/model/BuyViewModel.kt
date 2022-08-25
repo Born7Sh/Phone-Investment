@@ -2,15 +2,12 @@ package com.example.stock.model
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import com.example.stock.data.Stock
-import java.sql.Types.NULL
 
 class BuyViewModel(stock: Int) : ViewModel() {
 

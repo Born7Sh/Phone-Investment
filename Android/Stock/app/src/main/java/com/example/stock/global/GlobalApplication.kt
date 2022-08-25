@@ -1,12 +1,11 @@
-package com.example.stock.data.retrofit
+package com.example.stock.global
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.stock.BuildConfig
-import com.example.stock.data.AndroidKeyStoreUtil
-import com.example.stock.data.Auth
-import com.example.stock.data.SecureSharedPreferences
+import com.example.stock.util.AndroidKeyStoreUtil
+import com.example.stock.data.model.Auth
+import com.example.stock.util.SecureSharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

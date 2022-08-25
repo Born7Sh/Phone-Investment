@@ -1,9 +1,10 @@
-package com.example.stock.data.retrofit
+package com.example.stock.data.repository
 
-import com.example.stock.data.Auth
-import retrofit2.create
+import com.example.stock.data.model.Auth
+import com.example.stock.global.GlobalApplication
+import com.example.stock.data.retrofit.RetroAPI
 
-class RetroAPIRepository {
+class StockRepository {
     private val retro = GlobalApplication.baseService.create(RetroAPI::class.java)
 
     //    suspend fun getUserKey(auth : Auth) = retro.getUserKey(auth)

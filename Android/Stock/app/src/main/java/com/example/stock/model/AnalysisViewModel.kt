@@ -1,11 +1,9 @@
 package com.example.stock.model
 
-import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.stock.data.DataUtilLine
-import com.github.mikephil.charting.components.LimitLine
+import com.example.stock.util.DataUtilLine
 import com.github.mikephil.charting.data.*
 
 class AnalysisViewModel : ViewModel() {

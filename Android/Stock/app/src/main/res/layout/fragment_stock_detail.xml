@@ -10,11 +10,11 @@
 
         <variable
             name="stock"
-            type="com.example.stock.data.Stock" />
+            type="com.example.stock.data.model.Stock" />
 
         <variable
             name="company"
-            type="com.example.stock.data.Company" />
+            type="com.example.stock.data.model.Company" />
 
         <variable
             name="viewModel"

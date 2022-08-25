@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.stock.R
-import com.example.stock.data.*
-import com.example.stock.data.retrofit.GlobalApplication
-import com.example.stock.data.retrofit.RetroAPIRepository
+import com.example.stock.data.model.*
+import com.example.stock.global.GlobalApplication
+import com.example.stock.data.repository.StockRepository
 import kotlinx.coroutines.*
 import java.net.ConnectException
 
-class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
+class MainViewModel(private val repository: StockRepository) : ViewModel() {
 
     // 내 회사 리스트
     private val _myStockList = MutableLiveData<ArrayList<Stock>>()
@@ -354,7 +354,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
         } catch (e: ConnectException) {
 
         } catch (e: Exception) {
-            Log.d("items", "tokenUpdate() 에러값 : " +  e.toString() + "api_exception")
+            Log.d("items", "tokenUpdate() 에러값 : " + e.toString() + "api_exception")
         }
 
 
@@ -416,6 +416,7 @@ class MainViewModel(private val repository: RetroAPIRepository) : ViewModel() {
                     Log.d("items", "getMyMoney 집입")
                     if (response.code() == 200) {
                         Log.d("items", "getMyMoney 성공")
+                        Log.d("items", "내돈은 : " + response.body().toString())
                     } else {
                         Log.d("items", "getMyMoney 실패")
                     }

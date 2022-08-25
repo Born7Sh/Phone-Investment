@@ -10,8 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.stock.R
-import com.example.stock.data.EventObserver
-import com.example.stock.databinding.FragmentCommunityBinding
+import com.example.stock.util.EventObserver
 import com.example.stock.databinding.FragmentSignupBinding
 import com.example.stock.model.SignupViewModel
 
@@ -74,7 +73,7 @@ class SignupFragment : Fragment() {
             }
         })
 
-        viewModel.loginBtnText.observe(viewLifecycleOwner,EventObserver {
+        viewModel.loginBtnText.observe(viewLifecycleOwner, EventObserver {
             when (it) {
                 "1" -> Toast.makeText(activity, "비밀번호 - check 불일치!", Toast.LENGTH_SHORT).show()
                 "200" -> signUpSuccess()

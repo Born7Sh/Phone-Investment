@@ -4,13 +4,13 @@ import com.example.stock.databinding.ListNewsBinding;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.stock.data.News
+import com.example.stock.data.model.News
 class NewsAdapter :RecyclerView.Adapter<NewsAdapter.MyViewHolder>(){
     var newsList=mutableListOf<News>()
 
     // 생성된 뷰 홀더에 값 지정
     class MyViewHolder(val binding :ListNewsBinding) :RecyclerView.ViewHolder(binding.root){
-        fun bind(currentNews:News){
+        fun bind(currentNews: News){
             binding.news=currentNews
         }
     }

@@ -13,8 +13,8 @@ import com.example.stock.model.MainViewModel
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.example.stock.data.retrofit.GlobalApplication
-import com.example.stock.data.retrofit.RetroAPIRepository
+import com.example.stock.global.GlobalApplication
+import com.example.stock.data.repository.StockRepository
 import com.example.stock.model.HomeViewModelFactory
 
 
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun initViewModel(){
-        homeViewModelFactory = HomeViewModelFactory(RetroAPIRepository())
+        homeViewModelFactory = HomeViewModelFactory(StockRepository())
         mainViewModel = ViewModelProvider(this,homeViewModelFactory).get(MainViewModel::class.java)
     }
 

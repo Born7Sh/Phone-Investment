@@ -5,21 +5,13 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import android.R
-import android.content.Context
 import android.util.Log
 import android.view.View
 
-import android.widget.TextView
 import androidx.navigation.findNavController
 
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.stock.data.News
-import com.example.stock.data.Stock
-import com.example.stock.databinding.ListNewsBinding
 import com.example.stock.databinding.ListSearchBinding
 import com.example.stock.views.SearchFragmentDirections
-import com.example.stock.views.home.HomeFragmentDirections
 
 
 class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.MyViewHolder>(), Filterable {

@@ -8,7 +8,7 @@
             type="android.view.View.OnClickListener" />
         <variable
             name="news"
-            type="com.example.stock.data.News" />
+            type="com.example.stock.data.model.News" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_margin="10dp"

@@ -1,23 +1,13 @@
 package com.example.stock.model
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.stock.data.Event
-import com.example.stock.data.Stock
-import com.example.stock.data.retrofit.GlobalApplication
-import com.example.stock.data.retrofit.RetroAPI
-import com.example.stock.data.retrofit.RetroAPIRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.net.ConnectException
+import com.example.stock.util.Event
+import com.example.stock.data.model.Stock
+import com.example.stock.data.repository.StockRepository
 
-class HomeViewModel(private val repository: RetroAPIRepository) : ViewModel() {
+class HomeViewModel(private val repository: StockRepository) : ViewModel() {
     // 버튼 클릭 변수
     private val _newsBtnClick = MutableLiveData<Event<Boolean>>()
     val newsBtnClick: LiveData<Event<Boolean>>

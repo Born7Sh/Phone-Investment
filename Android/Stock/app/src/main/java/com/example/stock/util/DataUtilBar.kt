@@ -1,4 +1,6 @@
-package com.example.stock.data
+package com.example.stock.util
+
+import com.example.stock.data.model.CandleStock
 
 object DataUtilBar {
     fun getCandleStockData(): List<CandleStock> {

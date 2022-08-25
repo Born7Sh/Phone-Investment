@@ -1,40 +1,33 @@
 package com.example.stock.views.home
 
 import android.animation.ObjectAnimator
-import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.NewsAdapter
 import com.example.stock.adapter.RankAdapter
 import com.example.stock.adapter.StockAdapter
-import com.example.stock.data.EventObserver
-import com.example.stock.data.News
-import com.example.stock.data.Rank
-import com.example.stock.data.SecureSharedPreferences
-import com.example.stock.data.retrofit.GlobalApplication
-import com.example.stock.data.retrofit.RetroAPIRepository
+import com.example.stock.util.EventObserver
+import com.example.stock.data.model.News
+import com.example.stock.data.model.Rank
+import com.example.stock.global.GlobalApplication
+import com.example.stock.data.repository.StockRepository
 
 import com.example.stock.databinding.FragmentHomeBinding
 import com.example.stock.model.HomeViewModel
 import com.example.stock.model.HomeViewModelFactory
 import com.example.stock.model.MainViewModel
-import com.example.stock.model.StockDetailViewModel
 
 class HomeFragment : Fragment() {
 
@@ -63,7 +56,7 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        homeViewModelFactory = HomeViewModelFactory(RetroAPIRepository())
+        homeViewModelFactory = HomeViewModelFactory(StockRepository())
         homeViewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
 
         stockAdapter = StockAdapter()
