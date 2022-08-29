@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.stock.R
 import com.example.stock.databinding.FragmentSettingBinding
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.MainViewModel
 
 
 class SettingFragment : Fragment() {

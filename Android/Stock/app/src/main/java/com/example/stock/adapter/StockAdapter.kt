@@ -82,8 +82,8 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
         return stockList.size
     }
 
-    fun setData(data: ArrayList<Stock>) {
-        stockList = data
+    fun setData(data: List<Stock>) {
+        stockList = data.toMutableList()
         notifyDataSetChanged()
     }
 }

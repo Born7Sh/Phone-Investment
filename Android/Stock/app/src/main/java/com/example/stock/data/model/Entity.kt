@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "StockEntire")
 class StockEntire(
-    @PrimaryKey val symbol: String,
+    @PrimaryKey @ColumnInfo(name = "symbol") val symbol: String,
     @ColumnInfo(name = "stock_datetime") val stock_datetime: String,
     @ColumnInfo(name = "price") val price: Float,
     @ColumnInfo(name = "a_price") val a_price: Float,
@@ -18,7 +18,7 @@ class StockEntire(
 
 @Entity(tableName = "StockFavorite")
 class StockFavorite(
-    @PrimaryKey val symbol: String,
+    @PrimaryKey @ColumnInfo(name = "symbol") val symbol: String,
     @ColumnInfo(name = "stock_datetime") val stock_datetime: String,
     @ColumnInfo(name = "price") val price: Float,
     @ColumnInfo(name = "a_price") val a_price: Float,
@@ -29,7 +29,7 @@ class StockFavorite(
 
 @Entity(tableName = "StockOwn")
 class StockOwn(
-    @PrimaryKey val symbol: String,
+    @PrimaryKey @ColumnInfo(name = "symbol") val symbol: String,
     @ColumnInfo(name = "stock_datetime") val stock_datetime: String,
     @ColumnInfo(name = "price") val price: Float,
     @ColumnInfo(name = "a_price") val a_price: Float,

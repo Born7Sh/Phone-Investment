@@ -17,8 +17,8 @@ import com.example.stock.adapter.CommunityAdapter
 import com.example.stock.util.EventObserver
 import com.example.stock.data.model.Stock
 import com.example.stock.databinding.FragmentStockDetailBinding
-import com.example.stock.model.MainViewModel
-import com.example.stock.model.StockDetailViewModel
+import com.example.stock.viewmodel.MainViewModel
+import com.example.stock.viewmodel.StockDetailViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -51,7 +51,7 @@ class StockDetailFragment : Fragment() {
 
         // 메인 뷰모델에 있어야하는데 부담 많이될까봐 뺴옴
         // binding Adapter로도 안됨 데이터 가져와야하니깐
-        var stockFavoriteList: ArrayList<Stock>? = mainViewModel.stockFavoriteList.value
+        var stockFavoriteList: List<Stock>? = mainViewModel.stockFavoriteList.value
         if (stockFavoriteList != null) {
             for (i in stockFavoriteList) {
                 if (i == binding.stock) {

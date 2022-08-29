@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.stock.R
 import com.example.stock.util.EventObserver
 import com.example.stock.databinding.FragmentLoginBinding
-import com.example.stock.model.LoginViewModel
+import com.example.stock.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding

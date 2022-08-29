@@ -7,15 +7,16 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.example.stock.databinding.ActivityMainBinding
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.MainViewModel
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.stock.global.GlobalApplication
 import com.example.stock.data.repository.StockRepository
-import com.example.stock.model.HomeViewModelFactory
+import com.example.stock.viewmodel.HomeViewModelFactory
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,6 +82,18 @@ class MainActivity : AppCompatActivity() {
     private fun initViewModel(){
         homeViewModelFactory = HomeViewModelFactory(StockRepository())
         mainViewModel = ViewModelProvider(this,homeViewModelFactory).get(MainViewModel::class.java)
+
+        val DB_PATH = "/data/data/" + getPackageName()
+        val DB_NAME = "stock.db"
+        val DB_FULLPATH = "$DB_PATH/databases/$DB_NAME"
+
+        val dbFile = File(DB_FULLPATH)
+        if (dbFile.delete()) {
+            println("삭제 성공")
+        } else {
+            println("삭제 실패")
+        }
+
     }
 
     private fun getInitData(){

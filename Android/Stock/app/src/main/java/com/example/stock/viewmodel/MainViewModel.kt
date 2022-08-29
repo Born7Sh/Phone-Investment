@@ -1,10 +1,9 @@
-package com.example.stock.model
+package com.example.stock.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.stock.R
 import com.example.stock.data.model.*
 import com.example.stock.global.GlobalApplication
 import com.example.stock.data.repository.StockRepository
@@ -14,18 +13,18 @@ import java.net.ConnectException
 class MainViewModel(private val repository: StockRepository) : ViewModel() {
 
     // 내 회사 리스트
-    private val _myStockList = MutableLiveData<ArrayList<Stock>>()
-    val myStockList: LiveData<ArrayList<Stock>>
+    private val _myStockList = MutableLiveData<List<Stock>>()
+    val myStockList: LiveData<List<Stock>>
         get() = _myStockList
 
     // 전체 회사 리스트
-    private val _stockList = MutableLiveData<ArrayList<Stock>>()
-    val stockList: LiveData<ArrayList<Stock>>
+    private val _stockList = MutableLiveData<List<Stock>>()
+    val stockList: LiveData<List<Stock>>
         get() = _stockList
 
     // 내가 즐겨찾기 한 리스트
-    private val _stockFavoriteList = MutableLiveData<ArrayList<Stock>>()
-    val stockFavoriteList: LiveData<ArrayList<Stock>>
+    private val _stockFavoriteList = MutableLiveData<List<Stock>>()
+    val stockFavoriteList: LiveData<List<Stock>>
         get() = _stockFavoriteList
 
     // 뉴스 리스트
@@ -70,12 +69,14 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
     private lateinit var curStock: Stock
 
     init {
+
+
         stocks = arrayListOf(
-            Stock("AAPL", "", 122f, 100f, "애플", "Apple", R.drawable.c_aapl),
-            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
-            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
-            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
-            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
+//            Stock("AAPL", "", 122f, 100f, "애플", "Apple", R.drawable.c_aapl),
+//            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
+//            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
+//            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
+//            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
 //            Stock("AMD", "", "60000", "600", "암드", "+AMD", R.drawable.c_amd),
 //            Stock("AMZN", "", "70000", "600", "아마존", "Amazon", R.drawable.c_amzn),
 //            Stock("ANTM", "", "80000", "600", "앤썸", "Anthem", R.drawable.c_antm),
@@ -155,24 +156,24 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
         _stockList.value = stocks
 
         myStocks = arrayListOf(
-            Stock("AAPL", "", 20000f, 20000f, "애플", "Apple", R.drawable.c_aapl),
-            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
-            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
-            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
-            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
-            Stock("AMD", "", 20000f, 20000f, "암드", "+AMD", R.drawable.c_amd),
+//            Stock("AAPL", "", 20000f, 20000f, "애플", "Apple", R.drawable.c_aapl),
+//            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
+//            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
+//            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
+//            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
+//            Stock("AMD", "", 20000f, 20000f, "암드", "+AMD", R.drawable.c_amd),
 
             )
         _myStockList.value = myStocks
 
 
         stocks = arrayListOf(
-            Stock("AAPL", "", 20000f, 20000f, "애플", "Apple", R.drawable.c_aapl),
-            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
-            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
-            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
-            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
-            Stock("AMD", "", 20000f, 20000f, "암드", "+AMD", R.drawable.c_amd),
+//            Stock("AAPL", "", 20000f, 20000f, "애플", "Apple", R.drawable.c_aapl),
+//            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
+//            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
+//            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
+//            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
+//            Stock("AMD", "", 20000f, 20000f, "암드", "+AMD", R.drawable.c_amd),
 
             )
         _stockFavoriteList.value = stocks
@@ -256,7 +257,7 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
     }
 
     fun getStock(companyId: String): Stock {
-        val cp: ArrayList<Stock>? = _stockList.value
+        val cp: ArrayList<Stock>? = _stockList.value as ArrayList<Stock>?
         if (cp != null) {
             for (id in cp) {
                 if (id.symbol_en == companyId) {
@@ -265,7 +266,7 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
                 }
             }
         }
-        return (Stock("콩쥐야", "X됐어", 20000f, 20000f, ".", "", 1))
+        return (Stock("콩쥐야", "X됐어", 20000f, 20000f, ".", "", "",1))
     }
 
     fun getCompany(companyId: String): Company {
@@ -290,6 +291,7 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
     }
 
     fun dataCoroutineFun(auth: Auth) {
+        getDbStock()
         val mainCoroutineJob = Job()
         CoroutineScope(Dispatchers.IO + mainCoroutineJob).launch {
             // dataTestLoading 통해서
@@ -437,6 +439,20 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
 
     private fun stateDataLoading() {
 //        _stateMessage.value = "데이터를 서버로부터 받아오고 있습니다."
+    }
+
+    fun getDbStock() {
+        Log.d("items", "getOwnStock 진입")
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getOwnStock().let {
+                _myStockList.postValue(it)
+//                isGetAllMemoComplete.postValue(it)
+            }
+
+            repository.getAllStock().let{
+                _stockList.postValue(it)
+            }
+        }
     }
 }
 

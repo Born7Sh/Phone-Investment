@@ -10,8 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
+import com.example.stock.data.model.Stock
 import com.example.stock.databinding.FragmentStockAllBinding
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.MainViewModel
 
 class StockAllFragment : Fragment() {
     lateinit var binding: FragmentStockAllBinding
@@ -37,7 +38,7 @@ class StockAllFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            stockAdapter.setData(it)
+            stockAdapter.setData(it as ArrayList<Stock>)
         })
     }
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
 import com.example.stock.databinding.FragmentSellBinding
-import com.example.stock.model.*
+import com.example.stock.viewmodel.*
 
 
 class SellFragment : Fragment() {

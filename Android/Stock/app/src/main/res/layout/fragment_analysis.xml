@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.AnalysisViewModel" />
+            type="com.example.stock.viewmodel.AnalysisViewModel" />
 
     </data>
 

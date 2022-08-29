@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.LoginViewModel" />
+            type="com.example.stock.viewmodel.LoginViewModel" />
 
     </data>
 

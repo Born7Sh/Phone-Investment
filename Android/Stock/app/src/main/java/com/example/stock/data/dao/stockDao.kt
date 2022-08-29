@@ -1,44 +1,25 @@
 package com.example.stock.data.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
 import androidx.room.Query
 import com.example.stock.data.model.Stock
+import com.example.stock.data.model.StockEntire
 
 @Dao
-interface StockOwnDao {
-    @Insert
-    suspend fun insertStock(stock: Stock): String
+interface StockDao {
 
-    @Query("DELETE FROM Stock Where symbol = :symbol")
-    suspend fun deleteStockSymbol(symbol: String)
+    @Query("SELECT * FROM Stock")
+    fun getAllStock(): List<Stock>
 
-    @Query("SELECT * FROM stock")
-    suspend fun getAllStock(): List<Stock>
+    @Query("SELECT * FROM Stock WHERE stock_classification = 1")
+    fun getOwnStock(): List<Stock>
+
+    @Query("SELECT * FROM Stock WHERE stock_classification = 2")
+    fun getFavoriteStock(): List<Stock>
 
     @Query("UPDATE Stock SET price = :price  WHERE symbol = :symbol")
-    suspend fun modifyStock(symbol: String, price: Float)
-}
+    fun modifyPrice(symbol: String, price: Float)
 
-@Dao
-interface StockFavoriteDao {
-    @Insert
-    suspend fun insertStock(stock: Stock): String
-
-    @Query("DELETE FROM Stock Where symbol = :symbol")
-    suspend fun deleteStockSymbol(symbol: String)
-
-    @Query("SELECT * FROM stock")
-    suspend fun getAllStock(): List<Stock>
-
-    @Query("UPDATE Stock SET price = :price  WHERE symbol = :symbol")
-    suspend fun modifyStock(symbol: String, price: Float)
-}
-
-@Dao
-interface StockEntireDao {
-
-    @Query("SELECT * FROM stock")
-    suspend fun getAllStock(): List<Stock>
+    @Query("UPDATE Stock SET stock_classification = :classification  WHERE symbol = :symbol")
+    fun modifyClassification(symbol: String, classification: Int)
 }

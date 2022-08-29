@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.stock.R
 import com.example.stock.adapter.NewsAdapter
-import com.example.stock.adapter.StockAdapter
 import com.example.stock.databinding.FragmentNewsBinding
-import com.example.stock.databinding.ListNewsBinding
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.MainViewModel
 
 class NewsFragment : Fragment() {
 

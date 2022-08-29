@@ -21,13 +21,14 @@ import com.example.stock.adapter.StockAdapter
 import com.example.stock.util.EventObserver
 import com.example.stock.data.model.News
 import com.example.stock.data.model.Rank
+import com.example.stock.data.model.Stock
 import com.example.stock.global.GlobalApplication
 import com.example.stock.data.repository.StockRepository
 
 import com.example.stock.databinding.FragmentHomeBinding
-import com.example.stock.model.HomeViewModel
-import com.example.stock.model.HomeViewModelFactory
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.HomeViewModel
+import com.example.stock.viewmodel.HomeViewModelFactory
+import com.example.stock.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
 
@@ -103,24 +104,24 @@ class HomeFragment : Fragment() {
                 10
             )
 
-            stockAdapter.setData(it)
+            stockAdapter.setData(it as ArrayList<Stock>)
 
-            if (it.isEmpty()) {
-                // 소유한 주식이 하나도 없을 떄
-                // 주식이 없다는 textview가 뜨고, textview의 높이만큼 밑에 실시간 뉴스도 조정해줘야함
-                binding.recyclerStockTextEmpty.isVisible = true
-                binding.recyclerStock.isVisible = false
-
-                constraintSet.connect(
-                    binding.homeNews.id,
-                    ConstraintSet.TOP,
-                    binding.recyclerStockTextEmpty.id,
-                    ConstraintSet.BOTTOM,
-                    10
-                )
-                constraintSet.applyTo(constraintLayout)
-
-            }
+//            if (it.isEmpty()) {
+//                // 소유한 주식이 하나도 없을 떄
+//                // 주식이 없다는 textview가 뜨고, textview의 높이만큼 밑에 실시간 뉴스도 조정해줘야함
+//                binding.recyclerStockTextEmpty.isVisible = true
+//                binding.recyclerStock.isVisible = false
+//
+//                constraintSet.connect(
+//                    binding.homeNews.id,
+//                    ConstraintSet.TOP,
+//                    binding.recyclerStockTextEmpty.id,
+//                    ConstraintSet.BOTTOM,
+//                    10
+//                )
+//                constraintSet.applyTo(constraintLayout)
+//
+//            }
         })
 
         mainViewModel.newsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {

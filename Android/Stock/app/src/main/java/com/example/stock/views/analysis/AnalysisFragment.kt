@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.utils.HyperSpline
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.stock.R
 import com.example.stock.databinding.FragmentAnalysisBinding
-import com.example.stock.model.AnalysisViewModel
-import com.example.stock.model.CommunityViewModel
-import com.github.mikephil.charting.components.LimitLine
+import com.example.stock.viewmodel.AnalysisViewModel
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate

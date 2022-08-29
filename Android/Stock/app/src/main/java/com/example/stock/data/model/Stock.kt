@@ -5,22 +5,28 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity (tableName = "Stock")
+@Entity(tableName = "Stock")
 data class Stock(
+    @PrimaryKey(autoGenerate = false)
     @SerializedName("symbol")
-    @PrimaryKey(autoGenerate = true)
-    val symbol: String, // 영어 약자
+    var symbol: String, // 영어 약자
     @SerializedName("stock_datetime")
-    val stock_datetime: String, // 날짜
+    var stock_datetime: String, // 날짜
     @SerializedName("price")
-    val price: Float,
+    var price: Float,
     @SerializedName("a_price")
-    val a_price: Float,
+    var a_price: Float,
     @SerializedName("symbol_ko")
-    val symbol_ko: String,
+    var symbol_ko: String,
     @SerializedName("symbol_en")
-    val symbol_en: String,
+    var symbol_en: String,
 
-    val imgSrc: Int // 이미지 위치
-)
+    val imgSrc: String, // 이미지 위치
+
+    var stock_classification : Int
+    // 0 기본값
+    // 1 구매한 상태
+    // 2 즐겨찾기 상태
+    // 3 구매,즐겨 다한 상태
+    )
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.stock.R
 import com.example.stock.adapter.RankAdapter
 import com.example.stock.databinding.FragmentRankBinding
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.MainViewModel
 
 
 class RankFragment : Fragment() {

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
 import com.example.stock.databinding.FragmentCommunityBinding
-import com.example.stock.model.CommunityViewModel
+import com.example.stock.viewmodel.CommunityViewModel
 
 
 class CommunityFragment : Fragment() {

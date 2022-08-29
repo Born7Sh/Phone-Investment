@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.SignupViewModel" />
+            type="com.example.stock.viewmodel.SignupViewModel" />
 
 
     </data>

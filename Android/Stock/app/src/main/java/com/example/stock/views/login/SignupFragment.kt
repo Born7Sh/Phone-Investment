@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.stock.R
 import com.example.stock.util.EventObserver
 import com.example.stock.databinding.FragmentSignupBinding
-import com.example.stock.model.SignupViewModel
+import com.example.stock.viewmodel.SignupViewModel
 
 class SignupFragment : Fragment() {
 

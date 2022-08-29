@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.CommunityViewModel" />
+            type="com.example.stock.viewmodel.CommunityViewModel" />
     </data>
 
     <FrameLayout

@@ -10,8 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
+import com.example.stock.data.model.Stock
 import com.example.stock.databinding.FragmentFavoriteBinding
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.MainViewModel
 
 
 class FavoriteFragment : Fragment() {
@@ -35,7 +36,7 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mainViewModel.stockFavoriteList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            stockAdapter.setData(it)
+            stockAdapter.setData(it as ArrayList<Stock>)
         })
 
 

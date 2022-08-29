@@ -1,4 +1,4 @@
-package com.example.stock.model
+package com.example.stock.viewmodel
 
 import android.text.Editable
 import android.text.TextWatcher

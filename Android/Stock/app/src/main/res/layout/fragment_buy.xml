@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.BuyViewModel" />
+            type="com.example.stock.viewmodel.BuyViewModel" />
 
     </data>
     <FrameLayout

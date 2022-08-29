@@ -10,9 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.stock.R
 import com.example.stock.databinding.FragmentBuyBinding
-import com.example.stock.model.BuyViewModel
-import com.example.stock.model.BuyViewModelFactory
-import com.example.stock.model.MainViewModel
+import com.example.stock.viewmodel.BuyViewModel
+import com.example.stock.viewmodel.BuyViewModelFactory
+import com.example.stock.viewmodel.MainViewModel
 
 class BuyFragment : Fragment() {
 

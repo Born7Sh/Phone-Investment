@@ -22,7 +22,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.SellViewModel" />
+            type="com.example.stock.viewmodel.SellViewModel" />
 
     </data>
 

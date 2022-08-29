@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.stock.model.HomeViewModel" />
+            type="com.example.stock.viewmodel.HomeViewModel" />
 
         <variable
             name="clickListener"
