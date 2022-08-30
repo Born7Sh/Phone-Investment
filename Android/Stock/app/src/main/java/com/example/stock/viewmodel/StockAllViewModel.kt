@@ -9,15 +9,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(private val repository: StockRepository) : ViewModel() {
-    private val _favoriteStockList = MutableLiveData<List<Stock>>()
-    val favoriteStockList: LiveData<List<Stock>>
-        get() = _favoriteStockList
+class StockAllViewModel(private val repository: StockRepository) : ViewModel() {
+    private val _allStockList = MutableLiveData<List<Stock>>()
+    val allStockList: LiveData<List<Stock>>
+        get() = _allStockList
 
-    fun updateFavoriteStockList() {
+    fun updateAllStockList() {
         CoroutineScope(Dispatchers.IO).launch {
-            repository.getFavoriteStock().let {
-                _favoriteStockList.postValue(it)
+            repository.getAllStock().let {
+                _allStockList.postValue(it)
             }
         }
     }

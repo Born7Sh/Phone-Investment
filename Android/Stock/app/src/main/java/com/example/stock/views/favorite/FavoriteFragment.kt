@@ -15,14 +15,13 @@ import com.example.stock.data.model.Stock
 import com.example.stock.data.repository.StockRepository
 import com.example.stock.databinding.FragmentFavoriteBinding
 import com.example.stock.viewmodel.FavoriteViewModel
-import com.example.stock.viewmodel.HomeViewModel
 import com.example.stock.viewmodel.MainViewModel
 import com.example.stock.viewmodel.RepositoryViewModelFactory
 
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
-    private val mainViewModel by activityViewModels<MainViewModel>()
+
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
 
@@ -49,7 +48,7 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        favoriteViewModel.updateMyStockList()
+        favoriteViewModel.updateFavoriteStockList()
 
         favoriteViewModel.favoriteStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it as ArrayList<Stock>)

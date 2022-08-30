@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
+import com.example.stock.data.model.Company
 import com.example.stock.util.EventObserver
 import com.example.stock.data.model.Stock
 import com.example.stock.data.repository.StockRepository
@@ -34,7 +35,6 @@ class StockDetailFragment : Fragment() {
     lateinit var binding: FragmentStockDetailBinding
     lateinit var stockDetailViewModel: StockDetailViewModel
     private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
-    private val mainViewModel by activityViewModels<MainViewModel>()
     lateinit var currentStock: Stock
 
     // 22/08/30 globalApplication에서 변수 담당하는거로 변경
@@ -56,27 +56,16 @@ class StockDetailFragment : Fragment() {
         ).get(StockDetailViewModel::class.java)
 
 
-//        currentStock = mainViewModel.getStock(arg.stockId)
+
         currentStock = GlobalApplication.currentStock
         binding.stock = currentStock
 
 
-        binding.company = mainViewModel.getCompany(currentStock.symbol_en)
+        binding.company = Company("오류", "", "", 1, 1, 1, 1)
         binding.viewModel = stockDetailViewModel
         communityAdapter = CommunityAdapter()
         binding.recyclerCommunity.adapter = communityAdapter
 
-        // 메인 뷰모델에 있어야하는데 부담 많이될까봐 뺴옴
-        // binding Adapter로도 안됨 데이터 가져와야하니깐
-//        var stockFavoriteList: List<Stock>? = mainViewModel.stockFavoriteList.value
-//        if (stockFavoriteList != null) {
-//            for (i in stockFavoriteList) {
-//                if (i == binding.stock) {
-//                    stockDetailViewModel.favoriteTurnOn()
-//                    break
-//                }
-//            }
-//        }
 
         return binding.root
     }

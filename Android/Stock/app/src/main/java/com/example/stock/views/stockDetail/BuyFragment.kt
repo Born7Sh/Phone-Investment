@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.stock.R
 import com.example.stock.databinding.FragmentBuyBinding
+import com.example.stock.global.GlobalApplication
 import com.example.stock.viewmodel.BuyViewModel
 import com.example.stock.viewmodel.BuyViewModelFactory
 import com.example.stock.viewmodel.MainViewModel
@@ -28,8 +29,7 @@ class BuyFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_buy, container, false)
 
-        binding.stock = mainViewModel.getCurrentStock()
-        binding.company = mainViewModel.getCurrentCompany()
+        binding.stock = GlobalApplication.currentStock
         binding.user = mainViewModel.userIam.value
         return binding.root
     }
@@ -38,7 +38,7 @@ class BuyFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(
             this,
-            BuyViewModelFactory(mainViewModel.getCurrentStock().price.toInt())
+            BuyViewModelFactory(GlobalApplication.currentStock.price.toInt())
         ).get(BuyViewModel::class.java)
         binding.viewModel = viewModel
 

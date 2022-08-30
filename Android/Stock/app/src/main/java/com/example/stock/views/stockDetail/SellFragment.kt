@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.stock.R
 import com.example.stock.databinding.FragmentSellBinding
+import com.example.stock.global.GlobalApplication
 import com.example.stock.viewmodel.*
 
 
@@ -26,8 +27,7 @@ class SellFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_sell, container, false)
 
-        binding.stock = mainViewModel.getCurrentStock()
-        binding.company = mainViewModel.getCurrentCompany()
+        binding.stock = GlobalApplication.currentStock
         binding.user = mainViewModel.userIam.value
 
         return binding.root
@@ -37,7 +37,7 @@ class SellFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(
             this,
-            SellViewModelFactory(mainViewModel.getCurrentStock().price.toInt())
+            SellViewModelFactory(GlobalApplication.currentStock.price.toInt())
         ).get(SellViewModel::class.java)
         binding.viewModel = viewModel
 

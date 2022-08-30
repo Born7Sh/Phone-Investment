@@ -7,21 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.data.model.Stock
+import com.example.stock.data.repository.StockRepository
 import com.example.stock.databinding.FragmentStockAllBinding
+import com.example.stock.viewmodel.FavoriteViewModel
 import com.example.stock.viewmodel.MainViewModel
+import com.example.stock.viewmodel.RepositoryViewModelFactory
+import com.example.stock.viewmodel.StockAllViewModel
 
 class StockAllFragment : Fragment() {
     lateinit var binding: FragmentStockAllBinding
-    private val mainViewModel by activityViewModels<MainViewModel>()
+    private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
+    lateinit var stockAllViewModel: StockAllViewModel
     private lateinit var stockAdapter: StockAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,10 @@ class StockAllFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_stock_all, container, false)
+        repositoryViewModelFactory = RepositoryViewModelFactory(StockRepository())
+        stockAllViewModel =
+            ViewModelProvider(this, repositoryViewModelFactory).get(StockAllViewModel::class.java)
+
         stockAdapter = StockAdapter()
         binding.recyclerAllStock.adapter = stockAdapter
         binding.stokeAllFragment = this
@@ -37,7 +43,9 @@ class StockAllFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel.stockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        stockAllViewModel.updateAllStockList()
+
+        stockAllViewModel.allStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it as ArrayList<Stock>)
         })
     }
