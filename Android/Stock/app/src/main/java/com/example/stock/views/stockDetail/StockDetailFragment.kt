@@ -31,6 +31,7 @@ class StockDetailFragment : Fragment() {
     lateinit var binding: FragmentStockDetailBinding
     lateinit var stockDetailViewModel: StockDetailViewModel
     private val mainViewModel by activityViewModels<MainViewModel>()
+    lateinit var currentStock: Stock
 
     private val arg: StockDetailFragmentArgs by navArgs()
     private lateinit var communityAdapter: CommunityAdapter
@@ -43,7 +44,8 @@ class StockDetailFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_stock_detail, container, false)
         stockDetailViewModel = ViewModelProvider(this).get(StockDetailViewModel::class.java)
-        binding.stock = mainViewModel.getStock(arg.stockId)
+        currentStock = mainViewModel.getStock(arg.stockId)
+        binding.stock = currentStock
         binding.company = mainViewModel.getCompany(arg.stockId)
         binding.viewModel = stockDetailViewModel
         communityAdapter = CommunityAdapter()
@@ -70,8 +72,10 @@ class StockDetailFragment : Fragment() {
         stockDetailViewModel.isFavorite.observe(viewLifecycleOwner, {
             if (it == 1) {
                 binding.heart.setImageResource(R.drawable.icon_heart_red)
+                mainViewModel.favoriteTurnOn(currentStock.symbol)
             } else if (it == 0) {
                 binding.heart.setImageResource(R.drawable.icon_bot_heart10)
+                mainViewModel.favoriteTurnOff(currentStock.symbol)
             }
 
         })

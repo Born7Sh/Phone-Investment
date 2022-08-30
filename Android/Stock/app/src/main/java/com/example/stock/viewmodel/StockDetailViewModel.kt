@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.stock.data.Community
+import com.example.stock.data.repository.StockRepository
 import com.example.stock.util.DataUtilBar
 import com.example.stock.util.Event
 import com.github.mikephil.charting.data.CandleEntry

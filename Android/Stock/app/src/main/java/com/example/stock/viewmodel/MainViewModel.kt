@@ -69,116 +69,6 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
     private lateinit var curStock: Stock
 
     init {
-
-
-        stocks = arrayListOf(
-//            Stock("AAPL", "", 122f, 100f, "애플", "Apple", R.drawable.c_aapl),
-//            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
-//            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
-//            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
-//            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
-//            Stock("AMD", "", "60000", "600", "암드", "+AMD", R.drawable.c_amd),
-//            Stock("AMZN", "", "70000", "600", "아마존", "Amazon", R.drawable.c_amzn),
-//            Stock("ANTM", "", "80000", "600", "앤썸", "Anthem", R.drawable.c_antm),
-//            Stock("AXP", "", "90000", "800", "아메리칸 익스프레스", "American Express", R.drawable.c_axp),
-//            Stock("BA", "", "10000", "200", "보잉", "BOEING", R.drawable.c_ba),
-//            Stock("BAC", "", "20000", "230", "뱅크 오브 아메리카", "Bank of America", R.drawable.c_bac),
-//            Stock("BBY", "", "20030", "350", "베스트 바이", "BEST BUY", R.drawable.c_bby),
-//            Stock("C", "", "20040", "230", "씨티그룹", "CITI", R.drawable.c_c),
-//            Stock("CAH", "", "20050", "500", "카디널헬스", "CardinalHealth", R.drawable.c_cah),
-//            Stock("CAT", "", "20060", "650", "캐터필러", "CAT", R.drawable.c_cat),
-//            Stock("CHS", "", "20070", "700", "chico's", "chico's", R.drawable.c_chs),
-//            Stock("CMCSA", "", "20080", "800", "컴캐스트", "COMCAST", R.drawable.c_cmcsa),
-//            Stock("COP", "", "20080", "700", "코노코필립스 ", "ConocoPhillips", R.drawable.c_cop),
-//            Stock("COST", "", "20080", "700", "코스트코", "Costoco", R.drawable.c_cost),
-//            Stock("CPNG", "", "20080", "700", "쿠팡", "coupang", R.drawable.c_cpng),
-//            Stock("CSCO", "", "20080", "700", "시스코", "cisco", R.drawable.c_csco),
-//            Stock("CVS", "", "20080", "700", "CVS 케어마크", "CVSHealth", R.drawable.c_cvs),
-//            Stock("CVX", "", "20080", "700", "셰브론", "Chevron", R.drawable.c_cvx),
-//            Stock("DAL", "", "20080", "700", "델타", "DELTA", R.drawable.c_dal),
-//            Stock("DD", "", "20080", "700", "듀폰", "DUPONT", R.drawable.c_dd),
-//            Stock("DELL", "", "20080", "700", "델", "DELL", R.drawable.c_dell),
-//            Stock("DIS", "", "20080", "700", "디지니", "Walt Disney", R.drawable.c_dis),
-//            Stock("F", "", "20080", "700", "포드", "Fored", R.drawable.c_f),
-//            Stock("FB", "", "20080", "700", "메타", "Meta", R.drawable.c_fb),
-//            Stock("FDX", "", "20080", "700", "페덱스", "FedEx", R.drawable.c_fdx),
-//            Stock("GD", "", "20080", "700", "제너럴 다이내믹스", "GENERAL DYNAMICS", R.drawable.c_gd),
-//            Stock("GE", "", "20080", "700", "제너럴 일렉트릭", "General Electric", R.drawable.c_ge),
-//            Stock("GM", "", "20080", "700", "쉐보레", "CHEVROLET", R.drawable.c_gm),
-//            Stock("GOOG", "", "20080", "700", "구글", "Google", R.drawable.c_goog),
-//            Stock("GS", "", "20080", "700", "골드만삭스", "GoldmanSachs", R.drawable.c_gs),
-//            Stock("HCA", "", "20080", "700", "미국 병원 법인", "HCA", R.drawable.c_hca),
-//            Stock("HD", "", "20080", "700", "홈디포", "THE HOME DEPOT", R.drawable.c_hd),
-//            Stock("HES", "", "20080", "700", "헤스 코퍼레이션", "HESS", R.drawable.c_hes),
-//            Stock("HIG", "", "20080", "700", "하트퍼드", "THE HARTFORD", R.drawable.c_hig),
-//            Stock("HON", "", "20080", "700", "허니웰", "Honeywell", R.drawable.c_hon),
-//            Stock("HPQ", "", "20080", "700", "휴렛 팩커드", "HP", R.drawable.c_hpq),
-//            Stock("IBM", "", "20080", "700", "IBM", "IBM", R.drawable.c_ibm),
-//            Stock("INTC", "", "20080", "700", "인텔", "intel", R.drawable.c_intc),
-//            Stock("JCL", "", "20080", "700", "존슨컨트롤즈", "Johnson Controls", R.drawable.c_jcl),
-//            Stock("JNJ", "", "20080", "700", "존슨앤드존슨", "Johnson & Johnson", R.drawable.c_jnj),
-//            Stock("JPM", "", "20080", "700", "JP모간", "J.P.Morgan", R.drawable.c_jpm),
-//            Stock("KO", "", "20080", "700", "코카콜라", "CocaCola", R.drawable.c_ko),
-//            Stock("KR", "", "20080", "700", "크로거", "Kroger", R.drawable.c_kr),
-//            Stock("LBTYA", "", "20080", "700", "리버티 글로벌", "LIBERTY GLOBAL", R.drawable.c_lbtya),
-//            Stock("LMT", "", "20080", "700", "록히드 마틴", "LOCKHED MARTIN", R.drawable.c_lmt),
-//            Stock("MCK", "", "20080", "700", "MCKESSON", "MCKESSON", R.drawable.c_mck),
-//            Stock("MET", "", "20080", "700", "메트라이프", "MetLife", R.drawable.c_met),
-//            Stock("MRK", "", "20080", "700", "머크 그룹", "MERCK", R.drawable.c_mrk),
-//            Stock("MRO", "", "20080", "700", "마라톤 오일", "Marathon OIL", R.drawable.c_mro),
-//            Stock("MS", "", "20080", "700", "모건 스탠리", "Morgan Stanley", R.drawable.c_ms),
-//            Stock("MSFT", "", "20080", "700", "마이크로소프트", "Microsoft", R.drawable.c_msft),
-//            Stock("NOC", "", "20080", "700", "노스롭그루먼", "NORTHROP GRUMMAN", R.drawable.c_noc),
-//            Stock("NVDA", "", "20080", "700", "엔비디아", "NVIDIA", R.drawable.c_nvda),
-//            Stock("PEP", "", "20080", "700", "펩시", "PEPSI", R.drawable.c_pep),
-//            Stock("PFE", "", "20080", "700", "화이자", "PFIZER", R.drawable.c_pfe),
-//            Stock("PG", "", "P&20080", "700", "프록터 앤드 갬블", "P&G", R.drawable.c_pg),
-//            Stock("PM", "", "20080", "700", "필립 모리스 인터내셔널", "PHOLIP MORRIS", R.drawable.c_pm),
-//            Stock("QQQ", "", "20080", "700", "인베스코", "Invesco", R.drawable.c_qqq),
-//            Stock("RAD", "", "20080", "700", "라이트 에이드", "RITE AID", R.drawable.c_rad),
-//            Stock("RTX", "", "20080", "700", "레이시온", "Raytheon", R.drawable.c_rtx),
-//            Stock("SPY", "", "20080", "700", "스테이트 스트리트 코퍼레이션", "STATE STREET", R.drawable.c_spy),
-//            Stock("SYY", "", "20080", "700", "시스코", "Sysco", R.drawable.c_syy),
-//            Stock("T", "", "20080", "700", "AT&T", "AT&T", R.drawable.c_t),
-//            Stock("TGT", "", "20080", "700", "타깃", "TARGET", R.drawable.c_tgt),
-//            Stock("TRV", "", "20080", "700", "트래블러스", "TRAVELERS", R.drawable.c_trv),
-//            Stock("TSLA", "", "20080", "700", "테슬라", "TESLA", R.drawable.c_tsla),
-//            Stock("UNH", "", "20080", "700", "유나이티드헬스그룹", "UnitedHealth Group", R.drawable.c_unh),
-//            Stock("UPS", "", "20080", "700", "유피에스", "ups", R.drawable.c_ups),
-//            Stock("VLO", "", "20080", "700", "발레로 에너지", "VALERO", R.drawable.c_vlo),
-//            Stock("VZ", "", "20080", "700", "버라이즌", "verizon", R.drawable.c_vz),
-//            Stock("WBA", "", "20080", "700", "월그린스 부츠 얼라이언스", "Alliance Boots", R.drawable.c_wba),
-//            Stock("WFC", "", "20080", "700", "웰스 파고", "WELLS FARGO", R.drawable.c_wfc),
-//            Stock("WMT", "", "20080", "700", "월마트", "Walmart", R.drawable.c_wmt),
-//            Stock("XOM", "", "20080", "700", "엑슨모빌", "ExxonMobil", R.drawable.c_xom),
-//        )
-        )
-        _stockList.value = stocks
-
-        myStocks = arrayListOf(
-//            Stock("AAPL", "", 20000f, 20000f, "애플", "Apple", R.drawable.c_aapl),
-//            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
-//            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
-//            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
-//            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
-//            Stock("AMD", "", 20000f, 20000f, "암드", "+AMD", R.drawable.c_amd),
-
-            )
-        _myStockList.value = myStocks
-
-
-        stocks = arrayListOf(
-//            Stock("AAPL", "", 20000f, 20000f, "애플", "Apple", R.drawable.c_aapl),
-//            Stock("ABC", "", 20000f, 20000f, "아메리소스베르겐", "AmerisourceBergen", R.drawable.c_abc),
-//            Stock("ABT", "", 20000f, 20000f, "애벗", "Abbot", R.drawable.c_abt),
-//            Stock("ADM", "", 20000f, 20000f, "아처 대니얼스 미들랜드", "ADM", R.drawable.c_adm),
-//            Stock("AIG", "", 20000f, 20000f, "아메리칸 인터내셔널 그룹", "AIG", R.drawable.c_alg),
-//            Stock("AMD", "", 20000f, 20000f, "암드", "+AMD", R.drawable.c_amd),
-
-            )
-        _stockFavoriteList.value = stocks
-
-
         news = arrayListOf(
             News("1", "붕괴하는 한국 경제", "2022.11.14", "", ""),
             News("2", "붕괴하는 일본 경제", "2022.11.13", "", ""),
@@ -266,7 +156,7 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
                 }
             }
         }
-        return (Stock("콩쥐야", "X됐어", 20000f, 20000f, ".", "", "",1))
+        return (Stock("콩쥐야", "X됐어", 20000f, 20000f, ".", "", "", 1))
     }
 
     fun getCompany(companyId: String): Company {
@@ -446,14 +336,43 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             repository.getOwnStock().let {
                 _myStockList.postValue(it)
-//                isGetAllMemoComplete.postValue(it)
             }
 
-            repository.getAllStock().let{
+            repository.getFavoriteStock().let {
+                _stockFavoriteList.postValue(it)
+            }
+
+            repository.getAllStock().let {
                 _stockList.postValue(it)
             }
         }
     }
+
+    fun favoriteTurnOff(symbol: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("items", "favoriteTurnOFF 들어옴")
+            repository.modifyClassification(symbol, 0).let {
+                Log.d("items", "favoriteTurnOFF 데이터 바꿈")
+                repository.getFavoriteStock().let {
+                    _stockFavoriteList.postValue(it)
+                }
+            }
+        }
+    }
+
+    fun favoriteTurnOn(symbol: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("items", "favoriteTurnOn 들어옴")
+            repository.modifyClassification(symbol, 2).let {
+                Log.d("items", "favoriteTurnOn 데이터 바꿈")
+                repository.getFavoriteStock().let {
+                    _stockFavoriteList.postValue(it)
+                }
+            }
+        }
+    }
+
+
 }
 
 

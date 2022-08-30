@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.stock.global.GlobalApplication
 import com.example.stock.data.repository.StockRepository
-import com.example.stock.viewmodel.HomeViewModelFactory
+import com.example.stock.viewmodel.RepositoryViewModelFactory
 import java.io.File
 
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     lateinit var mainViewModel: MainViewModel
-    private lateinit var homeViewModelFactory: HomeViewModelFactory
+    private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
 
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -80,8 +80,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun initViewModel(){
-        homeViewModelFactory = HomeViewModelFactory(StockRepository())
-        mainViewModel = ViewModelProvider(this,homeViewModelFactory).get(MainViewModel::class.java)
+        repositoryViewModelFactory = RepositoryViewModelFactory(StockRepository())
+        mainViewModel = ViewModelProvider(this,repositoryViewModelFactory).get(MainViewModel::class.java)
 
         val DB_PATH = "/data/data/" + getPackageName()
         val DB_NAME = "stock.db"

@@ -8,31 +8,16 @@ import com.example.stock.data.retrofit.RetroAPI
 class StockRepository {
     // room 영역
     // Room Entity 조절용 변수선언
-//    private val ownInstance = GlobalApplication.appDataBaseInstance.stockOwnDao()
-//    private val favoriteInstance = GlobalApplication.appDataBaseInstance.stockFavoriteDao()
-//    private val entireInstance = GlobalApplication.appDataBaseInstance.stockEntireDao()
-
-    // 내가 보유한 것 쿼리
-//    suspend fun insertOwnStock(stock: Stock) = ownInstance.insertStock(stock)
-////    suspend fun deleteOwnStockSymbol(symbol: String) = ownInstance.deleteStockBySymbol(symbol)
-//    suspend fun getAllOwnStock() = ownInstance.getAllStock()
-//    suspend fun modifyOwnStock(symbol: String, price: Float) = ownInstance.modifyStock(symbol, price)
-
-//    // 내가 관심있는거 쿼리
-//    suspend fun insertFavoriteStock(stock: Stock) = favoriteInstance.insertStock(stock)
-////    suspend fun deleteFavoriteStockSymbol(symbol: String) = favoriteInstance.deleteStockSymbol(symbol)
-//    suspend fun getAllFavoriteStock() = favoriteInstance.getAllStock()
-//    suspend fun modifyFavoriteStock(symbol: String, price: Float) = favoriteInstance.modifyStock(symbol, price)
-//
-//    // 모든 기업 쿼리
-//    suspend fun getAllStock() = entireInstance.getAllStock()
-
 
     private val stockInstance = GlobalApplication.appDataBaseInstance.stockDao()
 
-    suspend fun getOwnStock() = stockInstance.getOwnStock()
+    fun getOwnStock() = stockInstance.getOwnStock()
 
     fun getAllStock() = stockInstance.getAllStock()
+
+    fun getFavoriteStock() = stockInstance.getFavoriteStock()
+
+    fun modifyClassification(symbol: String, classification: Int) = stockInstance.modifyClassification(symbol, classification)
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

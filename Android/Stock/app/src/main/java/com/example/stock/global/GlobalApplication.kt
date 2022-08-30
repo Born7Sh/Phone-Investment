@@ -61,11 +61,11 @@ class GlobalApplication : Application() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 Executors.newSingleThreadScheduledExecutor()
                     .execute(Runnable {
-                        db.execSQL("insert into Stock values (\"AAPL\", \"\", 0, 0, \"애플\", \"Apple\", 'c_aapl', 0);")
-                        db.execSQL("insert into Stock values (\"ABC\", \"\", 0, 0, \"아메리소스베르겐\", \"AmerisourceBergen\", 'c_abc', 1);")
-                        db.execSQL("insert into Stock values (\"ABT\", \"\", 0, 0, \"애벗\", \"Abbot\", 'c_abt', 1);")
-                        db.execSQL("insert into Stock values (\"ADM\", \"\", 0, 0, \"아처 대니얼스 미들랜드\", \"ADM\", 'c_adm', 1);")
-                        db.execSQL("insert into Stock values (\"AIG\", \"\", 0, 0, \"아메리칸 인터내셔널 그룹\", \"AIG\", 'c_alg', 1);")
+                        db.execSQL("insert into Stock values (\"AAPL\", \"\", 0, 0, \"애플\", \"Apple\", 'c_aapl', 1);")
+                        db.execSQL("insert into Stock values (\"ABC\", \"\", 0, 0, \"아메리소스베르겐\", \"AmerisourceBergen\", 'c_abc', 2);")
+                        db.execSQL("insert into Stock values (\"ABT\", \"\", 0, 0, \"애벗\", \"Abbot\", 'c_abt', 0);")
+                        db.execSQL("insert into Stock values (\"ADM\", \"\", 0, 0, \"아처 대니얼스 미들랜드\", \"ADM\", 'c_adm', 0);")
+                        db.execSQL("insert into Stock values (\"AIG\", \"\", 0, 0, \"아메리칸 인터내셔널 그룹\", \"AIG\", 'c_alg', 0);")
                         db.execSQL("insert into Stock values (\"AMD\", \"\", 0, 600, \"암드\", \"+AMD\", 'c_amd', 0);")
                         db.execSQL("insert into Stock values (\"AMZN\", \"\", 0, 0, \"아마존\", \"Amazon\", 'c_amzn', 0);")
                         db.execSQL("insert into Stock values (\"ANTM\", \"\", 0, 0, \"앤썸\", \"Anthem\", 'c_antm', 0);")

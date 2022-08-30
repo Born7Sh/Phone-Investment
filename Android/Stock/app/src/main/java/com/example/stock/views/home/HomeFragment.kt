@@ -27,7 +27,7 @@ import com.example.stock.data.repository.StockRepository
 
 import com.example.stock.databinding.FragmentHomeBinding
 import com.example.stock.viewmodel.HomeViewModel
-import com.example.stock.viewmodel.HomeViewModelFactory
+import com.example.stock.viewmodel.RepositoryViewModelFactory
 import com.example.stock.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
     // viewmodel
     private val mainViewModel by activityViewModels<MainViewModel>()
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var homeViewModelFactory: HomeViewModelFactory
+    private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
 
     // adapter
     private lateinit var stockAdapter: StockAdapter
@@ -57,8 +57,8 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        homeViewModelFactory = HomeViewModelFactory(StockRepository())
-        homeViewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
+        repositoryViewModelFactory = RepositoryViewModelFactory(StockRepository())
+        homeViewModel = ViewModelProvider(this, repositoryViewModelFactory).get(HomeViewModel::class.java)
 
         stockAdapter = StockAdapter()
         newsAdapter = NewsAdapter()
