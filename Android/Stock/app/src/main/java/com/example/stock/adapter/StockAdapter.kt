@@ -12,6 +12,7 @@ import com.example.stock.databinding.ListStockBinding
 import com.example.stock.views.home.HomeFragmentDirections
 import android.os.Bundle
 import androidx.navigation.NavDirections
+import com.example.stock.global.GlobalApplication
 import com.example.stock.views.favorite.FavoriteFragmentDirections
 import com.example.stock.views.stockAll.StockAllFragmentDirections
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -26,8 +27,9 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
         init {
             binding.setClickListener {
                 binding.stock?.let { stock ->
+                    // 22/08/30 한줄 추가.
+                    GlobalApplication.currentStock = stock
                     navigateToDetailStock(stock, it)
-
                 }
             }
         }
@@ -38,7 +40,6 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.MyViewHolder>() {
         ) {
             val args = Bundle()
             args.putString("stockId", stock.symbol_en)
-
             val currentFragment = view.findNavController().currentDestination!!.id
             Log.v("items", currentFragment.toString())
             Log.v("items", R.id.HomeFragment.toString())

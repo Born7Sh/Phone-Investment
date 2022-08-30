@@ -10,6 +10,7 @@ import com.example.stock.R
 import com.example.stock.data.AppDataBase
 import com.example.stock.util.AndroidKeyStoreUtil
 import com.example.stock.data.model.Auth
+import com.example.stock.data.model.Stock
 import com.example.stock.util.SecureSharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -48,6 +49,8 @@ class GlobalApplication : Application() {
 
         lateinit var appDataBaseInstance: AppDataBase
             private set
+
+        lateinit var currentStock: Stock
     }
 
     override fun onCreate() {

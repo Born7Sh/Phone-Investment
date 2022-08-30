@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.stock.util.Event
 import com.example.stock.data.model.Stock
 import com.example.stock.data.repository.StockRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: StockRepository) : ViewModel() {
     // 버튼 클릭 변수
@@ -79,73 +82,14 @@ class HomeViewModel(private val repository: StockRepository) : ViewModel() {
     }
 
 
-    fun getMyStockList(username: String, key: String) {
-
-//        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-//            .getMyStockList(username, key)
-//        call.enqueue(object : Callback<Stock> {
-//            override fun onResponse(
-//                call: Call<Stock>,
-//                response: Response<Stock>
-//            ) {
-//                Log.v("items", "StockList 받는 함수임.")
-//                Log.v(
-//                    "items",
-//                    "Response code : " + response.code().toString() + " " + response.message()
-//                )
-//                if (response.isSuccessful) {
-//                    var key = response.body()!!
-//                    Log.v("items", "getMyStockList 의 심지어 성공적임")
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<Stock>, t: Throwable) {
-//                Log.v("items", " getMyStockList의 Failure : " + t)
-//            }
-//
-//        })
-
+    fun updateMyStockList() {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getOwnStock().let {
+                _myStockList.postValue(it)
+            }
+        }
     }
 }
-//    fun getMyStockList(key: String) {
-//        Log.v("items", "getMyStockList의 키는 = " + key)
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                repository.getMyStockList(key).let { response ->
-//                    Log.v("items", "일단 들어옴1" + response.raw().request.url.toString())
-//                    Log.v("items", "일단 들어옴2" + response.code().toString() + " " + response.message())
-//
-//                    if (response.code() == 200) {
-//                        //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
-//                        _myStockList.postValue(response.body())
-//                        Log.v("items", "성공" + response.body().toString())
-//                    } else {
-//                        Log.v("items", "실패")
-//                        //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
-//                        _myStockList.postValue(
-//                            Stock(
-//                                "1",
-//                                "1",
-//                                "",
-//                                "",
-//                                "0",
-//                                "0",
-//                                0
-//                            )
-//                        )
-//                    }
-//
-//                }
-//            } catch (e: ConnectException) {
-//                e.printStackTrace()
-//                Log.v("items", "연결 불능" + e.toString() + "api_exception")
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//                Log.v("items", "예외 처리" + e.toString() + "api_exception")
-//            }
-//        }
-//    }
 
 
 

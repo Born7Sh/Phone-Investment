@@ -33,6 +33,7 @@ interface RetroAPI {
         @Header("Authorization") Authorization: String?
     ): Response<String>
 
+
     // 데이터 받기
     @POST("/stock/buy")
     suspend fun buyRequest(

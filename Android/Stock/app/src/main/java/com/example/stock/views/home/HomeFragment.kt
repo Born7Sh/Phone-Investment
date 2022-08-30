@@ -2,6 +2,7 @@ package com.example.stock.views.home
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +59,8 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         repositoryViewModelFactory = RepositoryViewModelFactory(StockRepository())
-        homeViewModel = ViewModelProvider(this, repositoryViewModelFactory).get(HomeViewModel::class.java)
+        homeViewModel =
+            ViewModelProvider(this, repositoryViewModelFactory).get(HomeViewModel::class.java)
 
         stockAdapter = StockAdapter()
         newsAdapter = NewsAdapter()
@@ -77,19 +79,16 @@ class HomeFragment : Fragment() {
     private fun getData() {
         var key = GlobalApplication.key
         var username = GlobalApplication.auth.username
-        homeViewModel.getMyStockList(username, key)
+//        homeViewModel.getMyStockList(username, key)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            binding.homeDataState.isVisible = true
-            binding.homeDataState.text = it
-        })
+        homeViewModel.updateMyStockList()
 
-        mainViewModel.myStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        homeViewModel.myStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val constraintLayout = binding.homeConstraint
             val constraintSet = ConstraintSet()
             constraintSet.clone(constraintLayout)
@@ -123,6 +122,13 @@ class HomeFragment : Fragment() {
 //
 //            }
         })
+
+        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            binding.homeDataState.isVisible = true
+            binding.homeDataState.text = it
+        })
+
+
 
         mainViewModel.newsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             // 최신순으로 정렬하는 함수
@@ -205,6 +211,5 @@ class HomeFragment : Fragment() {
 
         // The callback can be enabled or disabled here or in the lambda
     }
-
 
 }

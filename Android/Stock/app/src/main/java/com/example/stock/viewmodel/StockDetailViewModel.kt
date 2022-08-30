@@ -1,21 +1,28 @@
 package com.example.stock.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.stock.data.Community
+import com.example.stock.data.model.Stock
 import com.example.stock.data.repository.StockRepository
+import com.example.stock.global.GlobalApplication
 import com.example.stock.util.DataUtilBar
 import com.example.stock.util.Event
 import com.github.mikephil.charting.data.CandleEntry
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 
-class StockDetailViewModel() : ViewModel() {
+class StockDetailViewModel(private val repository: StockRepository) : ViewModel() {
 
     private val _stockList = MutableLiveData<ArrayList<CandleEntry>>()
     val stockList: LiveData<ArrayList<CandleEntry>>
         get() = _stockList
 
+    // 22/08/30 얘가 favorite 안에 포함되는지 확인하기 위해 만든 변수
     private val _isFavorite = MutableLiveData<Int>()
     val isFavorite: LiveData<Int>
         get() = _isFavorite
@@ -46,6 +53,7 @@ class StockDetailViewModel() : ViewModel() {
         get() = _btnCommunityClick
 
     init {
+        getDdData()
 
         btnGraphNum1Click()
 
@@ -55,6 +63,8 @@ class StockDetailViewModel() : ViewModel() {
             Community("김차동", "AmerisourceBergen", "ABC", "자 드가자"),
         )
         _communityList.value = community
+
+
     }
 
     fun setUnit(value: Int): String {
@@ -67,6 +77,18 @@ class StockDetailViewModel() : ViewModel() {
 
     }
 
+    private fun getDdData() {
+        // 데이터 가져와서 favorite 초기설정
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getFavoriteStock().let {
+                for (stock in it) {
+                    if (stock.symbol == GlobalApplication.currentStock.symbol) {
+                        _isFavorite.postValue( 1)
+                    }
+                }
+            }
+        }
+    }
 
     fun btnHeartClick() {
         if (_isFavorite.value == 1) {
@@ -76,12 +98,22 @@ class StockDetailViewModel() : ViewModel() {
         }
     }
 
-    fun favoriteTurnOn() {
+    private fun favoriteTurnOn() {
         _isFavorite.value = 1
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("items", "favoriteTurnOn 들어옴")
+            repository.modifyClassification(GlobalApplication.currentStock.symbol, 2).let {
+            }
+        }
     }
 
     private fun favoriteTurnOff() {
         _isFavorite.value = 0
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("items", "favoriteTurnOFF 들어옴")
+            repository.modifyClassification(GlobalApplication.currentStock.symbol, 0).let {
+            }
+        }
     }
 
     fun btnBackClick() {

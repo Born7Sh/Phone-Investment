@@ -16,8 +16,11 @@ import com.example.stock.R
 import com.example.stock.adapter.CommunityAdapter
 import com.example.stock.util.EventObserver
 import com.example.stock.data.model.Stock
+import com.example.stock.data.repository.StockRepository
 import com.example.stock.databinding.FragmentStockDetailBinding
+import com.example.stock.global.GlobalApplication
 import com.example.stock.viewmodel.MainViewModel
+import com.example.stock.viewmodel.RepositoryViewModelFactory
 import com.example.stock.viewmodel.StockDetailViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -30,10 +33,13 @@ class StockDetailFragment : Fragment() {
 
     lateinit var binding: FragmentStockDetailBinding
     lateinit var stockDetailViewModel: StockDetailViewModel
+    private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
     private val mainViewModel by activityViewModels<MainViewModel>()
     lateinit var currentStock: Stock
 
-    private val arg: StockDetailFragmentArgs by navArgs()
+    // 22/08/30 globalApplication에서 변수 담당하는거로 변경
+    // private val arg: StockDetailFragmentArgs by navArgs()
+
     private lateinit var communityAdapter: CommunityAdapter
 
     override fun onCreateView(
@@ -43,25 +49,34 @@ class StockDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_stock_detail, container, false)
-        stockDetailViewModel = ViewModelProvider(this).get(StockDetailViewModel::class.java)
-        currentStock = mainViewModel.getStock(arg.stockId)
+        repositoryViewModelFactory = RepositoryViewModelFactory(StockRepository())
+        stockDetailViewModel = ViewModelProvider(
+            this,
+            repositoryViewModelFactory
+        ).get(StockDetailViewModel::class.java)
+
+
+//        currentStock = mainViewModel.getStock(arg.stockId)
+        currentStock = GlobalApplication.currentStock
         binding.stock = currentStock
-        binding.company = mainViewModel.getCompany(arg.stockId)
+
+
+        binding.company = mainViewModel.getCompany(currentStock.symbol_en)
         binding.viewModel = stockDetailViewModel
         communityAdapter = CommunityAdapter()
         binding.recyclerCommunity.adapter = communityAdapter
 
         // 메인 뷰모델에 있어야하는데 부담 많이될까봐 뺴옴
         // binding Adapter로도 안됨 데이터 가져와야하니깐
-        var stockFavoriteList: List<Stock>? = mainViewModel.stockFavoriteList.value
-        if (stockFavoriteList != null) {
-            for (i in stockFavoriteList) {
-                if (i == binding.stock) {
-                    stockDetailViewModel.favoriteTurnOn()
-                    break
-                }
-            }
-        }
+//        var stockFavoriteList: List<Stock>? = mainViewModel.stockFavoriteList.value
+//        if (stockFavoriteList != null) {
+//            for (i in stockFavoriteList) {
+//                if (i == binding.stock) {
+//                    stockDetailViewModel.favoriteTurnOn()
+//                    break
+//                }
+//            }
+//        }
 
         return binding.root
     }
@@ -72,10 +87,8 @@ class StockDetailFragment : Fragment() {
         stockDetailViewModel.isFavorite.observe(viewLifecycleOwner, {
             if (it == 1) {
                 binding.heart.setImageResource(R.drawable.icon_heart_red)
-                mainViewModel.favoriteTurnOn(currentStock.symbol)
             } else if (it == 0) {
                 binding.heart.setImageResource(R.drawable.icon_bot_heart10)
-                mainViewModel.favoriteTurnOff(currentStock.symbol)
             }
 
         })

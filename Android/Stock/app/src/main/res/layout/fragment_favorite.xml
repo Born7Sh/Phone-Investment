@@ -5,6 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.stock.viewmodel.HomeViewModel" />
+
         <variable
             name="favoriteFragment"
             type="com.example.stock.views.favorite.FavoriteFragment" />

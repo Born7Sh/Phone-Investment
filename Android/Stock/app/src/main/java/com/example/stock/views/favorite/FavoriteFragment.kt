@@ -7,25 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.stock.R
 import com.example.stock.adapter.StockAdapter
 import com.example.stock.data.model.Stock
+import com.example.stock.data.repository.StockRepository
 import com.example.stock.databinding.FragmentFavoriteBinding
+import com.example.stock.viewmodel.FavoriteViewModel
+import com.example.stock.viewmodel.HomeViewModel
 import com.example.stock.viewmodel.MainViewModel
+import com.example.stock.viewmodel.RepositoryViewModelFactory
 
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
-
     private val mainViewModel by activityViewModels<MainViewModel>()
+    private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
+
     private lateinit var stockAdapter: StockAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // viewModel 설정
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite, container, false)
+        repositoryViewModelFactory = RepositoryViewModelFactory(StockRepository())
+        favoriteViewModel =
+            ViewModelProvider(this, repositoryViewModelFactory).get(FavoriteViewModel::class.java)
+
+
         stockAdapter = StockAdapter()
         binding.recycler.adapter = stockAdapter
         binding.favoriteFragment = this
@@ -35,7 +49,9 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel.stockFavoriteList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        favoriteViewModel.updateMyStockList()
+
+        favoriteViewModel.favoriteStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it as ArrayList<Stock>)
         })
 

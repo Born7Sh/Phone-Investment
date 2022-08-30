@@ -331,6 +331,21 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
 //        _stateMessage.value = "데이터를 서버로부터 받아오고 있습니다."
     }
 
+    suspend fun stockUpdate() {
+        repository.getStockPrice(
+            getCurrentStock().symbol,
+            GlobalApplication.key
+        ).let {
+                response ->
+            Log.d("items", "getMyMoney 집입")
+            if (response.code() == 200) {
+                Log.d("items", "getMyMoney 성공")
+                Log.d("items", "내돈은 : " + response.body().toString())
+            }
+        }
+    }
+
+
     fun getDbStock() {
         Log.d("items", "getOwnStock 진입")
         CoroutineScope(Dispatchers.IO).launch {
@@ -347,31 +362,6 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
             }
         }
     }
-
-    fun favoriteTurnOff(symbol: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            Log.d("items", "favoriteTurnOFF 들어옴")
-            repository.modifyClassification(symbol, 0).let {
-                Log.d("items", "favoriteTurnOFF 데이터 바꿈")
-                repository.getFavoriteStock().let {
-                    _stockFavoriteList.postValue(it)
-                }
-            }
-        }
-    }
-
-    fun favoriteTurnOn(symbol: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            Log.d("items", "favoriteTurnOn 들어옴")
-            repository.modifyClassification(symbol, 2).let {
-                Log.d("items", "favoriteTurnOn 데이터 바꿈")
-                repository.getFavoriteStock().let {
-                    _stockFavoriteList.postValue(it)
-                }
-            }
-        }
-    }
-
 
 }
 
