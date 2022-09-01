@@ -11,27 +11,13 @@ import com.example.stock.data.repository.StockRepository
 import com.example.stock.data.retrofit.handleApi
 import com.example.stock.util.ApiError
 import com.example.stock.util.ApiResult
+import com.example.stock.util.ExceptionError
 import com.example.stock.util.Success
 import kotlinx.coroutines.*
 import okhttp3.ResponseBody
 import java.net.ConnectException
 
 class MainViewModel(private val repository: StockRepository) : ViewModel() {
-
-    // 내 회사 리스트
-    private val _myStockList = MutableLiveData<List<Stock>>()
-    val myStockList: LiveData<List<Stock>>
-        get() = _myStockList
-
-    // 전체 회사 리스트
-    private val _stockList = MutableLiveData<List<Stock>>()
-    val stockList: LiveData<List<Stock>>
-        get() = _stockList
-
-    // 내가 즐겨찾기 한 리스트
-    private val _stockFavoriteList = MutableLiveData<List<Stock>>()
-    val stockFavoriteList: LiveData<List<Stock>>
-        get() = _stockFavoriteList
 
     // 뉴스 리스트
     private val _newsList = MutableLiveData<ArrayList<News>>()
@@ -64,10 +50,7 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
 
     // 각자 초기화용도
     private var news = ArrayList<News>()
-    private var stocks = ArrayList<Stock>()
-    private var myStocks = ArrayList<Stock>()
     private var rank = ArrayList<Rank>()
-    private var company = ArrayList<Company>()
 
     private var user = User("호민", "s", "d", 10000)
 
@@ -154,30 +137,13 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
     }
 
 
-
     private fun stateErrorNetwork() {
         _stateMessage.postValue("서버와의 통신이 불가합니다.")
     }
 
-    private fun stateDataLoading() {
-//        _stateMessage.value = "데이터를 서버로부터 받아오고 있습니다."
-    }
-
-    //    suspend fun stockUpdate() {
-//        repository.getStockPrice(
-//            getCurrentStock().symbol,
-//            GlobalApplication.key
-//        ).let {
-//                response ->
-//            Log.d("items", "getMyMoney 집입")
-//            if (response.code() == 200) {
-//                Log.d("items", "getMyMoney 성공")
-//                Log.d("items", "내돈은 : " + response.body().toString())
-//            }
-//        }
-//    }
     fun dataUpdate() {
-        viewModelScope.launch {
+        Log.d("items", "dataUpdate 진입")
+        CoroutineScope(Dispatchers.Main).launch {
             // 22/09/01
             // Event Wrapper class 생성 APIResult / handleApi
             // https://bb-library.tistory.com/264
@@ -189,19 +155,36 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
                     GlobalApplication.key
                 )
             })
+            Log.d("items", "dataUpdate 결과")
             when (result) {
                 is Success -> {
                     // result.data will give you ResponseBody
-                    for (stock in result.data){
+                    Log.d("items", "dataUpdate 성공")
+                    for (stock in result.data) {
+                        Log.d("items", "dataUpdate stock 이름 "+ stock.symbol + " 수정 가격 : " + stock.price.toString())
                         repository.modifyPrice(stock.symbol, stock.price)
                     }
+                    cancel()
+                    Log.d("items", "dataUpdate 반복 시작")
+                    dataUpdate()
                 }
                 is ApiError -> {
                     // result.exception will provide the error
+                    Log.d("items", "dataUpdate 실패")
                     Log.d("items", "에러입니다. : ")
+                    cancel()
+                    dataUpdate()
+                }
+
+                is ExceptionError -> {
+                    Log.d("items", "dataUpdate ExceptionError 에러임")
+                    cancel()
+                    dataUpdate()
                 }
             }
         }
+
+
     }
 }
 

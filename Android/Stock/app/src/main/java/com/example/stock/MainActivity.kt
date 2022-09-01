@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         initBinding()
         initNavigation()
         initViewModel()
+        mainViewModel.dataUpdate()
     }
 
 

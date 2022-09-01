@@ -91,12 +91,8 @@ class HomeViewModel(private val repository: StockRepository) : ViewModel() {
             repository.getOwnStock().let {
                 _myStockList.postValue(it)
             }
-        }
 
-        viewModelScope.launch {
-            repository.get().let {
-                _myStockList.postValue(it)
-            }
+
         }
 
     }

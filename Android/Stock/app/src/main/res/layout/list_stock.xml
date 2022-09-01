@@ -51,7 +51,7 @@
 
             <!--android:text="@{stock.price}"-->
             <TextView
-                android:text="@{String.valueOf(stock.a_price)}"
+                android:text="@{String.valueOf(stock.price)}"
                 android:id="@+id/stock_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
