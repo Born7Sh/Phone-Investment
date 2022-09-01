@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         initBinding()
         initNavigation()
         initViewModel()
-        getInitData()
     }
 
 
@@ -58,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             R.id.loginFragment //setStartDestination 설정
         else {
             navGraph.startDestination = R.id.HomeFragment
-            getUserKey()
         }
 
         navController.setGraph(navGraph, null) //navController에 graph 설정
@@ -96,41 +94,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getInitData(){
-        // 데이터 받는 경우 3가지 경우
-        // 1. 첫 로그인 한 경우 해서 토큰이 없는 경우 (initDataLoading)
-        // key 값 받아오는 함수 호출
-        //2. 기존의 key 값이 있는 경우 (dataLoading)
-        //3. 기존의 key 값이 만료된 경우 (dataLoading -> initDataLoading 호출)
-        // 에러 코드 확인 한 후 key 값 받아오는 함수 호출
-        mainViewModel.dataCoroutineFun(GlobalApplication.auth)
-    }
 
-    private fun getUserKey() {
 
-//        val call = GlobalApplication.baseService.create(RetroAPI::class.java)
-//            .getUserKey(GlobalApplication.auth)
-//        call.enqueue(object : retrofit2.Callback<String> {
-//            override fun onResponse(call: Call<String>, response: Response<String>) {
-//                if (response.isSuccessful) {
-//                    var key = response.body()!!
-//                    GlobalApplication.key = "Bearer $key"
-//
-//                    Log.v("items", "key is : " + key)
-//                    var sharedPrefs = getSharedPreferences("loginData", MODE_PRIVATE)
-//                    val secureSharedPreferences = SecureSharedPreferences.wrap(sharedPrefs)
-//                    secureSharedPreferences.put("key", key)
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<String>, t: Throwable) {
-//                Log.v("items", " authentic Failure : "+ t)
-//            }
-//
-//        })
 
-    }
 
     companion object {
         const val TAG = "MainActivityTag"

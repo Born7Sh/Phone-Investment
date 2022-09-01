@@ -194,6 +194,8 @@ class HomeFragment : Fragment() {
         homeViewModel.IMSI.observe(viewLifecycleOwner, EventObserver {
             getData()
         })
+
+        getInitData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -208,8 +210,17 @@ class HomeFragment : Fragment() {
                 activity?.finish() // 액티비티 종료
             }
         }
-
         // The callback can be enabled or disabled here or in the lambda
+    }
+
+    private fun getInitData(){
+        // 데이터 받는 경우 3가지 경우
+        // 1. 첫 로그인 한 경우 해서 토큰이 없는 경우 (initDataLoading)
+        // key 값 받아오는 함수 호출
+        //2. 기존의 key 값이 있는 경우 (dataLoading)
+        //3. 기존의 key 값이 만료된 경우 (dataLoading -> initDataLoading 호출)
+        // 에러 코드 확인 한 후 key 값 받아오는 함수 호출
+        homeViewModel.dataCoroutineFun(GlobalApplication.auth)
     }
 
 }

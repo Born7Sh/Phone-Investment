@@ -19,6 +19,12 @@ interface RetroAPI {
         @Header("Authorization") Authorization: String?
     ): Response<Stock>
 
+    @GET("/stock/stocklist/{username}")
+    suspend fun getStockList(
+        @Path("username") name: String,
+        @Header("Authorization") Authorization: String?
+    ): Response<List<Stock>>
+
     @GET("/stock/mymoney/{username}")
     suspend fun getMyMoney(
         @Path("username") name: String,
@@ -34,14 +40,14 @@ interface RetroAPI {
     ): Response<String>
 
 
-    // 데이터 받기
+    // 팔기
     @POST("/stock/buy")
     suspend fun buyRequest(
         @Body deal: Deal?,
         @Header("Authorization") Authorization: String?
     ): Response<String>
 
-    // 데이터 받기
+    // 사기
     @POST("/stock/sell")
     suspend fun sellRequest(
         @Body deal: Deal?,

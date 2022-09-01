@@ -4,10 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.stock.data.model.*
 import com.example.stock.global.GlobalApplication
 import com.example.stock.data.repository.StockRepository
+import com.example.stock.data.retrofit.handleApi
+import com.example.stock.util.ApiError
+import com.example.stock.util.ApiResult
+import com.example.stock.util.Success
 import kotlinx.coroutines.*
+import okhttp3.ResponseBody
 import java.net.ConnectException
 
 class MainViewModel(private val repository: StockRepository) : ViewModel() {
@@ -147,147 +153,6 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
         _stateMessage.value = "200"
     }
 
-    fun dataCoroutineFun(auth: Auth) {
-        getDbStock()
-        val mainCoroutineJob = Job()
-        CoroutineScope(Dispatchers.IO + mainCoroutineJob).launch {
-            // dataTestLoading 통해서
-            // 키 유효한지 판별 200이면 유효 / 400이면 만료 / 100이면 네트워크 안되는거
-            // dataTestLoading await() 통해서 그전까지 멈춰둠.
-
-            Log.d("items", "dataCoroutineFun 시작!")
-            var job = async { dataTestLoading(auth) }
-            var code = job.await()
-
-            Log.d("items", "code 값은 = " + code.toString())
-            when (code) {
-
-                200 -> dataLoading(auth) // 모든게 정상적인 경우
-                400 -> {
-                    // 네트워크는 되는데 토큰 문제로 안받아와지는 경우
-                    // 1. tockenUpdate() 호출
-                    // 2. job으로 묶어서 대기 시킴
-                    // 3. 메인 코루틴 중지시키고 dataInitFlow() 재호출
-                    Log.d("items", "100 번 들어와서 initTokenSetting() 들어가기 전")
-                    var job = launch { tokenUpdate(auth) }
-                    job.join()
-                    mainCoroutineJob.cancel()
-                    if (isActive) {
-                        Log.d("items", "코루틴 아직 종료 안됨")
-                    }
-                    Log.d("items", "dataInitFlow() 재시작")
-                    dataCoroutineFun(auth)
-                }
-                else -> stateErrorNetwork() // 네트워크가 안되는 경우
-
-            }
-
-        }
-    }
-
-    private suspend fun tokenUpdate(auth: Auth) {
-        // 토큰 받아오기
-
-        try {
-            //
-            Log.d("items", " tokenUpdate 진입")
-            // 1. 키 받아오기 getUserKey
-            repository.getUserKey(auth).let { response ->
-                Log.d("items::", response.raw().request.url.toString())
-                Log.d("items", response.code().toString() + " " + response.message())
-
-                if (response.code() == 200) {
-                    //200번이라면 잘 받아와진 것이므로 받아온 데이터를 넣어준다.
-                    _key.postValue(response.body())
-                    GlobalApplication.key = response.body().toString()
-                    Log.d("items", response.body()!!)
-                    Log.d("items", "tokenUpdate 완료")
-                } else {
-                    //200번이 아니라면 불러오지 못한 것이므로, null값 방지용으로 새 객체를 생성해서 넣어준다.
-                    Log.d("items", "코루틴 1. 200아님")
-                    GlobalApplication.key = "444"
-                    _stateMessage.value = "400"
-                }
-
-            }
-        } catch (e: ConnectException) {
-
-        } catch (e: Exception) {
-            Log.d("items", "tokenUpdate() 에러값 : " + e.toString() + "api_exception")
-        }
-
-
-    }
-
-    private suspend fun dataTestLoading(auth: Auth): Int {
-        try {
-            // 본격적으로 테스트로 하나 받아오기.
-            Log.d("items", "dataTestLoading 집입")
-            Log.d("items", "GlobalApplication.auth.username = " + GlobalApplication.auth.username)
-            Log.d("items", "GlobalApplication.key = " + GlobalApplication.key)
-            repository.getMyStockList(
-                GlobalApplication.auth.username,
-                GlobalApplication.key
-            ).let { response ->
-                Log.d("items", "dataTestLoading response 완료")
-                return if (response.code() == 200) {
-                    Log.d("items", "dataTestLoading response 200")
-                    200
-                } else {
-                    Log.d("items", "dataTestLoading response : " + response.code())
-                    Log.d("items", "dataTestLoading body : " + response.body()?.symbol)
-                    400
-                }
-
-            }
-        } catch (e: Exception) {
-            Log.d("items", "dataTestLoading 에러 Exception")
-            return 400
-        }
-
-    }
-
-    private suspend fun dataLoading(auth: Auth) {
-        // 본격적으로 데이터 받아오기.
-        try {
-            Log.d("items", "getmyStock 집입 전")
-            repository.getMyStockList(
-                GlobalApplication.auth.username,
-                GlobalApplication.key
-            ).let { response ->
-                if (response.code() == 200) {
-                    Log.d("items", "getmyStock 성공")
-                    Log.d("items", "getmyStock 값" + response.body()?.symbol)
-                } else {
-                    Log.d("items", "getmyStock 집입")
-                }
-            }
-        } catch (e: Exception) {
-            Log.d("items", "getmyStock 에러")
-        }
-        Log.d("items", "getmyStock 집입 후")
-
-        try {
-            repository.getMyMoney(GlobalApplication.auth.username, GlobalApplication.key)
-            Log.d("items", "getMyMoney 집입 전")
-            repository.getMyMoney(GlobalApplication.auth.username, GlobalApplication.key)
-                .let { response ->
-                    Log.d("items", "getMyMoney 집입")
-                    if (response.code() == 200) {
-                        Log.d("items", "getMyMoney 성공")
-                        Log.d("items", "내돈은 : " + response.body().toString())
-                    } else {
-                        Log.d("items", "getMyMoney 실패")
-                    }
-
-                }
-        } catch (e: Exception) {
-            Log.d("items", "getMyMoney 에러")
-        }
-        Log.d("items", "getMyMoney 집입 후")
-
-
-    }
 
 
     private fun stateErrorNetwork() {
@@ -298,7 +163,7 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
 //        _stateMessage.value = "데이터를 서버로부터 받아오고 있습니다."
     }
 
-//    suspend fun stockUpdate() {
+    //    suspend fun stockUpdate() {
 //        repository.getStockPrice(
 //            getCurrentStock().symbol,
 //            GlobalApplication.key
@@ -311,25 +176,36 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
 //            }
 //        }
 //    }
+    fun dataUpdate() {
+        viewModelScope.launch {
+            // 22/09/01
+            // Event Wrapper class 생성 APIResult / handleApi
+            // https://bb-library.tistory.com/264
+            // in/out 이해 https://hungseong.tistory.com/30
 
-
-    fun getDbStock() {
-        Log.d("items", "getOwnStock 진입")
-        CoroutineScope(Dispatchers.IO).launch {
-            repository.getOwnStock().let {
-                _myStockList.postValue(it)
-            }
-
-            repository.getFavoriteStock().let {
-                _stockFavoriteList.postValue(it)
-            }
-
-            repository.getAllStock().let {
-                _stockList.postValue(it)
+            val result: ApiResult<List<Stock>> = handleApi({
+                repository.getStockList(
+                    GlobalApplication.auth.username,
+                    GlobalApplication.key
+                )
+            })
+            when (result) {
+                is Success -> {
+                    // result.data will give you ResponseBody
+                    for (stock in result.data){
+                        repository.modifyPrice(stock.symbol, stock.price)
+                    }
+                }
+                is ApiError -> {
+                    // result.exception will provide the error
+                    Log.d("items", "에러입니다. : ")
+                }
             }
         }
     }
-
 }
+
+
+
 
 

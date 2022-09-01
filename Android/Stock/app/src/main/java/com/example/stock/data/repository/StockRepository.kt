@@ -19,6 +19,8 @@ class StockRepository {
 
     fun modifyClassification(symbol: String, classification: Int) = stockInstance.modifyClassification(symbol, classification)
 
+    fun modifyPrice(symbol: String, price: Float) = stockInstance.modifyPrice(symbol, price)
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // 여기서부터 retroFit 영역
@@ -29,6 +31,8 @@ class StockRepository {
     suspend fun getMyStockList(username: String, key: String) = retro.getMyStockList(username, key)
 
     suspend fun getMyMoney(username: String, key: String) = retro.getMyMoney(username, key)
+
+    suspend fun getStockList(username: String, key: String) = retro.getStockList(username, key)
 
     suspend fun getStockPrice(SYMBOL: String, key: String) = retro.getStockPrice(SYMBOL, key)
 }

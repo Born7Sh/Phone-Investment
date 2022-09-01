@@ -1,14 +1,18 @@
 package com.example.stock.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.stock.util.Event
+import androidx.lifecycle.viewModelScope
+import com.example.stock.data.model.Auth
 import com.example.stock.data.model.Stock
 import com.example.stock.data.repository.StockRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.stock.data.retrofit.handleApi
+import com.example.stock.global.GlobalApplication
+import com.example.stock.util.*
+import kotlinx.coroutines.*
+import java.net.ConnectException
 
 class HomeViewModel(private val repository: StockRepository) : ViewModel() {
     // 버튼 클릭 변수
@@ -83,12 +87,121 @@ class HomeViewModel(private val repository: StockRepository) : ViewModel() {
 
 
     fun updateMyStockList() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             repository.getOwnStock().let {
                 _myStockList.postValue(it)
             }
         }
+
+        viewModelScope.launch {
+            repository.get().let {
+                _myStockList.postValue(it)
+            }
+        }
+
     }
+
+    fun dataCoroutineFun(auth: Auth) {
+        viewModelScope.launch {
+            Log.d("items", "dataCoroutineFun 1) 입장. : ")
+            val test: ApiResult<Float> = handleApi({
+                repository.getMyMoney(GlobalApplication.auth.username, GlobalApplication.key)
+            })
+            Log.d("items", "dataCoroutineFun 2) data return")
+            when (test) {
+                is Success -> {
+                    Log.d("items", "dataCoroutineFun 2-1) tocken 최신임")
+                    dataLoading(auth) // 모든게 정상적인 경우
+                }
+                is ApiError -> {
+                    Log.d("items", "dataCoroutineFun 2-2) tocken 옛날거임")
+                    Log.d("items", "에러입니다. : " + test.exception)
+                    tokenUpdate(auth)
+                    dataLoading(auth)
+                }
+                is ExceptionError -> {
+                    Log.d("items", "dataCoroutineFun 2-3) 에러임")
+                }
+
+            }
+
+        }
+    }
+
+    private suspend fun tokenUpdate(auth: Auth) {
+        // 토큰 받아오기
+        Log.d("items", "dataCoroutineFun 2-2-1) tokenUpdate 진입")
+        val result: ApiResult<String> = handleApi({
+            repository.getUserKey(
+                GlobalApplication.auth
+            )
+        })
+        Log.d("items", "dataCoroutineFun 2-2-2) tokenUpdate 결과")
+        when (result) {
+            is Success -> {
+                Log.d("items", "dataCoroutineFun 2-2-3) tokenUpdate 성공")
+                GlobalApplication.key = result.data
+            }
+            is ApiError -> {
+                Log.d("items", "dataCoroutineFun 2-2-3) tokenUpdate 실패")
+                GlobalApplication.key = "444"
+                // result.exception will provide the error
+                Log.d("items", "에러입니다. : " + result.exception)
+            }
+        }
+
+
+    }
+
+    private fun dataLoading(auth: Auth) {
+        // 본격적으로 데이터 받아오기.
+
+        viewModelScope.launch {
+            Log.d("items", "\"dataLoading-result1 함수 집입")
+            val result1: ApiResult<Stock> = handleApi({
+                repository.getMyStockList(
+                    GlobalApplication.auth.username,
+                    GlobalApplication.key
+                )
+            })
+            Log.d("items", "dataLoading-result1 결과 나옴")
+
+            when (result1) {
+                is Success -> {
+                    Log.d("items", "dataLoading-result1 성공")
+                }
+                is ApiError -> {
+                    // result.exception will provide the error
+                    Log.d("items", "dataLoading-result1 실패 성공")
+                    Log.d("items", "에러입니다. : " + result1.exception)
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            Log.d("items", "\"dataLoading-result2 함수 집입")
+            val result2: ApiResult<Float> = handleApi({
+                repository.getMyMoney(
+                    GlobalApplication.auth.username,
+                    GlobalApplication.key
+                )
+            })
+            Log.d("items", "dataLoading-result2 결과 나옴")
+            when (result2) {
+                is Success -> {
+                    Log.d("items", "dataLoading-result2 성공")
+                }
+                is ApiError -> {
+                    // result.exception will provide the error
+                    Log.d("items", "dataLoading-result2 실패 성공")
+                    Log.d("items", "에러입니다. : " + result2.exception)
+                }
+            }
+        }
+
+
+    }
+
 }
 
 
