@@ -17,6 +17,9 @@ interface StockDao {
     @Query("SELECT * FROM Stock WHERE stock_classification = 2")
     fun getFavoriteStock(): List<Stock>
 
+    @Query("SELECT * FROM Stock WHERE symbol = :symbol")
+    fun getCurrentStock(symbol: String): Stock
+
     @Query("UPDATE Stock SET price = :price  WHERE symbol = :symbol")
     fun modifyPrice(symbol: String, price: Float)
 

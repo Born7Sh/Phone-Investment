@@ -3,6 +3,7 @@ package com.example.stock.views.stockDetail
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +81,11 @@ class StockDetailFragment : Fragment() {
                 binding.heart.setImageResource(R.drawable.icon_bot_heart10)
             }
 
+        })
+
+        stockDetailViewModel.price.observe(viewLifecycleOwner, {
+            Log.d("items", "price 호출 값 바뀜!")
+            binding.stock?.price = it
         })
 
         stockDetailViewModel.btnBackClick.observe(viewLifecycleOwner, EventObserver {

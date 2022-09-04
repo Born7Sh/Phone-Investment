@@ -17,6 +17,8 @@ class StockRepository {
 
     fun getFavoriteStock() = stockInstance.getFavoriteStock()
 
+    fun getCurrentStock(symbol: String) = stockInstance.getCurrentStock(symbol)
+
     fun modifyClassification(symbol: String, classification: Int) = stockInstance.modifyClassification(symbol, classification)
 
     fun modifyPrice(symbol: String, price: Float) = stockInstance.modifyPrice(symbol, price)

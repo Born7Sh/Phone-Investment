@@ -99,6 +99,8 @@ class HomeViewModel(private val repository: StockRepository) : ViewModel() {
 
     fun dataCoroutineFun(auth: Auth) {
         viewModelScope.launch {
+            // 22/09/02 주석 처리한거 실시간 처리하다가 1000개 다써서 다른 계정으로 들어옴
+            // 실험할때 진행하자.
             Log.d("items", "dataCoroutineFun 1) 입장. : ")
             val test: ApiResult<Float> = handleApi({
                 repository.getMyMoney(GlobalApplication.auth.username, GlobalApplication.key)
@@ -107,13 +109,13 @@ class HomeViewModel(private val repository: StockRepository) : ViewModel() {
             when (test) {
                 is Success -> {
                     Log.d("items", "dataCoroutineFun 2-1) tocken 최신임")
-                    dataLoading(auth) // 모든게 정상적인 경우
+//                    dataLoading(auth) // 모든게 정상적인 경우
                 }
                 is ApiError -> {
                     Log.d("items", "dataCoroutineFun 2-2) tocken 옛날거임")
                     Log.d("items", "에러입니다. : " + test.exception)
                     tokenUpdate(auth)
-                    dataLoading(auth)
+//                    dataLoading(auth)
                 }
                 is ExceptionError -> {
                     Log.d("items", "dataCoroutineFun 2-3) 에러임")

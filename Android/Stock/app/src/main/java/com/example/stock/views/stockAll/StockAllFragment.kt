@@ -1,6 +1,7 @@
 package com.example.stock.views.stockAll
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class StockAllFragment : Fragment() {
     lateinit var binding: FragmentStockAllBinding
     private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
     lateinit var stockAllViewModel: StockAllViewModel
+    private val mainViewModel by activityViewModels<MainViewModel>()
     private lateinit var stockAdapter: StockAdapter
 
     override fun onCreateView(
@@ -48,6 +50,11 @@ class StockAllFragment : Fragment() {
         stockAllViewModel.allStockList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             stockAdapter.setData(it as ArrayList<Stock>)
         })
+        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Log.d("items", "stockAllFragment updateAllStockList() 호출")
+            stockAllViewModel.updateAllStockList()
+        })
+
     }
 
     fun search(view: View) {

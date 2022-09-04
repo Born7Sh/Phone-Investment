@@ -195,6 +195,11 @@ class HomeFragment : Fragment() {
             getData()
         })
 
+        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Log.d("items", "homeFragment updateMyStockList() 호출")
+            homeViewModel.updateMyStockList()
+        })
+
         getInitData()
     }
 

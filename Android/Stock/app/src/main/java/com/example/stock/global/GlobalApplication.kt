@@ -190,7 +190,7 @@ class GlobalApplication : Application() {
     private fun initRetrofitBuilder(): Retrofit {
         // 기본 주소
 //        val BASE_URL = "http://222.112.18.141:8080/"
-        val BASE_URL = "https://9de12e98-1be1-47bd-90c2-c2a6f1b00cd3.mock.pstmn.io/"
+        val BASE_URL = "https://a06897e7-47c4-4096-b12f-c4cf3766af7c.mock.pstmn.io/"
 
 
         val gson: Gson = GsonBuilder()

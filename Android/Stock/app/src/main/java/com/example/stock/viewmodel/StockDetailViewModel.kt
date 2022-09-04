@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.stock.data.Community
 import com.example.stock.data.model.Stock
 import com.example.stock.data.repository.StockRepository
@@ -11,9 +12,7 @@ import com.example.stock.global.GlobalApplication
 import com.example.stock.util.DataUtilBar
 import com.example.stock.util.Event
 import com.github.mikephil.charting.data.CandleEntry
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.text.NumberFormat
 
 class StockDetailViewModel(private val repository: StockRepository) : ViewModel() {
@@ -28,6 +27,10 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
         get() = _isFavorite
 
     private var items = ArrayList<CandleEntry>()
+
+    private var _price = MutableLiveData<Float>()
+    val price: LiveData<Float>
+        get() = _price
 
     // 회사 리스트
     private val _communityList = MutableLiveData<ArrayList<Community>>()
@@ -57,6 +60,8 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
 
         btnGraphNum1Click()
 
+        getPrice()
+
         community = arrayListOf(
 
             Community("김규동", "Apple", "AAPL", "드자가"),
@@ -83,7 +88,7 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
             repository.getFavoriteStock().let {
                 for (stock in it) {
                     if (stock.symbol == GlobalApplication.currentStock.symbol) {
-                        _isFavorite.postValue( 1)
+                        _isFavorite.postValue(1)
                     }
                 }
             }
@@ -100,7 +105,7 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
 
     private fun favoriteTurnOn() {
         _isFavorite.value = 1
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             Log.d("items", "favoriteTurnOn 들어옴")
             repository.modifyClassification(GlobalApplication.currentStock.symbol, 2).let {
             }
@@ -109,11 +114,24 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
 
     private fun favoriteTurnOff() {
         _isFavorite.value = 0
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             Log.d("items", "favoriteTurnOFF 들어옴")
             repository.modifyClassification(GlobalApplication.currentStock.symbol, 0).let {
             }
         }
+    }
+
+    private fun getPrice() {
+        Log.d("items", "price 함수 들어옴")
+            viewModelScope.launch {
+                Log.d("items", "price 등장")
+                repository.getCurrentStock(GlobalApplication.currentStock.symbol).let {
+                    print(it.price)
+                    _price.postValue(it.price)
+                    delay(30000L)
+                    cancel()
+                }
+            }
     }
 
     fun btnBackClick() {

@@ -1,6 +1,7 @@
 package com.example.stock.views.favorite
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
+    private val mainViewModel by activityViewModels<MainViewModel>()
 
     private lateinit var stockAdapter: StockAdapter
 
@@ -54,6 +56,10 @@ class FavoriteFragment : Fragment() {
             stockAdapter.setData(it as ArrayList<Stock>)
         })
 
+        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Log.d("items", "favoriteFragment updateFavoriteStockList() 호출")
+            favoriteViewModel.updateFavoriteStockList()
+        })
 
     }
 

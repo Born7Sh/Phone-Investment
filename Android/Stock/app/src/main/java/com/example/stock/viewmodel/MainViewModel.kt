@@ -164,6 +164,10 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
                         Log.d("items", "dataUpdate stock 이름 "+ stock.symbol + " 수정 가격 : " + stock.price.toString())
                         repository.modifyPrice(stock.symbol, stock.price)
                     }
+                    _stateMessage.postValue("200")
+                    Log.d("items", "dataUpdate delay 30초")
+                    delay(30000L)
+                    Log.d("items", "dataUpdate delay 30초 끝")
                     cancel()
                     Log.d("items", "dataUpdate 반복 시작")
                     dataUpdate()
@@ -171,7 +175,12 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
                 is ApiError -> {
                     // result.exception will provide the error
                     Log.d("items", "dataUpdate 실패")
-                    Log.d("items", "에러입니다. : ")
+                    Log.d("items", "에러입니다. : "+result.exception)
+
+                    Log.d("items", "dataUpdate delay 30초")
+                    delay(30000L)
+                    Log.d("items", "dataUpdate delay 30초 끝")
+
                     cancel()
                     dataUpdate()
                 }
@@ -179,6 +188,11 @@ class MainViewModel(private val repository: StockRepository) : ViewModel() {
                 is ExceptionError -> {
                     Log.d("items", "dataUpdate ExceptionError 에러임")
                     cancel()
+
+                    Log.d("items", "dataUpdate delay 30초")
+                    delay(30000L)
+                    Log.d("items", "dataUpdate delay 30초 끝")
+
                     dataUpdate()
                 }
             }
