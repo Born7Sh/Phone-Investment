@@ -28,9 +28,9 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
 
     private var items = ArrayList<CandleEntry>()
 
-    private var _price = MutableLiveData<Float>()
-    val price: LiveData<Float>
-        get() = _price
+    private var _stock = MutableLiveData<Stock>()
+    val stock: LiveData<Stock>
+        get() = _stock
 
     // 회사 리스트
     private val _communityList = MutableLiveData<ArrayList<Community>>()
@@ -59,8 +59,6 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
         getDdData()
 
         btnGraphNum1Click()
-
-        getPrice()
 
         community = arrayListOf(
 
@@ -95,6 +93,17 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
         }
     }
 
+    fun updatePrice() {
+        Log.d("items", "price 함수 들어옴")
+        viewModelScope.launch {
+            Log.d("items", "price 등장")
+            repository.getCurrentStock(GlobalApplication.currentStock.symbol).let {
+                _stock.postValue(it)
+                cancel()
+            }
+        }
+    }
+
     fun btnHeartClick() {
         if (_isFavorite.value == 1) {
             favoriteTurnOff()
@@ -121,18 +130,6 @@ class StockDetailViewModel(private val repository: StockRepository) : ViewModel(
         }
     }
 
-    private fun getPrice() {
-        Log.d("items", "price 함수 들어옴")
-            viewModelScope.launch {
-                Log.d("items", "price 등장")
-                repository.getCurrentStock(GlobalApplication.currentStock.symbol).let {
-                    print(it.price)
-                    _price.postValue(it.price)
-                    delay(30000L)
-                    cancel()
-                }
-            }
-    }
 
     fun btnBackClick() {
         _btnBackClick.value = Event(true)

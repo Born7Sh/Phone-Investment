@@ -1,6 +1,7 @@
 package com.example.stock.data.repository
 
 import com.example.stock.data.model.Auth
+import com.example.stock.data.model.Deal
 import com.example.stock.data.model.Stock
 import com.example.stock.global.GlobalApplication
 import com.example.stock.data.retrofit.RetroAPI
@@ -37,4 +38,8 @@ class StockRepository {
     suspend fun getStockList(username: String, key: String) = retro.getStockList(username, key)
 
     suspend fun getStockPrice(SYMBOL: String, key: String) = retro.getStockPrice(SYMBOL, key)
+
+    suspend fun buyRequest(deal: Deal, key: String) = retro.buyRequest(deal, key)
+
+    suspend fun sellRequest(deal: Deal, key: String) = retro.sellRequest(deal, key)
 }

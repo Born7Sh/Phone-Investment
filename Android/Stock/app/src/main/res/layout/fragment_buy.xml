@@ -24,6 +24,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:indeterminateTint="@color/black"
+                android:id="@+id/contentLoading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -157,32 +169,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"></EditText>
 
-            <TextView
-                android:id="@+id/buy_textview_afterBuy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="40dp"
-                android:text="거래후 가용 자산"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buy_textview_buyVolume"></TextView>
-
-            <TextView
-                android:text="일단 보류"
-                android:id="@+id/buy_afterBuy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/buy_textview_afterBuy"></TextView>
-
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottom_bar"
@@ -200,7 +186,7 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/background_button_round_false"
                     app:layout_constraintHorizontal_weight="2"
-                    android:onClick="@{viewModel::btnCloseClick}"
+                    android:onClick="@{()->viewModel.btnCloseClick()}"
                     android:text="취소하기"
                     android:textColor="#C0C0C0"
                     android:textSize="20sp"
@@ -218,7 +204,7 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/background_button_round_blue"
                     app:layout_constraintHorizontal_weight="5"
-                    android:onClick="@{viewModel::btnBuyClick}"
+                    android:onClick="@{()->viewModel.btnBuyClick()}"
                     android:text="매수하기"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"

@@ -35,6 +35,7 @@ class StockDetailFragment : Fragment() {
 
     lateinit var binding: FragmentStockDetailBinding
     lateinit var stockDetailViewModel: StockDetailViewModel
+    private val mainViewModel by activityViewModels<MainViewModel>()
     private lateinit var repositoryViewModelFactory: RepositoryViewModelFactory
     lateinit var currentStock: Stock
 
@@ -83,9 +84,14 @@ class StockDetailFragment : Fragment() {
 
         })
 
-        stockDetailViewModel.price.observe(viewLifecycleOwner, {
-            Log.d("items", "price 호출 값 바뀜!")
-            binding.stock?.price = it
+        mainViewModel.stateMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Log.d("items", "stockDetailViewModel updatePrice 호출")
+            stockDetailViewModel.updatePrice()
+        })
+
+        stockDetailViewModel.stock.observe(viewLifecycleOwner, {
+            Log.d("items", "price 호출 값 바뀜! : " + it.symbol)
+            binding.stock =  it
         })
 
         stockDetailViewModel.btnBackClick.observe(viewLifecycleOwner, EventObserver {
